@@ -53,16 +53,20 @@ GlassPanel {
         anchors.margins: 10
         spacing: 6
 
-        Row {
+        Item {
             width: parent.width
-            spacing: 8
+            height: 24
 
             PanelHeading {
                 text: qsTr("RECEIVE")
+                anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
             }
 
-            Item { width: Math.max(4, parent.width - 300 - (root.lastLogged.length ? 90 : 0)); height: 1 }
+            Row {
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            spacing: 8
 
             Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
@@ -129,6 +133,7 @@ in the HIS CALL field.")
                 implicitHeight: 22
                 font.pixelSize: 10
                 onClicked: receiveText.clear()
+            }
             }
         }
 

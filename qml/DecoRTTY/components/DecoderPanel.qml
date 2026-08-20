@@ -104,15 +104,23 @@ GlassPanel {
                 width: parent.width
                 spacing: 3
 
-                Row {
+                Item {
                     width: parent.width
+                    height: 15
+
                     Text {
+                        anchors.left: parent.left
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: Math.max(0, parent.width - depth.width - 8)
+                        elide: Text.ElideRight
                         text: qsTr("Correction")
                         color: Theme.textSecondary
                         font.pixelSize: 11
                     }
-                    Item { width: parent.width - 150; height: 1 }
                     Text {
+                        id: depth
+                        anchors.right: parent.right
+                        anchors.verticalCenter: parent.verticalCenter
                         text: rtty.correctionDepth === 0
                               ? "off"
                               : rtty.correctionDepth + " ch · " +

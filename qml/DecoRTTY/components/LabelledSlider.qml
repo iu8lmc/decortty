@@ -18,16 +18,25 @@ Column {
 
     spacing: 2
 
-    Row {
+    Item {
         width: parent.width
+        height: 15
 
         Text {
+            anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
+            // L'etichetta cede il posto al valore, non viceversa: il numero e'
+            // quello che si legge mentre si gira la manopola.
+            width: Math.max(0, parent.width - value.width - 8)
+            elide: Text.ElideRight
             text: root.label
             color: Theme.textSecondary
             font.pixelSize: 11
         }
-        Item { width: parent.width - 150; height: 1 }
         Text {
+            id: value
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
             text: root.value.toFixed(root.decimals) + root.suffix
             color: Theme.textPrimary
             font.pixelSize: 11
