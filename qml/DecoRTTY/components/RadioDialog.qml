@@ -66,7 +66,7 @@ Dialog {
                 }
                 Text {
                     anchors.verticalCenter: parent.verticalCenter
-                    text: "GATEWAY FT-991A"
+                    text: qsTr("FT-991A GATEWAY")
                     color: Theme.textPrimary
                     font.pixelSize: 11
                     font.bold: true
@@ -82,23 +82,21 @@ Dialog {
                 }
                 GlassButton {
                     anchors.verticalCenter: parent.verticalCenter
-                    text: gateway.enabled ? "attivo" : "spento"
+                    text: gateway.enabled ? qsTr("on") : qsTr("off")
                     armed: gateway.enabled
                     accentColor: Theme.success
-                    implicitWidth: 62
+                    minimumWidth: 62
                     implicitHeight: 22
                     font.pixelSize: 10
                     onClicked: gateway.enabled = !gateway.enabled
                     ToolTip.visible: hovered
                     ToolTip.delay: 700
-                    ToolTip.text: "Se attivo, il gateway si apre all'avvio e si\n"
-                                  + "chiude con il programma. Spegnilo se la radio\n"
-                                  + "e' su un altro PC."
+                    ToolTip.text: qsTr("When on, the gateway opens at start-up and\ncloses with the program. Turn it off if the radio\nis on another PC.")
                 }
                 GlassButton {
                     anchors.verticalCenter: parent.verticalCenter
-                    text: root.showGateway ? "chiudi" : "regola"
-                    implicitWidth: 58
+                    text: root.showGateway ? qsTr("close") : qsTr("settings")
+                    minimumWidth: 58
                     implicitHeight: 22
                     font.pixelSize: 10
                     onClicked: {
@@ -141,7 +139,7 @@ Dialog {
                 }
 
                 Text {
-                    text: "Audio in"
+                    text: qsTr("Audio in")
                     color: Theme.textSecondary
                     font.pixelSize: 10
                     height: 26
@@ -159,8 +157,8 @@ Dialog {
                 }
 
                 GlassButton {
-                    text: "Riavvia"
-                    implicitWidth: 70
+                    text: qsTr("Restart")
+                    minimumWidth: 70
                     implicitHeight: 26
                     font.pixelSize: 10
                     accentColor: Theme.warning
@@ -168,12 +166,12 @@ Dialog {
                     onClicked: gateway.restart()
                     ToolTip.visible: hovered
                     ToolTip.delay: 700
-                    ToolTip.text: "Da usare dopo aver cambiato porta o dispositivo."
+                    ToolTip.text: qsTr("Use after changing the port or a device.")
                 }
                 Item { width: 80; height: 26 }
 
                 Text {
-                    text: "Audio out"
+                    text: qsTr("Audio out")
                     color: Theme.textSecondary
                     font.pixelSize: 10
                     height: 26
@@ -198,7 +196,7 @@ Dialog {
             spacing: 10
 
             PanelHeading {
-                text: "RADIOS ON THE NETWORK"
+                text: qsTr("RADIOS ON THE NETWORK")
                 anchors.verticalCenter: parent.verticalCenter
             }
 
@@ -308,14 +306,13 @@ Dialog {
 
                 Text {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text: "No radio has answered yet"
+                    text: qsTr("No radio has answered yet")
                     color: Theme.textSecondary
                     font.pixelSize: 13
                 }
                 Text {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text: "Radios announce themselves on UDP 4992.\n"
-                          + "Check the radio is on the same subnet, or enter its address below."
+                    text: qsTr("Radios announce themselves on UDP 4992.\nCheck the radio is on the same subnet, or enter its address below.")
                     color: Theme.textSecondary
                     font.pixelSize: 10
                     horizontalAlignment: Text.AlignHCenter
@@ -367,15 +364,15 @@ Dialog {
                 // gateway, so the operator does.
                 armed: false
                 accentColor: Theme.secondary
-                implicitWidth: 76
+                minimumWidth: 76
                 implicitHeight: 32
                 font.pixelSize: 11
                 onClicked: armed = !armed
             }
 
             GlassButton {
-                text: "Connect"
-                implicitWidth: 84
+                text: qsTr("Connect")
+                minimumWidth: 84
                 implicitHeight: 32
                 accentColor: Theme.success
                 enabled: manualInput.text.length > 0
@@ -386,8 +383,8 @@ Dialog {
             }
 
             GlassButton {
-                text: "Close"
-                implicitWidth: 74
+                text: qsTr("Close")
+                minimumWidth: 74
                 implicitHeight: 32
                 onClicked: root.close()
             }

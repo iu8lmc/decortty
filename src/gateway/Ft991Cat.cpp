@@ -355,12 +355,12 @@ void Ft991Cat::setTransmit(bool on)
         m_replyTimer.stop();
         if (m_port.isOpen()) {
             const qint64 written = m_port.write(QByteArrayLiteral("TX0;"));
-            emit errorOccurred(tr("CAT: scritto TX0; (%1 byte) su %2")
+            emit errorOccurred(tr("CAT: wrote TX0; (%1 bytes) on %2")
                                    .arg(written).arg(m_config.portName));
         }
     } else {
         enqueue(QByteArrayLiteral("TX1;"), false);
-        emit errorOccurred(tr("CAT: accodato TX1; su %1").arg(m_config.portName));
+        emit errorOccurred(tr("CAT: queued TX1; on %1").arg(m_config.portName));
     }
     enqueue(QByteArrayLiteral("TX;"), true);
 }

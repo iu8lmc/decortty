@@ -72,7 +72,7 @@ bool QsoLog::addQso(const QString& call, const QString& rstSent,
 {
     const QString cleanCall = call.trimmed().toUpper();
     if (cleanCall.isEmpty()) {
-        emit errorOccurred(tr("Serve almeno il nominativo per registrare il collegamento"));
+        emit errorOccurred(tr("A callsign is the least a contact needs to be logged"));
         return false;
     }
 
@@ -269,7 +269,7 @@ bool QsoLog::importAdif(const QString& path)
 void QsoLog::autoSave()
 {
     if (!m_path.isEmpty() && !exportAdif(m_path))
-        emit errorOccurred(tr("Impossibile scrivere il log in %1").arg(m_path));
+        emit errorOccurred(tr("Cannot write the log in %1").arg(m_path));
 }
 
 } // namespace decortty::app

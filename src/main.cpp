@@ -1,6 +1,7 @@
 // DecoRTTY — modern RTTY for FlexRadio, over VITA-49.
 
 #include "app/GatewaySupervisor.h"
+#include "app/Language.h"
 #include "app/MacroModel.h"
 #include "app/QsoLog.h"
 #include "app/ReceiveTextModel.h"
@@ -35,6 +36,7 @@ int main(int argc, char* argv[])
 
     QSettings settings;
 
+    app::Language language;
     link::RadioHub radio;
     app::RttyEngine     engine;
     app::GatewaySupervisor gateway;
@@ -120,6 +122,7 @@ int main(int argc, char* argv[])
         settings.setValue(QStringLiteral("gateway/audioOut"), gateway.audioOut());
         settings.setValue(QStringLiteral("gateway/udpPort"), gateway.udpPort());
         settings.setValue(QStringLiteral("gateway/autoConnect"), gateway.autoConnect());
+        settings.setValue(QStringLiteral("ui/language"), language.current());
         qsoLog.exportAdif();
         macros.save(settings);
         // Scrittura immediata. QSettings tiene i valori in memoria e li versa su
@@ -135,13 +138,21 @@ int main(int argc, char* argv[])
         gateway.stop();
     });
 
+    // La lingua prima di ogni altra cosa: le stringhe tradotte devono essere in
+    // circolo quando il QML viene caricato, altrimenti la prima schermata esce
+    // in inglese e si sistema solo al riavvio.
+    language.attachEngine(nullptr);
+    language.setCurrent(settings.value(QStringLiteral("ui/language")).toString());
+
     QQmlApplicationEngine qml;
+    language.attachEngine(&qml);
     qml.rootContext()->setContextProperty(QStringLiteral("radio"), &radio);
     qml.rootContext()->setContextProperty(QStringLiteral("rtty"), &engine);
     qml.rootContext()->setContextProperty(QStringLiteral("receiveText"), &receiveText);
     qml.rootContext()->setContextProperty(QStringLiteral("macros"), &macros);
     qml.rootContext()->setContextProperty(QStringLiteral("qsoLog"), &qsoLog);
     qml.rootContext()->setContextProperty(QStringLiteral("gateway"), &gateway);
+    qml.rootContext()->setContextProperty(QStringLiteral("language"), &language);
     qml.rootContext()->setContextProperty(QStringLiteral("appVersion"),
                                           QStringLiteral(DECORTTY_VERSION));
 

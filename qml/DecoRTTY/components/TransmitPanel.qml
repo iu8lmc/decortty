@@ -69,8 +69,8 @@ GlassPanel {
                     TextArea {
                         id: input
                         placeholderText: radio.canTransmit
-                                         ? "Type here — Enter sends the line"
-                                         : "Connect a radio to transmit"
+                                         ? qsTr("Type here — Enter sends the line")
+                                         : qsTr("Connect a radio to transmit")
                         color: Theme.textPrimary
                         placeholderTextColor: Theme.textSecondary
                         font.family: Theme.monoFamily
@@ -99,10 +99,10 @@ GlassPanel {
                 spacing: 6
 
                 GlassButton {
-                    text: rtty.transmitting ? "TRANSMITTING" : "TRANSMIT"
+                    text: rtty.transmitting ? qsTr("TRANSMITTING") : qsTr("TRANSMIT")
                     armed: rtty.transmitting
                     accentColor: Theme.error
-                    implicitWidth: 194
+                    minimumWidth: 194
                     implicitHeight: 32
                     font.pixelSize: 13
                     font.bold: true
@@ -114,9 +114,9 @@ GlassPanel {
                     spacing: 6
 
                     GlassButton {
-                        text: "Abort"
+                        text: qsTr("Abort")
                         accentColor: Theme.error
-                        implicitWidth: 62
+                        minimumWidth: 62
                         implicitHeight: 26
                         font.pixelSize: 11
                         enabled: rtty.transmitting
@@ -124,8 +124,8 @@ GlassPanel {
                     }
 
                     GlassButton {
-                        text: "Clear"
-                        implicitWidth: 60
+                        text: qsTr("Clear")
+                        minimumWidth: 60
                         implicitHeight: 26
                         font.pixelSize: 11
                         onClicked: input.clear()
@@ -196,7 +196,7 @@ GlassPanel {
                         }
 
                         ToolTip.visible: rtty.transmitLevel > 0.6
-                        ToolTip.text: "High enough to drive the ALC — check the meter."
+                        ToolTip.text: qsTr("High enough to drive the ALC — check the meter.")
                     }
                 }
             }

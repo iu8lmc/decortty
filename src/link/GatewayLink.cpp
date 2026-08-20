@@ -37,14 +37,14 @@ GatewayLink::GatewayLink(QObject* parent)
             return;
         const qint64 silence = QDateTime::currentMSecsSinceEpoch() - m_lastPacketMs;
         if (silence > kWatchdogMs) {
-            emit errorOccurred(tr("Il gateway non risponde — riprovo"));
+            emit errorOccurred(tr("The gateway is not answering — retrying"));
             // Cade la connessione ma non l'intenzione: il timer di riconnessione
             // continua a bussare finche' il gateway non torna.
             const bool want = m_wantConnection;
             disconnectRadio();
             m_wantConnection = want;
             if (want) {
-                setStatusText(tr("In attesa del gateway…"));
+                setStatusText(tr("Waiting for the gateway…"));
                 m_reconnect.start();
             }
         }
@@ -61,7 +61,7 @@ void GatewayLink::onReconnectAttempt()
 {
     if (!m_wantConnection || m_connected || m_gatewayAddress.isNull())
         return;
-    setStatusText(tr("Riconnessione a %1…").arg(m_radioName));
+    setStatusText(tr("Reconnecting to %1…").arg(m_radioName));
     connectToAddress(m_gatewayAddress, m_gatewayPort);
 }
 

@@ -103,7 +103,7 @@ ApplicationWindow {
                     background: null
 
                     Repeater {
-                        model: ["DECODER", "FILTRI"]
+                        model: [qsTr("DECODER"), qsTr("FILTERS")]
                         delegate: TabButton {
                             required property int index
                             required property string modelData

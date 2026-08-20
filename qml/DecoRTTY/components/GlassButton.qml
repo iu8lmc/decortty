@@ -13,8 +13,13 @@ Button {
     property color accentColor: Theme.primary
     property int   cornerRadius: 8
 
+    // La larghezza minima: quella che i pannelli chiedono per allineare le
+    // colonne. Il pulsante non scende mai sotto, ma cresce se il testo tradotto
+    // e' piu' lungo — meglio una fila un po' piu' larga che una parola tagliata.
+    property int minimumWidth: 72
+
     implicitHeight: 32
-    implicitWidth: Math.max(72, contentText.implicitWidth + 24)
+    implicitWidth: Math.max(minimumWidth, contentText.implicitWidth + 22)
     font.pixelSize: 13
 
     contentItem: Text {

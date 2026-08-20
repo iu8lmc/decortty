@@ -268,7 +268,7 @@ void Ft991Gateway::onSubscriberSweep()
             if (m_aloneSinceMs == 0)
                 m_aloneSinceMs = now;
             else if (now - m_aloneSinceMs > 30000) {
-                emit log(tr("Nessun client da trenta secondi: chiudo"));
+                emit log(tr("No client for thirty seconds: closing"));
                 emit shutdownRequested();
             }
         } else {
@@ -364,7 +364,7 @@ void Ft991Gateway::onDatagrams()
             const QString token = QString::fromLatin1(data.mid(kShutdown.size())).trimmed();
             if (!m_config.shutdownToken.isEmpty() && token == m_config.shutdownToken
                 && datagram.senderAddress().isLoopback()) {
-                emit log(tr("Spegnimento richiesto da chi mi ha avviato"));
+                emit log(tr("Shutdown requested by whoever started me"));
                 requestShutdown();
             }
             continue;
@@ -380,7 +380,7 @@ void Ft991Gateway::onDatagrams()
                     m_subscribers.removeAt(i);
             }
             if (before != m_subscribers.size())
-                emit log(tr("Client %1 se ne va").arg(datagram.senderAddress().toString()));
+                emit log(tr("Client %1 is leaving").arg(datagram.senderAddress().toString()));
             continue;
         }
 
@@ -407,9 +407,9 @@ void Ft991Gateway::onDatagrams()
             if (command.transmit) {
                 if (*command.transmit)
                     m_lastTxAudioMs = QDateTime::currentMSecsSinceEpoch();
-                emit log(tr("PTT richiesto dal client: %1  (CAT %2)")
-                             .arg(*command.transmit ? tr("TRASMETTI") : tr("ricevi"),
-                                  m_cat.isOpen() ? tr("aperto") : tr("CHIUSO")));
+                emit log(tr("PTT requested by the client: %1  (CAT %2)")
+                             .arg(*command.transmit ? tr("TRANSMIT") : tr("receive"),
+                                  m_cat.isOpen() ? tr("open") : tr("CLOSED")));
                 if (m_cat.isOpen()) {
                     m_cat.setTransmit(*command.transmit);
                 } else {
@@ -487,7 +487,7 @@ void Ft991Gateway::decideShutdown()
     // qui in avanti nessuno ci sorveglia: si esce quando l'ultimo se ne va.
     m_emancipated  = true;
     m_aloneSinceMs = 0;
-    emit log(tr("Chiusura rimandata: %1 client stanno ancora usando la radio")
+    emit log(tr("Shutdown deferred: %1 client(s) are still using the radio")
                  .arg(stillThere));
 }
 

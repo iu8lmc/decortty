@@ -23,7 +23,7 @@ GlassPanel {
         anchors.margins: 10
         spacing: 6
 
-        PanelHeading { text: "TUNING" }
+        PanelHeading { text: qsTr("TUNING") }
 
         Item {
             width: parent.width

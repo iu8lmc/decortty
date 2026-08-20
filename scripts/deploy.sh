@@ -23,8 +23,12 @@ echo "== build =="
 cmake --build "$BUILD"
 
 echo "== cartella $DIST =="
-rm -rf "$DIST"
+# Si svuota la cartella invece di rimuoverla. Su Windows basta una shell aperta
+# li' dentro perche' la rimozione fallisca, e quel che resta e' una cartella
+# vuota e uno script che ha detto di aver finito: la volta dopo si distribuisce
+# il nulla senza accorgersene.
 mkdir -p "$DIST"
+find "$DIST" -mindepth 1 -maxdepth 1 -exec rm -rf {} + 2>/dev/null || true
 cp "$BUILD"/decortty.exe "$BUILD"/decortty-ft991.exe \
    "$BUILD"/decortty_wavtool.exe "$BUILD"/decortty_selftest.exe "$DIST"/
 
@@ -36,6 +40,22 @@ echo "== librerie Qt =="
 echo "== moduli QML completi =="
 # 18 MB in tutto: copiarli tutti costa meno che inseguire un sottomodulo alla
 # volta ogni volta che l'interfaccia usa un controllo nuovo.
+# I cataloghi tradotti. windeployqt viene lanciato con --no-translations perche'
+# copierebbe l'intero corredo di Qt in tutte le lingue esistenti — decine di
+# megabyte di stringhe di dialoghi che a noi non servono. Qui si prendono i
+# nostri, piu' i qtbase delle sole lingue che il programma parla: sono quelli che
+# traducono i menu contestuali dei campi di testo.
+echo "== traduzioni =="
+mkdir -p "$DIST/translations"
+cp "$BUILD"/*.qm "$DIST/translations/" 2>/dev/null || true
+for lang in it de fr es pt nl ca da hu ro lv ru ja zh zh_TW; do
+    for cat in qtbase qt; do
+        src="$MINGW/share/qt6/translations/${cat}_${lang}.qm"
+        [ -f "$src" ] && cp "$src" "$DIST/translations/"
+    done
+done
+echo "  $(ls "$DIST/translations" | wc -l) cataloghi"
+
 rm -rf "$DIST/qml"
 cp -r "$MINGW/share/qt6/qml" "$DIST/qml"
 # Il modulo dell'applicazione è compilato dentro l'eseguibile; gli strumenti per

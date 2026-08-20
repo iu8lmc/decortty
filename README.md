@@ -171,6 +171,44 @@ The first run needs Windows Firewall to allow inbound UDP, or no radio will ever
 appear: discovery works by *listening* to broadcasts on port 4992.
 
 
+## Sixteen languages
+
+The interface speaks English, Italian, German, French, Spanish, Portuguese,
+Dutch, Catalan, Danish, Hungarian, Romanian, Latvian, Russian, Japanese and
+Chinese in both scripts. It follows the system's language on first run, and
+**Setup** has a picker at the top — each language named in its own words, because
+looking for "Deutsch" in a list that says "German" is an obstacle to exactly the
+person who needs the help. The change takes effect at once, without restarting
+and without interrupting reception.
+
+Amateur-radio abbreviations are deliberately left alone: AFC, REV, USOS, BPF,
+NOTCH, LMS, RST, QTH are international and that is how an operator looks for
+them. So are "mark", "shift", "squelch" and "waterfall" — translating those would
+produce words nobody uses in the shack.
+
+Translations live in `translations/` as one plain Python dictionary per language:
+
+```sh
+cmake --build build --target update_translations   # pull new strings from source
+python translations/apply.py de                    # catalogue -> .ts
+cmake --build build                                # .ts -> .qm, copied beside the exe
+```
+
+A missing translation is never invented: the entry stays "unfinished", lrelease
+leaves it out of the compiled catalogue, and the English shows through. A word in
+English inside a translated sentence beats a wrong word that looks right.
+
+Two things this exercise turned up, both fixed:
+
+- **Qt's ahead-of-time QML compiler broke every UI translation.** It registers
+  the files under a path the translation context does not match, so the C++
+  strings came out translated while the whole interface stayed in English. The
+  cache is now off for the QML modules: an imperceptibly slower start against an
+  interface that speaks the user's language is not a difficult trade.
+- **Buttons truncated the longer words.** "Centre" becomes "ZENTRIEREN"; at a
+  fixed width that reads "ZENTRIE…", which says nothing at all. The width written
+  in the code is now a minimum, and a button grows if the word needs it.
+
 ## Installing
 
 Download `DecoRTTY-x.y.z-setup.exe` from the

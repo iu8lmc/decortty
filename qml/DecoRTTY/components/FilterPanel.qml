@@ -45,7 +45,7 @@ GlassPanel {
             spacing: 8
 
             // ── anti-QRM ────────────────────────────────────────────────
-            PanelHeading { text: "FILTRI" }
+            PanelHeading { text: qsTr("FILTERS") }
 
             Row {
                 width: parent.width
@@ -53,7 +53,7 @@ GlassPanel {
 
                 GlassButton {
                     text: "BPF"
-                    implicitWidth: (controls.width - 10) / 3
+                    minimumWidth: (controls.width - 10) / 3
                     implicitHeight: 26
                     font.pixelSize: 11
                     armed: rtty.bandpassEnabled
@@ -61,12 +61,11 @@ GlassPanel {
                     onClicked: rtty.bandpassEnabled = !rtty.bandpassEnabled
                     ToolTip.visible: hovered
                     ToolTip.delay: 700
-                    ToolTip.text: "Passa-banda attorno ai due toni: scarta tutto\n"
-                                  + "cio' che sta fuori prima del rivelatore."
+                    ToolTip.text: qsTr("Bandpass around the two tones: throws away\neverything outside before the detector.")
                 }
                 GlassButton {
                     text: "NOTCH"
-                    implicitWidth: (controls.width - 10) / 3
+                    minimumWidth: (controls.width - 10) / 3
                     implicitHeight: 26
                     font.pixelSize: 11
                     armed: rtty.notchEnabled
@@ -74,12 +73,11 @@ GlassPanel {
                     onClicked: rtty.notchEnabled = !rtty.notchEnabled
                     ToolTip.visible: hovered
                     ToolTip.delay: 700
-                    ToolTip.text: "Cancella una frequenza. Ctrl+clic sul waterfall\n"
-                                  + "per piazzarlo sulla portante che disturba."
+                    ToolTip.text: qsTr("Removes one frequency. Ctrl+click the waterfall\nto drop it on the carrier that is in the way.")
                 }
                 GlassButton {
                     text: "LMS"
-                    implicitWidth: (controls.width - 10) / 3
+                    minimumWidth: (controls.width - 10) / 3
                     implicitHeight: 26
                     font.pixelSize: 11
                     armed: rtty.lmsEnabled
@@ -87,16 +85,14 @@ GlassPanel {
                     onClicked: rtty.lmsEnabled = !rtty.lmsEnabled
                     ToolTip.visible: hovered
                     ToolTip.delay: 700
-                    ToolTip.text: "Cancellatore adattivo: toglie da se' le portanti\n"
-                                  + "ferme. Su segnali deboli puo' mangiarsi anche\n"
-                                  + "il RTTY — provalo e ascolta."
+                    ToolTip.text: qsTr("Adaptive canceller: removes steady carriers by\nitself. On weak signals it can eat the RTTY as\nwell — try it and listen.")
                 }
             }
 
             LabelledSlider {
                 width: parent.width
                 visible: rtty.bandpassEnabled
-                label: "Larghezza BPF"
+                label: qsTr("BPF width")
                 suffix: " Hz"
                 from: 200; to: 1200; stepSize: 25
                 value: rtty.bandpassWidthHz
@@ -116,7 +112,7 @@ GlassPanel {
             Rectangle { width: parent.width; height: 1; color: Theme.glassBorder }
 
             // ── parametri di trama ──────────────────────────────────────
-            PanelHeading { text: "TRAMA" }
+            PanelHeading { text: qsTr("FRAMING") }
 
             Row {
                 width: parent.width
@@ -124,7 +120,7 @@ GlassPanel {
 
                 Text {
                     anchors.verticalCenter: parent.verticalCenter
-                    text: "Stop"
+                    text: qsTr("Stop")
                     color: Theme.textSecondary
                     font.pixelSize: 11
                     width: 40
@@ -136,7 +132,7 @@ GlassPanel {
                     delegate: GlassButton {
                         required property var modelData
                         text: modelData.label
-                        implicitWidth: (controls.width - 60) / 3
+                        minimumWidth: (controls.width - 60) / 3
                         implicitHeight: 24
                         font.pixelSize: 10
                         armed: Math.abs(rtty.stopBits - modelData.value) < 0.1
@@ -151,7 +147,7 @@ GlassPanel {
 
                 Text {
                     anchors.verticalCenter: parent.verticalCenter
-                    text: "Bit"
+                    text: qsTr("Bits")
                     color: Theme.textSecondary
                     font.pixelSize: 11
                     width: 40
@@ -161,7 +157,7 @@ GlassPanel {
                     delegate: GlassButton {
                         required property int modelData
                         text: modelData + ""
-                        implicitWidth: (controls.width - 60) / 3
+                        minimumWidth: (controls.width - 60) / 3
                         implicitHeight: 24
                         font.pixelSize: 10
                         armed: rtty.dataBits === modelData
@@ -180,19 +176,19 @@ GlassPanel {
 
                 Text {
                     anchors.verticalCenter: parent.verticalCenter
-                    text: "Par."
+                    text: qsTr("Par.")
                     color: Theme.textSecondary
                     font.pixelSize: 11
                     width: 40
                 }
                 Repeater {
-                    model: [{ label: "no", value: 0 },
-                            { label: "pari", value: 1 },
-                            { label: "disp", value: 2 }]
+                    model: [{ label: qsTr("none"), value: 0 },
+                            { label: qsTr("even"), value: 1 },
+                            { label: qsTr("odd"), value: 2 }]
                     delegate: GlassButton {
                         required property var modelData
                         text: modelData.label
-                        implicitWidth: (controls.width - 60) / 3
+                        minimumWidth: (controls.width - 60) / 3
                         implicitHeight: 24
                         font.pixelSize: 10
                         armed: rtty.parity === modelData.value
@@ -207,7 +203,7 @@ GlassPanel {
 
                 GlassButton {
                     text: rtty.figuresSet === 0 ? "FIG US" : "FIG ITA2"
-                    implicitWidth: (controls.width - 5) / 2
+                    minimumWidth: (controls.width - 5) / 2
                     implicitHeight: 26
                     font.pixelSize: 11
                     accentColor: Theme.primary
@@ -215,12 +211,11 @@ GlassPanel {
                     onClicked: rtty.figuresSet = rtty.figuresSet === 0 ? 1 : 0
                     ToolTip.visible: hovered
                     ToolTip.delay: 700
-                    ToolTip.text: "Set figure: US ha BELL e apostrofo dove\n"
-                                  + "ITA2 mette apostrofo e BELL scambiati."
+                    ToolTip.text: qsTr("Figures set: US has BELL and apostrophe where\nITA2 swaps the two.")
                 }
                 GlassButton {
                     text: "NO FRAME"
-                    implicitWidth: (controls.width - 5) / 2
+                    minimumWidth: (controls.width - 5) / 2
                     implicitHeight: 26
                     font.pixelSize: 11
                     accentColor: Theme.warning
@@ -228,16 +223,14 @@ GlassPanel {
                     onClicked: rtty.ignoreFramingErrors = !rtty.ignoreFramingErrors
                     ToolTip.visible: hovered
                     ToolTip.delay: 700
-                    ToolTip.text: "Stampa anche i caratteri col bit di stop sbagliato:\n"
-                                  + "qualche carattere in piu' su segnali distorti,\n"
-                                  + "qualche riga di spazzatura in cambio."
+                    ToolTip.text: qsTr("Prints characters whose stop bit read wrong too:\na few more characters on distorted signals, some\nlines of rubbish in exchange.")
                 }
             }
 
             Rectangle { width: parent.width; height: 1; color: Theme.glassBorder }
 
             // ── trasmissione ────────────────────────────────────────────
-            PanelHeading { text: "TRASMISSIONE" }
+            PanelHeading { text: qsTr("TRANSMIT") }
 
             Row {
                 width: parent.width
@@ -245,34 +238,33 @@ GlassPanel {
 
                 Text {
                     anchors.verticalCenter: parent.verticalCenter
-                    text: "Fill"
+                    text: qsTr("Fill")
                     color: Theme.textSecondary
                     font.pixelSize: 11
                     width: 40
                 }
                 Repeater {
-                    model: [{ label: "off", value: 0 },
+                    model: [{ label: qsTr("off"), value: 0 },
                             { label: "LTRS", value: 1 },
                             { label: "blank", value: 2 }]
                     delegate: GlassButton {
                         required property var modelData
                         text: modelData.label
-                        implicitWidth: (controls.width - 60) / 3
+                        minimumWidth: (controls.width - 60) / 3
                         implicitHeight: 24
                         font.pixelSize: 10
                         armed: rtty.diddleMode === modelData.value
                         onClicked: rtty.diddleMode = modelData.value
                         ToolTip.visible: hovered
                         ToolTip.delay: 700
-                        ToolTip.text: "Cosa mandare fra un carattere e l'altro\n"
-                                      + "mentre scrivi dal vivo."
+                        ToolTip.text: qsTr("What to send between characters while you\ntype live.")
                     }
                 }
             }
 
             LabelledSlider {
                 width: parent.width
-                label: "Attesa fra caratteri"
+                label: qsTr("Character wait")
                 suffix: " bit"
                 from: 0; to: 3; stepSize: 0.5
                 decimals: 1

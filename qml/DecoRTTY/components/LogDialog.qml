@@ -33,11 +33,11 @@ Dialog {
 
             PanelHeading {
                 anchors.verticalCenter: parent.verticalCenter
-                text: "LOG"
+                text: qsTr("LOG")
             }
             Text {
                 anchors.verticalCenter: parent.verticalCenter
-                text: qsoLog.count + (qsoLog.count === 1 ? " collegamento" : " collegamenti")
+                text: qsTr("%n contact(s)", "", qsoLog.count)
                 color: Theme.textSecondary
                 font.pixelSize: 11
             }
@@ -75,25 +75,25 @@ Dialog {
                     onEdited: (value) => macros.hisCall = value
                 }
                 QsoField {
-                    label: "RST INV"
+                    label: qsTr("RST SENT")
                     width: 60
                     text: macros.rstSent
                     onEdited: (value) => macros.rstSent = value
                 }
                 QsoField {
                     id: rstRcvd
-                    label: "RST RIC"
+                    label: qsTr("RST RCVD")
                     width: 60
                     text: "599"
                 }
-                QsoField { id: opName; label: "NOME"; width: 100 }
+                QsoField { id: opName; label: qsTr("NAME"); width: 100 }
                 QsoField { id: opQth;  label: "QTH";  width: 110 }
 
                 GlassButton {
                     anchors.verticalCenter: parent.verticalCenter
-                    text: "Registra"
+                    text: qsTr("Log it")
                     accentColor: Theme.success
-                    implicitWidth: 92
+                    minimumWidth: 92
                     implicitHeight: 30
                     enabled: macros.hisCall.length > 0
                     onClicked: {
@@ -123,7 +123,8 @@ Dialog {
 
             Text {
                 anchors.centerIn: parent
-                text: "Gia' collegato: " + macros.hisCall + " — ultimo " + qsoLog.lastWorked(macros.hisCall)
+                text: qsTr("Worked before: %1 — last on %2").arg(macros.hisCall)
+                                                      .arg(qsoLog.lastWorked(macros.hisCall))
                 color: Theme.warning
                 font.pixelSize: 11
             }
@@ -203,14 +204,14 @@ Dialog {
             spacing: 8
 
             GlassButton {
-                text: "Esporta ADIF"
-                implicitWidth: 116
+                text: qsTr("Export ADIF")
+                minimumWidth: 116
                 accentColor: Theme.primary
                 onClicked: qsoLog.exportAdif()
             }
             GlassButton {
-                text: "Chiudi"
-                implicitWidth: 84
+                text: qsTr("Close")
+                minimumWidth: 84
                 onClicked: root.close()
             }
         }

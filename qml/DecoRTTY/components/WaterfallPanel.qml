@@ -49,7 +49,7 @@ GlassPanel {
             height: 24
 
             PanelHeading {
-                text: "SPECTRUM"
+                text: qsTr("SPECTRUM")
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
             }
@@ -69,68 +69,63 @@ GlassPanel {
                 }
 
                     GlassButton {
-                    text: "VISTA"
+                    text: qsTr("VIEW")
                     armed: root.showViewControls
                     accentColor: Theme.textSecondary
-                    implicitWidth: 56
+                    minimumWidth: 56
                     implicitHeight: 22
                     font.pixelSize: 10
                     onClicked: root.showViewControls = !root.showViewControls
                     ToolTip.visible: hovered
                     ToolTip.delay: 700
-                    ToolTip.text: "Zoom, tavolozza, luminosita' e velocita'\n"
-                                  + "della cascata."
+                    ToolTip.text: qsTr("Zoom, palette, brightness and speed of the\nwaterfall.")
                 }
 
             // Centratura su richiesta: un colpo solo, adesso. E' il gesto che
                 // sostituisce il girare la manopola guardando il waterfall.
                 GlassButton {
-                    text: "CENTRA"
+                    text: qsTr("CENTRE")
                     accentColor: Theme.primary
-                    implicitWidth: 66
+                    minimumWidth: 66
                     implicitHeight: 22
                     font.pixelSize: 10
                     onClicked: rtty.centreOnSignal()
                     ToolTip.visible: hovered
                     ToolTip.delay: 700
-                    ToolTip.text: "Cerca la coppia di toni in banda e ci porta\n"
-                                  + "sopra la sintonia. Una volta sola."
+                    ToolTip.text: qsTr("Finds the tone pair in the band and moves the\ntuning onto it. Once, now.")
                 }
 
                 GlassButton {
                     text: "AUTO"
                     armed: rtty.autoTuneEnabled
                     accentColor: Theme.success
-                    implicitWidth: 56
+                    minimumWidth: 56
                     implicitHeight: 22
                     font.pixelSize: 10
                     onClicked: rtty.autoTuneEnabled = !rtty.autoTuneEnabled
                     ToolTip.visible: hovered
                     ToolTip.delay: 700
-                    ToolTip.text: "Cerca da sola quando non si sta copiando nulla,\n"
-                                  + "e prova anche il verso. Mentre il decodificatore\n"
-                                  + "e' agganciato non tocca niente."
+                    ToolTip.text: qsTr("Searches by itself whenever nothing is being\ncopied, and tries the polarity too. While the\ndecoder is locked it touches nothing.")
                 }
 
                 GlassButton {
                     text: "AFC"
                     armed: rtty.afcEnabled
                     accentColor: Theme.secondary
-                    implicitWidth: 52
+                    minimumWidth: 52
                     implicitHeight: 22
                     font.pixelSize: 10
                     onClicked: rtty.afcEnabled = !rtty.afcEnabled
                     ToolTip.visible: hovered
                     ToolTip.delay: 700
-                    ToolTip.text: "Insegue la deriva del segnale gia' agganciato,\n"
-                                  + "entro qualche decina di hertz."
+                    ToolTip.text: qsTr("Follows the drift of the signal already locked,\nwithin a few tens of hertz.")
                 }
 
                 GlassButton {
                     text: "REV"
                     armed: rtty.reverse
                     accentColor: Theme.warning
-                    implicitWidth: 52
+                    minimumWidth: 52
                     implicitHeight: 22
                     font.pixelSize: 10
                     onClicked: rtty.reverse = !rtty.reverse
@@ -146,8 +141,8 @@ GlassPanel {
             spacing: 6
 
             GlassButton {
-                text: root.zoomLevel === 0 ? "banda" : (root.zoomLevel === 1 ? "±400" : "±170")
-                implicitWidth: 62
+                text: root.zoomLevel === 0 ? qsTr("band") : (root.zoomLevel === 1 ? "\u00b1400" : "\u00b1170")
+                minimumWidth: 62
                 implicitHeight: 22
                 font.pixelSize: 10
                 accentColor: Theme.primary
@@ -155,13 +150,12 @@ GlassPanel {
                 onClicked: root.zoomLevel = (root.zoomLevel + 1) % 3
                 ToolTip.visible: hovered
                 ToolTip.delay: 700
-                ToolTip.text: "Quanta banda mostrare. Stretto attorno ai toni si\n"
-                              + "vedono i singoli bit; larga si vede chi chiama."
+                ToolTip.text: qsTr("How much band to show. Narrow around the tones\nshows the individual bits; wide shows who is calling.")
             }
 
             GlassButton {
-                text: ["DECO", "GRIGI", "FUOCO"][root.paletteIndex]
-                implicitWidth: 62
+                text: [qsTr("DECO"), qsTr("GREY"), qsTr("FIRE")][root.paletteIndex]
+                minimumWidth: 62
                 implicitHeight: 22
                 font.pixelSize: 10
                 accentColor: Theme.secondary
@@ -169,20 +163,19 @@ GlassPanel {
             }
 
             GlassButton {
-                text: "vel " + root.speedDivider + "x"
-                implicitWidth: 56
+                text: qsTr("speed %1x").arg(root.speedDivider)
+                minimumWidth: 56
                 implicitHeight: 22
                 font.pixelSize: 10
                 onClicked: root.speedDivider = root.speedDivider >= 4 ? 1 : root.speedDivider * 2
                 ToolTip.visible: hovered
                 ToolTip.delay: 700
-                ToolTip.text: "Quanto in fretta scorre. Piu' lento tiene in vista\n"
-                              + "un pezzo di banda piu' lungo."
+                ToolTip.text: qsTr("How fast it scrolls. Slower keeps a longer\nstretch of band in view.")
             }
 
             Text {
                 anchors.verticalCenter: parent.verticalCenter
-                text: "luce"
+                text: qsTr("light")
                 color: Theme.textSecondary
                 font.pixelSize: 10
             }
@@ -197,7 +190,7 @@ GlassPanel {
 
             Text {
                 anchors.verticalCenter: parent.verticalCenter
-                text: "contrasto"
+                text: qsTr("contrast")
                 color: Theme.textSecondary
                 font.pixelSize: 10
             }
@@ -212,7 +205,7 @@ GlassPanel {
 
             Text {
                 anchors.verticalCenter: parent.verticalCenter
-                text: "fondo " + rtty.spectrumFloorDb.toFixed(0) + " dB"
+                text: qsTr("floor %1 dB").arg(rtty.spectrumFloorDb.toFixed(0))
                 color: Theme.textSecondary
                 font.pixelSize: 10
                 font.family: Theme.monoFamily

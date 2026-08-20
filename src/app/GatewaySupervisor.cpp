@@ -21,7 +21,7 @@ constexpr auto kExecutableName = "decortty-ft991";
 GatewaySupervisor::GatewaySupervisor(QObject* parent)
     : QObject(parent)
 {
-    setStatus(tr("non avviato"));
+    setStatus(tr("not started"));
 }
 
 GatewaySupervisor::~GatewaySupervisor()
@@ -118,7 +118,7 @@ void GatewaySupervisor::setAutoConnect(bool on)
 void GatewaySupervisor::startUnlessPresent(bool alreadyPresent)
 {
     if (!m_enabled) {
-        setStatus(tr("disattivato"));
+        setStatus(tr("disabled"));
         return;
     }
     if (isRunning())
@@ -128,15 +128,15 @@ void GatewaySupervisor::startUnlessPresent(bool alreadyPresent)
         // Non è un errore: qualcuno ha già aperto il gateway, e va benissimo.
         // Ce ne teniamo fuori, e soprattutto non lo chiuderemo uscendo.
         m_ours = false;
-        setStatus(tr("gia' in ascolto (avviato altrove)"));
-        emit log(tr("Gateway gia' presente sulla rete: non ne avvio un altro"));
+        setStatus(tr("already listening (started elsewhere)"));
+        emit log(tr("A gateway is already on the network: not starting another"));
         return;
     }
 
     const QString exe = gatewayExecutable();
     if (exe.isEmpty()) {
-        setStatus(tr("eseguibile non trovato"));
-        emit log(tr("Non trovo %1 accanto all'applicazione").arg(QString(kExecutableName)));
+        setStatus(tr("executable not found"));
+        emit log(tr("Cannot find %1 beside the application").arg(QString(kExecutableName)));
         return;
     }
 
@@ -161,17 +161,17 @@ void GatewaySupervisor::startUnlessPresent(bool alreadyPresent)
             this, &GatewaySupervisor::readProcessOutput);
     connect(m_process, &QProcess::errorOccurred, this, [this](QProcess::ProcessError error) {
         if (error == QProcess::FailedToStart) {
-            setStatus(tr("avvio fallito"));
-            emit log(tr("Il gateway non parte: %1").arg(m_process->errorString()));
+            setStatus(tr("start failed"));
+            emit log(tr("The gateway will not start: %1").arg(m_process->errorString()));
         }
     });
     connect(m_process, &QProcess::finished, this, [this](int code, QProcess::ExitStatus) {
         // Non lo si riavvia da soli. Se è uscito è perché la porta CAT non c'era
         // o la scheda audio è occupata: ripartire in ciclo nasconderebbe il
         // motivo dietro una raffica di tentativi identici.
-        setStatus(code == 0 ? tr("terminato") : tr("terminato (codice %1)").arg(code));
+        setStatus(code == 0 ? tr("exited") : tr("exited (code %1)").arg(code));
         m_catOnline = false;
-        emit log(tr("Gateway terminato, codice %1").arg(code));
+        emit log(tr("Gateway exited, code %1").arg(code));
         m_ours = false;
         // Il processo e' finito: si lascia andare l'oggetto, altrimenti un
         // riavvio lo sovrascriverebbe e il vecchio resterebbe appeso.
@@ -184,14 +184,14 @@ void GatewaySupervisor::startUnlessPresent(bool alreadyPresent)
 
     m_process->start();
     m_ours = true;
-    setStatus(tr("in avvio su %1").arg(m_catPort));
-    emit log(tr("Avvio il gateway: %1 porta %2").arg(QFileInfo(exe).fileName(), m_catPort));
+    setStatus(tr("starting on %1").arg(m_catPort));
+    emit log(tr("Starting the gateway: %1 on port %2").arg(QFileInfo(exe).fileName(), m_catPort));
     emit statusChanged();
 
     if (m_process->waitForStarted(3000)) {
         // Lo stato definitivo arriva dalla riga STATUS del gateway, che sa se la
         // porta si e' aperta davvero.
-        setStatus(tr("avviato"));
+        setStatus(tr("started"));
         emit gatewayStarted();
     }
 }
@@ -213,7 +213,7 @@ void GatewaySupervisor::stop()
     m_ours = false;
 
     if (process->state() != QProcess::NotRunning) {
-        emit log(tr("Chiudo il gateway"));
+        emit log(tr("Closing the gateway"));
         // Non terminate(): su Windows manda WM_CLOSE alle finestre del processo,
         // e il gateway non ne ha alcuna. Gli si dice di chiudere sulla porta che
         // sta gia' ascoltando, cosi' passa dalla sua uscita ordinata — che
@@ -232,16 +232,16 @@ void GatewaySupervisor::stop()
         // chiudersi da solo quando l'ultimo se ne va, e se davvero fosse
         // bloccato ci pensa il suo controllo sul processo padre.
         if (!process->waitForFinished(6000)) {
-            emit log(tr("Il gateway resta in piedi: lo sto lasciando ad altri client"));
+            emit log(tr("The gateway is staying up: leaving it to the other clients"));
             // Niente deleteLater: distruggere un QProcess uccide il figlio, ed
             // e' proprio quello che non vogliamo. L'oggetto muore con noi.
             process->setParent(nullptr);
-            setStatus(tr("lasciato attivo"));
+            setStatus(tr("left running"));
             return;
         }
     }
     process->deleteLater();
-    setStatus(tr("chiuso"));
+    setStatus(tr("closed"));
 }
 
 void GatewaySupervisor::restart()
@@ -268,11 +268,11 @@ void GatewaySupervisor::readProcessOutput()
             }
             m_catOnline = cat == QLatin1String("open");
             if (m_catOnline)
-                setStatus(tr("attivo su %1").arg(port));
+                setStatus(tr("running on %1").arg(port));
             else if (cat == QLatin1String("busy"))
-                setStatus(tr("%1 occupata — solo ascolto").arg(port));
+                setStatus(tr("%1 is busy — receive only").arg(port));
             else
-                setStatus(tr("attivo, senza CAT"));
+                setStatus(tr("running, no CAT"));
             emit statusChanged();
             continue;
         }

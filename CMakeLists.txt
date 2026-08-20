@@ -50,7 +50,7 @@ endif()
 
 # ── FlexRadio transport ─────────────────────────────────────────────────────
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Network Gui Qml Quick QuickControls2
-                                        Multimedia SerialPort)
+                                        Multimedia SerialPort LinguistTools)
 qt_standard_project_setup(REQUIRES 6.5)
 
 add_library(decortty_flex STATIC
@@ -133,6 +133,8 @@ qt_add_executable(decortty
     src/app/QsoLog.h
     src/app/GatewaySupervisor.cpp
     src/app/GatewaySupervisor.h
+    src/app/Language.cpp
+    src/app/Language.h
     src/app/WaterfallItem.cpp
     src/app/WaterfallItem.h
     src/app/Theme.h
@@ -144,11 +146,13 @@ qt_add_resources(decortty "appicon"
     FILES resources/decortty.png
 )
 
+set(DECORTTY_QML_FILES qml/DecoRTTY/Main.qml)
+
 qt_add_qml_module(decortty
     URI DecoRTTY
     VERSION 1.0
     QML_FILES
-        qml/DecoRTTY/Main.qml
+        ${DECORTTY_QML_FILES}
     SOURCES
         src/app/Theme.h
         src/app/WaterfallItem.h
@@ -157,29 +161,49 @@ qt_add_qml_module(decortty
 
 # The reusable widgets live in their own QML module so `import
 # DecoRTTY.components` resolves the same way in every file.
+set(DECORTTY_COMPONENT_FILES
+    qml/DecoRTTY/components/GlassPanel.qml
+    qml/DecoRTTY/components/GlassButton.qml
+    qml/DecoRTTY/components/PanelHeading.qml
+    qml/DecoRTTY/components/StatusItem.qml
+    qml/DecoRTTY/components/StatusBar.qml
+    qml/DecoRTTY/components/QsoField.qml
+    qml/DecoRTTY/components/LabelledSlider.qml
+    qml/DecoRTTY/components/HeaderBar.qml
+    qml/DecoRTTY/components/WaterfallPanel.qml
+    qml/DecoRTTY/components/TuningScope.qml
+    qml/DecoRTTY/components/ReceivePanel.qml
+    qml/DecoRTTY/components/TransmitPanel.qml
+    qml/DecoRTTY/components/DecoderPanel.qml
+    qml/DecoRTTY/components/RadioDialog.qml
+    qml/DecoRTTY/components/SetupDialog.qml
+    qml/DecoRTTY/components/FilterPanel.qml
+    qml/DecoRTTY/components/LogDialog.qml
+)
+
 qt_add_qml_module(decortty_components
     URI DecoRTTY.components
     VERSION 1.0
     STATIC
     QML_FILES
-        qml/DecoRTTY/components/GlassPanel.qml
-        qml/DecoRTTY/components/GlassButton.qml
-        qml/DecoRTTY/components/PanelHeading.qml
-        qml/DecoRTTY/components/StatusItem.qml
-        qml/DecoRTTY/components/StatusBar.qml
-        qml/DecoRTTY/components/QsoField.qml
-        qml/DecoRTTY/components/LabelledSlider.qml
-        qml/DecoRTTY/components/HeaderBar.qml
-        qml/DecoRTTY/components/WaterfallPanel.qml
-        qml/DecoRTTY/components/TuningScope.qml
-        qml/DecoRTTY/components/ReceivePanel.qml
-        qml/DecoRTTY/components/TransmitPanel.qml
-        qml/DecoRTTY/components/DecoderPanel.qml
-        qml/DecoRTTY/components/RadioDialog.qml
-        qml/DecoRTTY/components/SetupDialog.qml
-        qml/DecoRTTY/components/FilterPanel.qml
-        qml/DecoRTTY/components/LogDialog.qml
+        ${DECORTTY_COMPONENT_FILES}
 )
+
+# Niente compilazione anticipata del QML.
+#
+# qmlcachegen trasforma i file QML in bytecode dentro l'eseguibile, il che fa
+# guadagnare qualche millisecondo all'avvio. Ma il percorso con cui registra i
+# file — /qt/qml/DecoRTTY/components/qml/DecoRTTY/components/DecoderPanel.qml —
+# non e' quello da cui Qt ricava il contesto delle traduzioni, e il risultato e'
+# che ogni stringa dell'interfaccia resta in inglese mentre quelle del C++ sono
+# tradotte: un programma mezzo in una lingua e mezzo nell'altra. Verificato
+# avviando con QML_DISABLE_DISK_CACHE=1, che lo traduce per intero.
+#
+# Fra un avvio impercettibilmente piu' rapido e un'interfaccia che parla la
+# lingua di chi la usa, la scelta non e' in dubbio.
+set_source_files_properties(
+    ${DECORTTY_QML_FILES} ${DECORTTY_COMPONENT_FILES}
+    PROPERTIES QT_QML_SKIP_CACHEGEN TRUE)
 
 target_compile_definitions(decortty PRIVATE DECORTTY_VERSION="${PROJECT_VERSION}")
 # src/app is on the include path as well as src, because the generated QML type
@@ -196,6 +220,38 @@ target_link_libraries(decortty PRIVATE
 set_target_properties(decortty PROPERTIES
     WIN32_EXECUTABLE ON
     MACOSX_BUNDLE ON
+)
+
+# ── Traduzioni ──────────────────────────────────────────────────────────────
+# Sedici lingue. I cataloghi .ts stanno sotto controllo di versione — sono il
+# lavoro dei traduttori — mentre i .qm compilati si rigenerano a ogni build e
+# finiscono accanto all'eseguibile, dove Language li cerca.
+set(DECORTTY_LANGUAGES
+    it de fr es pt nl ca da hu ro lv ru ja zh zh_TW)
+
+set(DECORTTY_TS_FILES "")
+foreach(lang IN LISTS DECORTTY_LANGUAGES)
+    list(APPEND DECORTTY_TS_FILES ${CMAKE_CURRENT_SOURCE_DIR}/translations/decortty_${lang}.ts)
+endforeach()
+
+# qt_add_translations aggiorna i .ts dalle sorgenti e compila i .qm. Il
+# `qt_add_lupdate` separato serve perche' i .ts vanno aggiornati a mano, con un
+# bersaglio esplicito: rifarli a ogni compilazione sovrascriverebbe il lavoro di
+# chi sta traducendo in quel momento.
+qt_add_translations(decortty
+    TS_FILES ${DECORTTY_TS_FILES}
+    QM_FILES_OUTPUT_VARIABLE DECORTTY_QM_FILES
+    LUPDATE_OPTIONS -no-obsolete -locations none
+)
+
+# I .qm accanto all'eseguibile: e' li' che Language li cerca, ed e' anche quello
+# che lo script di distribuzione copia.
+add_custom_command(TARGET decortty POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E make_directory $<TARGET_FILE_DIR:decortty>/translations
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${DECORTTY_QM_FILES}
+            $<TARGET_FILE_DIR:decortty>/translations
+    COMMENT "Copio i cataloghi tradotti accanto all'eseguibile"
+    VERBATIM
 )
 
 # ── Tools ───────────────────────────────────────────────────────────────────

@@ -145,7 +145,7 @@ Rectangle {
             text: radio.connected ? "Disconnect" : "Radio…"
             armed: radio.connected
             accentColor: radio.connected ? Theme.success : Theme.primary
-            implicitWidth: 96
+            minimumWidth: 96
             onClicked: radio.connected ? radio.disconnectRadio() : root.radioDialogRequested()
         }
 
@@ -153,14 +153,14 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             text: qsoLog.count > 0 ? "Log " + qsoLog.count : "Log"
             accentColor: Theme.accent
-            implicitWidth: 72
+            minimumWidth: 72
             onClicked: root.logRequested()
         }
 
         GlassButton {
             anchors.verticalCenter: parent.verticalCenter
-            text: "Setup"
-            implicitWidth: 68
+            text: qsTr("Setup")
+            minimumWidth: 68
             onClicked: root.settingsRequested()
         }
     }

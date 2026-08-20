@@ -94,9 +94,9 @@ RttyEngine::RttyEngine(QObject* parent)
         m_params.reverse = decision.reverse;
         applyParams();
         emit autoTuned(flipped
-                           ? tr("Provo il verso opposto (%1)")
-                                 .arg(decision.reverse ? tr("invertito") : tr("diretto"))
-                           : tr("Segnale a %1 Hz: mi sposto")
+                           ? tr("Trying the opposite polarity (%1)")
+                                 .arg(decision.reverse ? tr("reversed") : tr("direct"))
+                           : tr("Signal at %1 Hz: moving there")
                                  .arg(m_params.markHz, 0, 'f', 0));
     });
 }
@@ -227,13 +227,13 @@ bool RttyEngine::centreOnSignal()
 {
     const auto pair = m_demod.searchTonePair(400.0f, 2600.0f);
     if (!pair.found || pair.marginDb < 6.0f || pair.balanceDb > 10.0f) {
-        emit autoTuned(tr("Nessun segnale RTTY riconoscibile in banda"));
+        emit autoTuned(tr("No recognisable RTTY signal in the band"));
         return false;
     }
     m_params.markHz = std::clamp(pair.markHz, 300.0f, 3500.0f);
     m_autoTuner.reset();
     applyParams();
-    emit autoTuned(tr("Centrato su %1 Hz (%2 dB sul fondo)")
+    emit autoTuned(tr("Centred on %1 Hz (%2 dB above the floor)")
                        .arg(m_params.markHz, 0, 'f', 0)
                        .arg(pair.marginDb, 0, 'f', 1));
     return true;
@@ -583,8 +583,8 @@ void RttyEngine::beginTransmit(bool autoReturn)
         && !mode.startsWith(QLatin1String("RTTY"))
         && !mode.startsWith(QLatin1String("PKT"))
         && !mode.startsWith(QLatin1String("DATA"))) {
-        emit errorOccurred(tr("La radio e' in %1: in fonia l'audio della USB non "
-                              "modula. Premi 'Set radio' nel pannello DECODER.")
+        emit errorOccurred(tr("The radio is in %1: on voice modes the USB audio does "
+                              "not modulate. Press 'Set radio' in the DECODER panel.")
                                .arg(mode));
         return;
     }

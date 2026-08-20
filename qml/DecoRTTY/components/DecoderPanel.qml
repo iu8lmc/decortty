@@ -61,7 +61,7 @@ GlassPanel {
                     delegate: GlassButton {
                         required property var modelData
                         text: modelData.label
-                        implicitWidth: (controls.width - 4) / 2
+                        minimumWidth: (controls.width - 4) / 2
                         implicitHeight: 24
                         font.pixelSize: 10
                         armed: Math.abs(rtty.baud - modelData.baud) < 0.1
@@ -107,7 +107,7 @@ GlassPanel {
                 Row {
                     width: parent.width
                     Text {
-                        text: "Correzione"
+                        text: qsTr("Correction")
                         color: Theme.textSecondary
                         font.pixelSize: 11
                     }
@@ -127,24 +127,24 @@ GlassPanel {
                     spacing: 4
 
                     GlassButton {
-                        text: "Off"
-                        implicitWidth: (controls.width - 8) / 3
+                        text: qsTr("Off")
+                        minimumWidth: (controls.width - 8) / 3
                         implicitHeight: 23
                         font.pixelSize: 10
                         armed: rtty.correctionDepth === 0
                         onClicked: rtty.correctionDepth = 0
                     }
                     GlassButton {
-                        text: "Normale"
-                        implicitWidth: (controls.width - 8) / 3
+                        text: qsTr("Normal")
+                        minimumWidth: (controls.width - 8) / 3
                         implicitHeight: 23
                         font.pixelSize: 10
                         armed: rtty.correctionDepth > 0 && rtty.correctionDepth <= 6
                         onClicked: rtty.correctionDepth = 4
                     }
                     GlassButton {
-                        text: "Profonda"
-                        implicitWidth: (controls.width - 8) / 3
+                        text: qsTr("Deep")
+                        minimumWidth: (controls.width - 8) / 3
                         implicitHeight: 23
                         font.pixelSize: 10
                         armed: rtty.correctionDepth > 6
@@ -159,7 +159,7 @@ GlassPanel {
 
                 GlassButton {
                     text: "USOS"
-                    implicitWidth: (controls.width - 4) / 2
+                    minimumWidth: (controls.width - 4) / 2
                     implicitHeight: 24
                     font.pixelSize: 10
                     armed: rtty.unshiftOnSpace
@@ -167,13 +167,12 @@ GlassPanel {
                     onClicked: rtty.unshiftOnSpace = !rtty.unshiftOnSpace
                     ToolTip.visible: hovered
                     ToolTip.delay: 700
-                    ToolTip.text: "Unshift on space — recupera un FIGS/LTRS perduto, ma\n"
-                                  + "spezza i gruppi lunghi di cifre come le serie di numeri."
+                    ToolTip.text: qsTr("Unshift on space — recovers a lost FIGS/LTRS, but\nbreaks long figure groups such as serial numbers.")
                 }
 
                 GlassButton {
-                    text: "Set radio"
-                    implicitWidth: (controls.width - 4) / 2
+                    text: qsTr("Set radio")
+                    minimumWidth: (controls.width - 4) / 2
                     implicitHeight: 24
                     font.pixelSize: 10
                     enabled: radio.connected
@@ -181,7 +180,7 @@ GlassPanel {
                     onClicked: radio.applyRttyProfile(rtty.markHz, rtty.shiftHz)
                     ToolTip.visible: hovered
                     ToolTip.delay: 700
-                    ToolTip.text: "Mette la radio in DIGU e stringe il filtro sui toni."
+                    ToolTip.text: qsTr("Puts the radio into DIGU and narrows its filter\naround the tones.")
                 }
             }
         }

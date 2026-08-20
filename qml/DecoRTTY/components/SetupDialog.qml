@@ -12,7 +12,7 @@ Dialog {
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
     anchors.centerIn: Overlay.overlay
     width: 620
-    height: 520
+    height: 590
     padding: 0
 
     background: GlassPanel { tintOpacity: 0.97 }
@@ -22,9 +22,56 @@ Dialog {
 
         Item { width: 1; height: 6 }
 
+        // ── lingua ──────────────────────────────────────────────────────
+        //
+        // In cima e non in fondo: chi apre questa finestra perche' non capisce
+        // quello che c'e' scritto deve trovarla subito, e i nomi delle lingue
+        // sono scritti ciascuno nella propria — cercare "Deutsch" in un elenco
+        // che dice "German" e' un ostacolo proprio per chi ha piu' bisogno.
+        Row {
+            x: 16
+            spacing: 10
+
+            PanelHeading {
+                anchors.verticalCenter: parent.verticalCenter
+                text: qsTr("LANGUAGE")
+            }
+
+            ComboBox {
+                anchors.verticalCenter: parent.verticalCenter
+                width: 190
+                height: 30
+                font.pixelSize: 12
+                model: language.available
+                textRole: "name"
+                valueRole: "code"
+                currentIndex: {
+                    for (let i = 0; i < model.length; ++i)
+                        if (model[i].code === language.current)
+                            return i
+                    return 0
+                }
+                onActivated: language.current = currentValue
+            }
+
+            Text {
+                anchors.verticalCenter: parent.verticalCenter
+                text: qsTr("changes immediately")
+                color: Theme.textSecondary
+                font.pixelSize: 10
+            }
+        }
+
+        Rectangle {
+            x: 16
+            width: parent.width - 32
+            height: 1
+            color: Theme.glassBorder
+        }
+
         PanelHeading {
             x: 16
-            text: "STATION"
+            text: qsTr("STATION")
         }
 
         Row {
@@ -32,20 +79,20 @@ Dialog {
             spacing: 10
 
             QsoField {
-                label: "MY CALL"
+                label: qsTr("MY CALL")
                 width: 130
                 text: macros.myCall
                 highlight: true
                 onEdited: (value) => macros.myCall = value
             }
             QsoField {
-                label: "NAME"
+                label: qsTr("NAME")
                 width: 130
                 text: macros.myName
                 onEdited: (value) => macros.myName = value
             }
             QsoField {
-                label: "QTH"
+                label: qsTr("QTH")
                 width: 160
                 text: macros.myQth
                 onEdited: (value) => macros.myQth = value
@@ -65,7 +112,7 @@ Dialog {
 
             PanelHeading {
                 anchors.verticalCenter: parent.verticalCenter
-                text: "MACROS"
+                text: qsTr("MACROS")
             }
             Item { width: parent.width - 300; height: 1 }
             Text {
@@ -80,7 +127,7 @@ Dialog {
         ListView {
             x: 12
             width: parent.width - 24
-            height: root.height - 260
+            height: root.height - 330
             clip: true
             spacing: 5
             model: macros
@@ -146,14 +193,14 @@ Dialog {
             spacing: 8
 
             GlassButton {
-                text: "Restore defaults"
-                implicitWidth: 140
+                text: qsTr("Restore defaults")
+                minimumWidth: 140
                 accentColor: Theme.warning
                 onClicked: macros.resetToDefaults()
             }
             GlassButton {
-                text: "Close"
-                implicitWidth: 84
+                text: qsTr("Close")
+                minimumWidth: 84
                 onClicked: root.close()
             }
         }

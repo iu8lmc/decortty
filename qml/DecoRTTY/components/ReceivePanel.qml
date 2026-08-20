@@ -58,7 +58,7 @@ GlassPanel {
             spacing: 8
 
             PanelHeading {
-                text: "RECEIVE"
+                text: qsTr("RECEIVE")
                 anchors.verticalCenter: parent.verticalCenter
             }
 
@@ -83,24 +83,24 @@ GlassPanel {
             }
 
             GlassButton {
-                text: "Call"
+                text: qsTr("Call")
                 armed: root.highlightCalls
                 accentColor: Theme.accent
-                implicitWidth: 48
+                minimumWidth: 48
                 implicitHeight: 22
                 font.pixelSize: 10
                 onClicked: root.highlightCalls = !root.highlightCalls
                 ToolTip.visible: hovered
                 ToolTip.delay: 700
-                ToolTip.text: "Evidenzia i nominativi. Cliccane uno per
-metterlo nel campo HIS CALL."
+                ToolTip.text: qsTr("Highlights callsigns. Click one to put it
+in the HIS CALL field.")
             }
 
             GlassButton {
-                text: "Follow"
+                text: qsTr("Follow")
                 armed: root.autoScroll
                 accentColor: Theme.secondary
-                implicitWidth: 62
+                minimumWidth: 62
                 implicitHeight: 22
                 font.pixelSize: 10
                 onClicked: {
@@ -111,8 +111,8 @@ metterlo nel campo HIS CALL."
             }
 
             GlassButton {
-                text: "Copy"
-                implicitWidth: 54
+                text: qsTr("Copy")
+                minimumWidth: 54
                 implicitHeight: 22
                 font.pixelSize: 10
                 onClicked: {
@@ -123,9 +123,9 @@ metterlo nel campo HIS CALL."
             }
 
             GlassButton {
-                text: "Clear"
+                text: qsTr("Clear")
                 accentColor: Theme.error
-                implicitWidth: 54
+                minimumWidth: 54
                 implicitHeight: 22
                 font.pixelSize: 10
                 onClicked: receiveText.clear()
@@ -283,7 +283,7 @@ metterlo nel campo HIS CALL."
                 Text {
                     id: backLabel
                     anchors.centerIn: parent
-                    text: "in coda ↓"
+                    text: qsTr("jump to end ↓")
                     color: Theme.bgDeep
                     font.pixelSize: 10
                     font.bold: true
