@@ -1,0 +1,22 @@
+# Prodotti della compilazione: si rifanno da sorgente, e in cronologia
+# peserebbero decine di megabyte a ogni ricostruzione.
+build/
+dist/
+*.o
+*.obj
+*.exe
+*.dll
+*.a
+
+# Segnali di prova: si rigenerano con decortty_wavtool, che sta nel repository.
+#   ./build/decortty_wavtool gen testsignals/test.wav 14 "CQ DE IU8LMC K"
+testsignals/*.wav
+
+# Log del gateway, scritti accanto all'eseguibile a ogni avvio.
+*.log
+
+# Cartelle degli strumenti di sviluppo.
+.vscode/
+.idea/
+CMakeUserPresets.json
+compile_commands.json

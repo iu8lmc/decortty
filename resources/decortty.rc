@@ -1,0 +1,3 @@
+// Icona dell'eseguibile su Windows. Il primo ICON del file e' quello che
+// Esplora risorse e la barra delle applicazioni mostrano.
+IDI_ICON1 ICON "decortty.ico"
