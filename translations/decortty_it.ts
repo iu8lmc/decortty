@@ -330,6 +330,13 @@ metterlo nel campo HIS CALL.</translation>
     </message>
 </context>
 <context>
+    <name>StatusBar</name>
+    <message>
+        <source>shared with %1</source>
+        <translation>condivisa con %1</translation>
+    </message>
+</context>
+<context>
     <name>TransmitPanel</name>
     <message>
         <source>Type here — Enter sends the line</source>
@@ -591,6 +598,10 @@ un tratto di banda più lungo.</translation>
         <source>The radio refused the client registration (code 0x%1)</source>
         <translation>La radio ha rifiutato la registrazione del client (codice 0x%1)</translation>
     </message>
+    <message>
+        <source>another station</source>
+        <translation>un'altra stazione</translation>
+    </message>
 </context>
 <context>
     <name>decortty::flex::FlexDiscovery</name>
@@ -601,6 +612,10 @@ un tratto di banda più lungo.</translation>
 </context>
 <context>
     <name>decortty::flex::FlexRadioLink</name>
+    <message>
+        <source>Sharing %1 with %2</source>
+        <translation>%1 condivisa con %2</translation>
+    </message>
     <message>
         <source>Disconnected</source>
         <translation>Scollegato</translation>
@@ -614,12 +629,20 @@ un tratto di banda più lungo.</translation>
         <translation>Collegato a %1</translation>
     </message>
     <message>
+        <source>Reconnecting to %1…</source>
+        <translation>Mi ricollego a %1…</translation>
+    </message>
+    <message>
         <source>Could not open the audio transport</source>
         <translation>Non riesco ad aprire il trasporto audio</translation>
     </message>
     <message>
         <source>The radio rejected the UDP port registration</source>
         <translation>La radio ha rifiutato la registrazione della porta UDP</translation>
+    </message>
+    <message>
+        <source>The radio will not give audio to a bound client — reconnecting as a GUI station</source>
+        <translation>La radio non concede audio a un client legato — mi ricollego come stazione GUI</translation>
     </message>
     <message>
         <source>Could not create the receive audio stream</source>

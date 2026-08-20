@@ -330,6 +330,13 @@ pour le placer dans le champ HIS CALL.</translation>
     </message>
 </context>
 <context>
+    <name>StatusBar</name>
+    <message>
+        <source>shared with %1</source>
+        <translation>partagée avec %1</translation>
+    </message>
+</context>
+<context>
     <name>TransmitPanel</name>
     <message>
         <source>Type here — Enter sends the line</source>
@@ -591,6 +598,10 @@ vue une tranche de bande plus longue.</translation>
         <source>The radio refused the client registration (code 0x%1)</source>
         <translation>Le poste a refusé l'enregistrement du client (code 0x%1)</translation>
     </message>
+    <message>
+        <source>another station</source>
+        <translation>une autre station</translation>
+    </message>
 </context>
 <context>
     <name>decortty::flex::FlexDiscovery</name>
@@ -601,6 +612,10 @@ vue une tranche de bande plus longue.</translation>
 </context>
 <context>
     <name>decortty::flex::FlexRadioLink</name>
+    <message>
+        <source>Sharing %1 with %2</source>
+        <translation>%1 partagée avec %2</translation>
+    </message>
     <message>
         <source>Disconnected</source>
         <translation>Déconnecté</translation>
@@ -614,12 +629,20 @@ vue une tranche de bande plus longue.</translation>
         <translation>Connecté à %1</translation>
     </message>
     <message>
+        <source>Reconnecting to %1…</source>
+        <translation>Reconnexion à %1…</translation>
+    </message>
+    <message>
         <source>Could not open the audio transport</source>
         <translation>Impossible d'ouvrir le transport audio</translation>
     </message>
     <message>
         <source>The radio rejected the UDP port registration</source>
         <translation>Le poste a rejeté l'enregistrement du port UDP</translation>
+    </message>
+    <message>
+        <source>The radio will not give audio to a bound client — reconnecting as a GUI station</source>
+        <translation>Le poste ne donne pas d'audio à un client lié — je me reconnecte comme station GUI</translation>
     </message>
     <message>
         <source>Could not create the receive audio stream</source>

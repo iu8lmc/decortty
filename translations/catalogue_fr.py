@@ -8,6 +8,14 @@ donnerait des mots que personne n'emploie en station.
 """
 
 TRANSLATIONS = {
+    "shared with %1":
+        "partagée avec %1",
+    "Sharing %1 with %2":
+        "%1 partagée avec %2",
+    "another station":
+        "une autre station",
+    "The radio will not give audio to a bound client — reconnecting as a GUI station":
+        "Le poste ne donne pas d'audio à un client lié — je me reconnecte comme station GUI",
     "TRANSMITTING":
         "EN ÉMISSION",
     "Type here — Enter sends the line":

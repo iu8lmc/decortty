@@ -34,6 +34,8 @@ class RadioHub : public QObject {
     // interface uses it to label the connection honestly rather than implying
     // everything is a network SDR.
     Q_PROPERTY(bool viaGateway READ viaGateway NOTIFY connectionChanged)
+    // La stazione con cui si condivide il FlexRadio, vuoto se si lavora da soli.
+    Q_PROPERTY(QString sharedWith READ sharedWith NOTIFY connectionChanged)
 
 public:
     explicit RadioHub(QObject* parent = nullptr);
@@ -50,6 +52,7 @@ public:
     bool    canTransmit() const;
     int     signalStrengthDbm() const;
     bool    viaGateway() const { return m_viaGateway; }
+    QString sharedWith() const;
 
     Q_INVOKABLE void startDiscovery();
     Q_INVOKABLE void stopDiscovery();

@@ -8,6 +8,14 @@ gebräuchliche deutsche Entsprechung im Funkbetrieb.
 """
 
 TRANSLATIONS = {
+    "shared with %1":
+        "geteilt mit %1",
+    "Sharing %1 with %2":
+        "%1 geteilt mit %2",
+    "another station":
+        "eine andere Station",
+    "The radio will not give audio to a bound client — reconnecting as a GUI station":
+        "Das Gerät gibt einem gebundenen Client kein Audio — ich verbinde mich als GUI-Station neu",
     "TRANSMITTING":
         "SENDET",
     "Type here — Enter sends the line":

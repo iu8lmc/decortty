@@ -7,6 +7,14 @@
 """
 
 TRANSLATIONS = {
+    "shared with %1":
+        "%1 と共用",
+    "Sharing %1 with %2":
+        "%1 を %2 と共用",
+    "another station":
+        "別の局",
+    "The radio will not give audio to a bound client — reconnecting as a GUI station":
+        "無線機は従属クライアントに音声を渡しません — GUI 局として接続し直します",
     "TRANSMITTING":
         "送信中",
     "Type here — Enter sends the line":

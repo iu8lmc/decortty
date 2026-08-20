@@ -8,6 +8,14 @@ folosește în stație.
 """
 
 TRANSLATIONS = {
+    "shared with %1":
+        "partajat cu %1",
+    "Sharing %1 with %2":
+        "%1 partajat cu %2",
+    "another station":
+        "altă stație",
+    "The radio will not give audio to a bound client — reconnecting as a GUI station":
+        "Stația nu dă audio unui client legat — mă reconectez ca stație GUI",
     "TRANSMITTING":
         "ÎN EMISIE",
     "Type here — Enter sends the line":

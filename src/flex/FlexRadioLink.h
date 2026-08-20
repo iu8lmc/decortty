@@ -87,6 +87,15 @@ private:
     SliceState m_slice;
     QString    m_statusText;
 
+    // Vero mentre si sta rifacendo il collegamento perche' il ruolo secondario
+    // non ha ottenuto l'audio.
+    bool    m_relinkAsGui{false};
+    // La stazione GUI con cui si condivide la radio, vuoto se si lavora da soli.
+    QString m_boundStation;
+public:
+    QString sharedWith() const override { return m_boundStation; }
+
+private:
     quint32 m_rxStreamId{0};
     quint32 m_txStreamId{0};
     bool    m_transmitting{false};

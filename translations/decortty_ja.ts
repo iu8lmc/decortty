@@ -329,6 +329,13 @@ HIS CALL 欄に入ります。</translation>
     </message>
 </context>
 <context>
+    <name>StatusBar</name>
+    <message>
+        <source>shared with %1</source>
+        <translation>%1 と共用</translation>
+    </message>
+</context>
+<context>
     <name>TransmitPanel</name>
     <message>
         <source>Type here — Enter sends the line</source>
@@ -590,6 +597,10 @@ stretch of band in view.</source>
         <source>The radio refused the client registration (code 0x%1)</source>
         <translation>無線機がクライアント登録を拒みました（コード 0x%1）</translation>
     </message>
+    <message>
+        <source>another station</source>
+        <translation>別の局</translation>
+    </message>
 </context>
 <context>
     <name>decortty::flex::FlexDiscovery</name>
@@ -600,6 +611,10 @@ stretch of band in view.</source>
 </context>
 <context>
     <name>decortty::flex::FlexRadioLink</name>
+    <message>
+        <source>Sharing %1 with %2</source>
+        <translation>%1 を %2 と共用</translation>
+    </message>
     <message>
         <source>Disconnected</source>
         <translation>切断しました</translation>
@@ -613,12 +628,20 @@ stretch of band in view.</source>
         <translation>%1 に接続しました</translation>
     </message>
     <message>
+        <source>Reconnecting to %1…</source>
+        <translation>%1 に接続し直しています…</translation>
+    </message>
+    <message>
         <source>Could not open the audio transport</source>
         <translation>音声の経路を開けませんでした</translation>
     </message>
     <message>
         <source>The radio rejected the UDP port registration</source>
         <translation>無線機が UDP ポートの登録を拒みました</translation>
+    </message>
+    <message>
+        <source>The radio will not give audio to a bound client — reconnecting as a GUI station</source>
+        <translation>無線機は従属クライアントに音声を渡しません — GUI 局として接続し直します</translation>
     </message>
     <message>
         <source>Could not create the receive audio stream</source>

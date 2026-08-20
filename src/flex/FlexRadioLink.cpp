@@ -1,5 +1,7 @@
 #include "flex/FlexRadioLink.h"
 
+#include <QTimer>
+
 #include <QVariantMap>
 
 #include <cmath>
@@ -11,6 +13,13 @@ FlexRadioLink::FlexRadioLink(QObject* parent)
 {
     connect(&m_api, &FlexApiClient::connected,     this, &FlexRadioLink::onApiConnected);
     connect(&m_api, &FlexApiClient::disconnected,  this, &FlexRadioLink::onApiDisconnected);
+    // Legati a una stazione gia' presente: l'operatore deve saperlo, perche'
+    // cambia dove si guarda — la slice e' quella di SmartSDR, non una nostra.
+    connect(&m_api, &FlexApiClient::boundToStation, this, [this](const QString& station) {
+        m_boundStation = station;
+        setStatusText(tr("Sharing %1 with %2").arg(m_radio.displayName(), station));
+        emit connectionChanged();
+    });
     connect(&m_api, &FlexApiClient::statusReceived, this, &FlexRadioLink::onStatus);
     connect(&m_api, &FlexApiClient::errorOccurred, this, &FlexRadioLink::errorOccurred);
     connect(&m_api, &FlexApiClient::radioMessage, this,
@@ -86,6 +95,17 @@ void FlexRadioLink::onApiDisconnected()
     m_txStreamId = 0;
     m_slice      = SliceState{};
     m_vita.stop();
+
+    if (m_relinkAsGui) {
+        // La disconnessione era voluta: si torna subito, questa volta come
+        // stazione GUI.
+        m_relinkAsGui = false;
+        setStatusText(tr("Reconnecting to %1…").arg(m_radio.displayName()));
+        emit connectionChanged();
+        QTimer::singleShot(300, this, [this] { m_api.connectToRadio(m_radio); });
+        return;
+    }
+
     setStatusText(tr("Disconnected"));
     emit connectionChanged();
     emit sliceChanged();
@@ -113,6 +133,23 @@ void FlexRadioLink::bringUpStreams()
                    m_api.send(QStringLiteral("stream create type=remote_audio_rx compression=none"),
                               [this](int rxCode, const QString& body) {
                                   if (rxCode != 0) {
+                                      // Da client secondario la radio potrebbe
+                                      // non concedere il flusso audio. Non e'
+                                      // stato possibile verificarlo su un
+                                      // apparato vero, quindi invece di
+                                      // affermare che funziona si prevede il
+                                      // caso: si ritenta prendendo il ruolo
+                                      // GUI, che l'audio lo ottiene di sicuro —
+                                      // al prezzo di un posto MultiFlex.
+                                      if (!m_api.boundTo().isEmpty()) {
+                                          emit errorOccurred(
+                                              tr("The radio will not give audio to a bound client — "
+                                                 "reconnecting as a GUI station"));
+                                          m_api.setRole(flex::FlexApiClient::Role::Gui);
+                                          m_relinkAsGui = true;
+                                          m_api.disconnectFromRadio();
+                                          return;
+                                      }
                                       emit errorOccurred(tr("Could not create the receive audio stream"));
                                       return;
                                   }

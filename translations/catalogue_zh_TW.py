@@ -9,6 +9,14 @@
 """
 
 TRANSLATIONS = {
+    "shared with %1":
+        "與 %1 共用",
+    "Sharing %1 with %2":
+        "%1 與 %2 共用",
+    "another station":
+        "另一個電臺",
+    "The radio will not give audio to a bound client — reconnecting as a GUI station":
+        "電臺不給繫結的用戶端音訊 —— 改以 GUI 身分重新連線",
     "TRANSMITTING":
         "發射中",
     "Type here — Enter sends the line":

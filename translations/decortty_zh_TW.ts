@@ -323,6 +323,13 @@ in the HIS CALL field.</source>
     </message>
 </context>
 <context>
+    <name>StatusBar</name>
+    <message>
+        <source>shared with %1</source>
+        <translation>與 %1 共用</translation>
+    </message>
+</context>
+<context>
     <name>TransmitPanel</name>
     <message>
         <source>Type here — Enter sends the line</source>
@@ -581,6 +588,10 @@ stretch of band in view.</source>
         <source>The radio refused the client registration (code 0x%1)</source>
         <translation>電臺拒絕了用戶端註冊（代碼 0x%1）</translation>
     </message>
+    <message>
+        <source>another station</source>
+        <translation>另一個電臺</translation>
+    </message>
 </context>
 <context>
     <name>decortty::flex::FlexDiscovery</name>
@@ -591,6 +602,10 @@ stretch of band in view.</source>
 </context>
 <context>
     <name>decortty::flex::FlexRadioLink</name>
+    <message>
+        <source>Sharing %1 with %2</source>
+        <translation>%1 與 %2 共用</translation>
+    </message>
     <message>
         <source>Disconnected</source>
         <translation>已斷開</translation>
@@ -604,12 +619,20 @@ stretch of band in view.</source>
         <translation>已連線到 %1</translation>
     </message>
     <message>
+        <source>Reconnecting to %1…</source>
+        <translation>正在重新連線 %1…</translation>
+    </message>
+    <message>
         <source>Could not open the audio transport</source>
         <translation>打不開音訊通道</translation>
     </message>
     <message>
         <source>The radio rejected the UDP port registration</source>
         <translation>電臺拒絕了 UDP 連接埠的註冊</translation>
+    </message>
+    <message>
+        <source>The radio will not give audio to a bound client — reconnecting as a GUI station</source>
+        <translation>電臺不給繫結的用戶端音訊 —— 改以 GUI 身分重新連線</translation>
     </message>
     <message>
         <source>Could not create the receive audio stream</source>

@@ -8,6 +8,14 @@ RST, QTH международные, и оператор ищет именно �
 """
 
 TRANSLATIONS = {
+    "shared with %1":
+        "совместно с %1",
+    "Sharing %1 with %2":
+        "%1 совместно с %2",
+    "another station":
+        "другая станция",
+    "The radio will not give audio to a bound client — reconnecting as a GUI station":
+        "Радио не даёт звук привязанному клиенту — переподключаюсь как станция GUI",
     "TRANSMITTING":
         "ПЕРЕДАЮ",
     "Type here — Enter sends the line":

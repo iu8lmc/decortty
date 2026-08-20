@@ -51,6 +51,28 @@ public:
     void setClientId(const QString& uuid)    { m_clientId = uuid; }
     QString clientId() const { return m_clientId; }
 
+    // Come ci si presenta alla radio.
+    //
+    // Un client GUI possiede le proprie slice e occupa uno dei posti MultiFlex,
+    // che su un FLEX-6000 sono due. DecoRTTY non ne ha bisogno: non crea slice,
+    // legge quella su cui l'operatore e' gia' sintonizzato e comanda il PTT. Se
+    // si dichiarasse GUI mentre SmartSDR e' aperto, occuperebbe il secondo posto
+    // — e su un apparato senza licenza MultiFlex verrebbe rifiutato del tutto.
+    //
+    // Percio' si guarda prima chi c'e': se una stazione GUI e' gia' collegata,
+    // ci si registra come client secondario e ci si lega a quella, vedendo le
+    // sue slice. Se non c'e' nessuno, si prende il ruolo GUI e si lavora da
+    // soli.
+    enum class Role {
+        Auto,     // secondario se c'e' gia' una GUI, altrimenti GUI
+        Gui,      // sempre GUI, come faceva prima
+        Bound,    // sempre secondario, anche senza nessuno a cui legarsi
+    };
+    void setRole(Role role) { m_role = role; }
+    Role role() const { return m_role; }
+    // Il client GUI a cui ci si e' legati, vuoto se si lavora da soli.
+    QString boundTo() const { return m_boundStation; }
+
     void connectToRadio(const RadioInfo& radio);
     void connectToHost(const QHostAddress& address, quint16 port = 4992);
     void disconnectFromRadio();
@@ -61,6 +83,9 @@ public:
 
 signals:
     void stateChanged(LinkState state);
+    // Ci si e' legati a una stazione GUI gia' presente: il nome e' quello che
+    // l'operatore vede in SmartSDR.
+    void boundToStation(const QString& station);
     void connected();          // handshake finished; safe to create streams
     void disconnected();
     void errorOccurred(const QString& message);
@@ -79,6 +104,13 @@ private:
     void setState(LinkState state);
     void processLine(const QString& line);
     void runHandshake();
+    // Registrazione come GUI: si usa quando non c'e' nessuno a cui legarsi.
+    void registerAsGui();
+    // Registrazione come secondario legato al client GUI indicato.
+    void bindTo(const QString& clientId, const QString& station);
+    void subscribeEverything();
+    // Le stazioni GUI viste finora, dal flusso di stato dei client.
+    void noteClientStatus(const QString& object, const QMap<QString, QString>& kvs);
 
     QTcpSocket m_socket;
     QByteArray m_buffer;
@@ -89,6 +121,10 @@ private:
     quint32   m_sequence{0};
     QString   m_version;
     QString   m_stationName{QStringLiteral("DecoRTTY")};
+    Role      m_role{Role::Auto};
+    QString   m_boundStation;
+    bool      m_registered{false};
+    QTimer    m_roleTimer;   // attesa prima di decidere di fare da soli
     QString   m_clientId;
 
     QHash<quint32, Reply> m_pending;

@@ -330,6 +330,13 @@ posar-lo al camp HIS CALL.</translation>
     </message>
 </context>
 <context>
+    <name>StatusBar</name>
+    <message>
+        <source>shared with %1</source>
+        <translation>compartit amb %1</translation>
+    </message>
+</context>
+<context>
     <name>TransmitPanel</name>
     <message>
         <source>Type here — Enter sends the line</source>
@@ -591,6 +598,10 @@ vista un tram de banda més llarg.</translation>
         <source>The radio refused the client registration (code 0x%1)</source>
         <translation>L'equip ha refusat el registre del client (codi 0x%1)</translation>
     </message>
+    <message>
+        <source>another station</source>
+        <translation>una altra estació</translation>
+    </message>
 </context>
 <context>
     <name>decortty::flex::FlexDiscovery</name>
@@ -601,6 +612,10 @@ vista un tram de banda més llarg.</translation>
 </context>
 <context>
     <name>decortty::flex::FlexRadioLink</name>
+    <message>
+        <source>Sharing %1 with %2</source>
+        <translation>%1 compartit amb %2</translation>
+    </message>
     <message>
         <source>Disconnected</source>
         <translation>Desconnectat</translation>
@@ -614,12 +629,20 @@ vista un tram de banda més llarg.</translation>
         <translation>Connectat a %1</translation>
     </message>
     <message>
+        <source>Reconnecting to %1…</source>
+        <translation>Reconnectant amb %1…</translation>
+    </message>
+    <message>
         <source>Could not open the audio transport</source>
         <translation>No he pogut obrir el transport d'àudio</translation>
     </message>
     <message>
         <source>The radio rejected the UDP port registration</source>
         <translation>L'equip ha rebutjat el registre del port UDP</translation>
+    </message>
+    <message>
+        <source>The radio will not give audio to a bound client — reconnecting as a GUI station</source>
+        <translation>L'equip no dóna àudio a un client lligat — em reconnecto com a estació GUI</translation>
     </message>
     <message>
         <source>Could not create the receive audio stream</source>

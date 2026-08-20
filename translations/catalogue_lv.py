@@ -8,6 +8,14 @@ nelieto.
 """
 
 TRANSLATIONS = {
+    "shared with %1":
+        "koplietots ar %1",
+    "Sharing %1 with %2":
+        "%1 koplietots ar %2",
+    "another station":
+        "cita stacija",
+    "The radio will not give audio to a bound client — reconnecting as a GUI station":
+        "Stacija nedod skaņu piesaistītam klientam — pieslēdzos no jauna kā GUI stacija",
     "TRANSMITTING":
         "RAIDA",
     "Type here — Enter sends the line":

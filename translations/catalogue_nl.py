@@ -8,6 +8,14 @@ op die niemand in de shack gebruikt.
 """
 
 TRANSLATIONS = {
+    "shared with %1":
+        "gedeeld met %1",
+    "Sharing %1 with %2":
+        "%1 gedeeld met %2",
+    "another station":
+        "een ander station",
+    "The radio will not give audio to a bound client — reconnecting as a GUI station":
+        "De set geeft een gebonden client geen audio — ik verbind opnieuw als GUI-station",
     "TRANSMITTING":
         "ZENDT",
     "Type here — Enter sends the line":

@@ -22,6 +22,11 @@ RadioHub::~RadioHub()
 // ── state, forwarded from whichever link is live ────────────────────────────
 
 bool    RadioHub::connected() const  { return m_link && m_link->isConnected(); }
+QString RadioHub::sharedWith() const
+{
+    return m_link ? m_link->sharedWith() : QString();
+}
+
 QString RadioHub::statusText() const { return m_link ? m_link->statusText() : m_idleStatus; }
 QString RadioHub::radioName() const  { return m_link ? m_link->radioName() : QString(); }
 double  RadioHub::frequencyMhz() const { return m_link ? m_link->frequencyMhz() : 0.0; }

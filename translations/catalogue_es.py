@@ -8,6 +8,14 @@ la estación.
 """
 
 TRANSLATIONS = {
+    "shared with %1":
+        "compartido con %1",
+    "Sharing %1 with %2":
+        "%1 compartido con %2",
+    "another station":
+        "otra estación",
+    "The radio will not give audio to a bound client — reconnecting as a GUI station":
+        "El equipo no da audio a un cliente vinculado — me reconecto como estación GUI",
     "TRANSMITTING":
         "TRANSMITIENDO",
     "Type here — Enter sends the line":

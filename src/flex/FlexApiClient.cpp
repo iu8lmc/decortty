@@ -178,7 +178,11 @@ void FlexApiClient::processLine(const QString& line)
 
         const QString object = QStringList(parts.mid(0, nameTokens)).join(QLatin1Char(' '));
         const QString kvBody = QStringList(parts.mid(nameTokens)).join(QLatin1Char(' '));
-        emit statusReceived(object, parseKeyValues(kvBody));
+        const QMap<QString, QString> kvs = parseKeyValues(kvBody);
+        // Prima di passarlo oltre: se e' un client che si presenta, puo' essere
+        // la stazione GUI a cui legarsi.
+        noteClientStatus(object, kvs);
+        emit statusReceived(object, kvs);
         break;
     }
 
@@ -200,10 +204,50 @@ void FlexApiClient::processLine(const QString& line)
 
 void FlexApiClient::runHandshake()
 {
-    // Order matters and mirrors what FlexLib does: identify the program, then
-    // register as a GUI client, then subscribe. Registering before identifying
-    // makes the radio ignore later client settings.
+    // L'ordine conta e ricalca quello di FlexLib: prima ci si presenta, poi ci
+    // si registra, poi ci si abbona. Registrarsi prima di presentarsi fa
+    // ignorare alla radio tutto quello che viene dopo.
     send(QStringLiteral("client program DecoRTTY"));
+
+    m_registered   = false;
+    m_boundStation.clear();
+
+    if (m_role == Role::Gui) {
+        registerAsGui();
+        return;
+    }
+
+    // Ci si abbona subito all'elenco dei client: e' da li' che si scopre se una
+    // stazione GUI e' gia' collegata. La risposta arriva in pochi millisecondi
+    // se c'e' qualcuno.
+    send(QStringLiteral("sub client all"));
+
+    // Se entro questo tempo nessuna stazione GUI si e' fatta viva, vuol dire che
+    // la radio e' libera e ci si prende il ruolo GUI. Due secondi: la radio
+    // risponde molto prima, e l'attesa si paga una volta sola all'avvio.
+    m_roleTimer.setSingleShot(true);
+    m_roleTimer.setInterval(2000);
+    disconnect(&m_roleTimer, nullptr, this, nullptr);
+    connect(&m_roleTimer, &QTimer::timeout, this, [this] {
+        if (m_registered)
+            return;
+        if (m_role == Role::Bound) {
+            // Richiesto esplicitamente il ruolo secondario e non c'e' nessuno a
+            // cui legarsi: si prosegue lo stesso, con quel che si vede.
+            subscribeEverything();
+            return;
+        }
+        registerAsGui();
+    });
+    m_roleTimer.start();
+}
+
+void FlexApiClient::registerAsGui()
+{
+    if (m_registered)
+        return;
+    m_registered = true;
+    m_roleTimer.stop();
 
     send(QStringLiteral("client gui %1").arg(m_clientId),
          [this](int code, const QString& body) {
@@ -217,21 +261,81 @@ void FlexApiClient::runHandshake()
                  m_clientId = body.trimmed();
 
              send(QStringLiteral("client station %1").arg(m_stationName));
-             send(QStringLiteral("keepalive enable"));
-
-             // Subscriptions. Slice and transmit carry everything RTTY needs
-             // (frequency, mode, filter, PTT state); meter gives the S-meter.
-             send(QStringLiteral("sub slice all"));
-             send(QStringLiteral("sub tx all"));
-             send(QStringLiteral("sub meter all"));
-             send(QStringLiteral("sub audio all"));
-             send(QStringLiteral("sub radio all"));
-             send(QStringLiteral("sub client all"));
-
-             m_keepalive.start();
-             setState(LinkState::Connected);
-             emit connected();
+             subscribeEverything();
          });
+}
+
+void FlexApiClient::bindTo(const QString& clientId, const QString& station)
+{
+    if (m_registered)
+        return;
+    m_registered   = true;
+    m_boundStation = station;
+    m_roleTimer.stop();
+
+    // Legarsi a una stazione GUI: da qui in avanti le slice che la radio ci
+    // mostra sono le sue, cioe' quelle che l'operatore vede in SmartSDR. E'
+    // esattamente quello che serve a un decodificatore — leggere dove l'altro e'
+    // sintonizzato — e non costa un posto MultiFlex.
+    send(QStringLiteral("client bind client_id=%1").arg(clientId),
+         [this, station](int code, const QString&) {
+             if (code != 0) {
+                 // Il legame non e' andato: meglio lavorare da soli che restare
+                 // a meta'.
+                 m_registered = false;
+                 m_boundStation.clear();
+                 registerAsGui();
+                 return;
+             }
+             subscribeEverything();
+             emit boundToStation(station);
+         });
+}
+
+void FlexApiClient::subscribeEverything()
+{
+    send(QStringLiteral("keepalive enable"));
+
+    // Slice e trasmissione portano tutto quello che serve al RTTY (frequenza,
+    // modo, filtro, stato del PTT); meter da' l'S-meter.
+    send(QStringLiteral("sub slice all"));
+    send(QStringLiteral("sub tx all"));
+    send(QStringLiteral("sub meter all"));
+    send(QStringLiteral("sub audio all"));
+    send(QStringLiteral("sub radio all"));
+
+    m_keepalive.start();
+    setState(LinkState::Connected);
+    emit connected();
+}
+
+void FlexApiClient::noteClientStatus(const QString& object,
+                                     const QMap<QString, QString>& kvs)
+{
+    if (m_registered || m_role == Role::Gui)
+        return;
+    if (!object.startsWith(QLatin1String("client ")))
+        return;
+    // Solo i client che si sono appena collegati, non quelli che se ne vanno.
+    if (kvs.contains(QStringLiteral("disconnected")))
+        return;
+
+    // Una stazione GUI si riconosce dall'identificatore di client: i client
+    // secondari non ne hanno uno.
+    const QString id = kvs.value(QStringLiteral("client_id"));
+    if (id.isEmpty())
+        return;
+    // Non ci si lega a se stessi.
+    if (!m_clientId.isEmpty() && id == m_clientId)
+        return;
+
+    const QString program = kvs.value(QStringLiteral("program"));
+    if (program == QLatin1String("DecoRTTY"))
+        return;
+
+    const QString station = kvs.value(QStringLiteral("station"),
+                                      program.isEmpty() ? tr("another station") : program);
+    bindTo(id, station);
 }
 
 } // namespace decortty::flex

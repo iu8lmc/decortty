@@ -329,6 +329,13 @@ lai ieliktu to laukā HIS CALL.</translation>
     </message>
 </context>
 <context>
+    <name>StatusBar</name>
+    <message>
+        <source>shared with %1</source>
+        <translation>koplietots ar %1</translation>
+    </message>
+</context>
+<context>
     <name>TransmitPanel</name>
     <message>
         <source>Type here — Enter sends the line</source>
@@ -590,6 +597,10 @@ joslas gabals.</translation>
         <source>The radio refused the client registration (code 0x%1)</source>
         <translation>Stacija atteica klienta reģistrāciju (kods 0x%1)</translation>
     </message>
+    <message>
+        <source>another station</source>
+        <translation>cita stacija</translation>
+    </message>
 </context>
 <context>
     <name>decortty::flex::FlexDiscovery</name>
@@ -600,6 +611,10 @@ joslas gabals.</translation>
 </context>
 <context>
     <name>decortty::flex::FlexRadioLink</name>
+    <message>
+        <source>Sharing %1 with %2</source>
+        <translation>%1 koplietots ar %2</translation>
+    </message>
     <message>
         <source>Disconnected</source>
         <translation>Atslēgts</translation>
@@ -613,12 +628,20 @@ joslas gabals.</translation>
         <translation>Pieslēgts pie %1</translation>
     </message>
     <message>
+        <source>Reconnecting to %1…</source>
+        <translation>Pieslēdzos no jauna pie %1…</translation>
+    </message>
+    <message>
         <source>Could not open the audio transport</source>
         <translation>Neizdevās atvērt skaņas kanālu</translation>
     </message>
     <message>
         <source>The radio rejected the UDP port registration</source>
         <translation>Stacija noraidīja UDP porta reģistrāciju</translation>
+    </message>
+    <message>
+        <source>The radio will not give audio to a bound client — reconnecting as a GUI station</source>
+        <translation>Stacija nedod skaņu piesaistītam klientam — pieslēdzos no jauna kā GUI stacija</translation>
     </message>
     <message>
         <source>Could not create the receive audio stream</source>

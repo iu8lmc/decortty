@@ -329,6 +329,13 @@ lægge det i feltet HIS CALL.</translation>
     </message>
 </context>
 <context>
+    <name>StatusBar</name>
+    <message>
+        <source>shared with %1</source>
+        <translation>delt med %1</translation>
+    </message>
+</context>
+<context>
     <name>TransmitPanel</name>
     <message>
         <source>Type here — Enter sends the line</source>
@@ -589,6 +596,10 @@ længere stykke bånd i syne.</translation>
         <source>The radio refused the client registration (code 0x%1)</source>
         <translation>Radioen afviste klientregistreringen (kode 0x%1)</translation>
     </message>
+    <message>
+        <source>another station</source>
+        <translation>en anden station</translation>
+    </message>
 </context>
 <context>
     <name>decortty::flex::FlexDiscovery</name>
@@ -599,6 +610,10 @@ længere stykke bånd i syne.</translation>
 </context>
 <context>
     <name>decortty::flex::FlexRadioLink</name>
+    <message>
+        <source>Sharing %1 with %2</source>
+        <translation>%1 delt med %2</translation>
+    </message>
     <message>
         <source>Disconnected</source>
         <translation>Afbrudt</translation>
@@ -612,12 +627,20 @@ længere stykke bånd i syne.</translation>
         <translation>Forbundet til %1</translation>
     </message>
     <message>
+        <source>Reconnecting to %1…</source>
+        <translation>Forbinder igen til %1…</translation>
+    </message>
+    <message>
         <source>Could not open the audio transport</source>
         <translation>Kunne ikke åbne lydtransporten</translation>
     </message>
     <message>
         <source>The radio rejected the UDP port registration</source>
         <translation>Radioen afviste registreringen af UDP-porten</translation>
+    </message>
+    <message>
+        <source>The radio will not give audio to a bound client — reconnecting as a GUI station</source>
+        <translation>Radioen giver ikke lyd til en bundet klient — jeg forbinder igen som GUI-station</translation>
     </message>
     <message>
         <source>Could not create the receive audio stream</source>

@@ -72,8 +72,14 @@ Rectangle {
         anchors.right: parent.right
         anchors.rightMargin: 12
         anchors.verticalCenter: parent.verticalCenter
-        text: (radio.viaGateway ? "VITA-49 gateway · FT-991A"
-                                : "VITA-49 · no DAX · no CAT") + "   ·   v" + appVersion
+        // Con chi si sta dividendo la radio, quando capita: con un FlexRadio
+        // due programmi possono usarla insieme, e sapere di stare guardando la
+        // slice di SmartSDR cambia il modo di leggere quello che si vede.
+        text: (radio.sharedWith.length
+                   ? qsTr("shared with %1").arg(radio.sharedWith)
+                   : (radio.viaGateway ? "VITA-49 gateway · FT-991A"
+                                       : "VITA-49 · no DAX · no CAT"))
+              + "   ·   v" + appVersion
         color: Theme.textSecondary
         font.pixelSize: 10
     }

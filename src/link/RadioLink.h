@@ -24,6 +24,10 @@ public:
 
     virtual bool    isConnected() const = 0;
     virtual QString statusText() const = 0;
+    // Il nome della stazione con cui si sta condividendo la radio, vuoto quando
+    // si lavora da soli. Riguarda solo i FlexRadio, dove piu' programmi possono
+    // usare lo stesso apparato insieme.
+    virtual QString sharedWith() const { return {}; }
     virtual QString radioName() const = 0;
     virtual double  frequencyMhz() const = 0;
     virtual QString mode() const = 0;

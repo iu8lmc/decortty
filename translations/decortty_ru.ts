@@ -330,6 +330,13 @@ in the HIS CALL field.</source>
     </message>
 </context>
 <context>
+    <name>StatusBar</name>
+    <message>
+        <source>shared with %1</source>
+        <translation>совместно с %1</translation>
+    </message>
+</context>
+<context>
     <name>TransmitPanel</name>
     <message>
         <source>Type here — Enter sends the line</source>
@@ -591,6 +598,10 @@ stretch of band in view.</source>
         <source>The radio refused the client registration (code 0x%1)</source>
         <translation>Радио отказало в регистрации клиента (код 0x%1)</translation>
     </message>
+    <message>
+        <source>another station</source>
+        <translation>другая станция</translation>
+    </message>
 </context>
 <context>
     <name>decortty::flex::FlexDiscovery</name>
@@ -601,6 +612,10 @@ stretch of band in view.</source>
 </context>
 <context>
     <name>decortty::flex::FlexRadioLink</name>
+    <message>
+        <source>Sharing %1 with %2</source>
+        <translation>%1 совместно с %2</translation>
+    </message>
     <message>
         <source>Disconnected</source>
         <translation>Отключено</translation>
@@ -614,12 +629,20 @@ stretch of band in view.</source>
         <translation>Подключено к %1</translation>
     </message>
     <message>
+        <source>Reconnecting to %1…</source>
+        <translation>Переподключаюсь к %1…</translation>
+    </message>
+    <message>
         <source>Could not open the audio transport</source>
         <translation>Не удалось открыть звуковой канал</translation>
     </message>
     <message>
         <source>The radio rejected the UDP port registration</source>
         <translation>Радио отклонило регистрацию порта UDP</translation>
+    </message>
+    <message>
+        <source>The radio will not give audio to a bound client — reconnecting as a GUI station</source>
+        <translation>Радио не даёт звук привязанному клиенту — переподключаюсь как станция GUI</translation>
     </message>
     <message>
         <source>Could not create the receive audio stream</source>

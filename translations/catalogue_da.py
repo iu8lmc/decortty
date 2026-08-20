@@ -8,6 +8,14 @@ ord, ingen bruger i stationen.
 """
 
 TRANSLATIONS = {
+    "shared with %1":
+        "delt med %1",
+    "Sharing %1 with %2":
+        "%1 delt med %2",
+    "another station":
+        "en anden station",
+    "The radio will not give audio to a bound client — reconnecting as a GUI station":
+        "Radioen giver ikke lyd til en bundet klient — jeg forbinder igen som GUI-station",
     "TRANSMITTING":
         "SENDER",
     "Type here — Enter sends the line":

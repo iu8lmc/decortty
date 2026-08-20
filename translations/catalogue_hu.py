@@ -8,6 +8,14 @@ az állomáson senki sem használ.
 """
 
 TRANSLATIONS = {
+    "shared with %1":
+        "megosztva vele: %1",
+    "Sharing %1 with %2":
+        "%1 megosztva vele: %2",
+    "another station":
+        "egy másik állomás",
+    "The radio will not give audio to a bound client — reconnecting as a GUI station":
+        "A rádió nem ad hangot kötött kliensnek — újracsatlakozom GUI állomásként",
     "TRANSMITTING":
         "ADÁS ALATT",
     "Type here — Enter sends the line":
