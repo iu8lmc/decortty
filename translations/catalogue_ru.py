@@ -8,6 +8,20 @@ RST, QTH международные, и оператор ищет именно �
 """
 
 TRANSLATIONS = {
+    "FROM A SOUND CARD":
+        "СО ЗВУКОВОЙ КАРТЫ",
+    "no frequency, no PTT — transmit on VOX":
+        "нет частоты, нет PTT — передача по VOX",
+    "— no transmit —":
+        "— без передачи —",
+    "Listen":
+        "Слушать",
+    "Cannot open the sound card":
+        "Не могу открыть звуковую карту",
+    "Listening to %1":
+        "Слушаю %1",
+    "Listening to %1 — receive only":
+        "Слушаю %1 — только приём",
     "shared with %1":
         "совместно с %1",
     "Sharing %1 with %2":

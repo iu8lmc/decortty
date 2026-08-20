@@ -7,6 +7,20 @@
 """
 
 TRANSLATIONS = {
+    "FROM A SOUND CARD":
+        "来自声卡",
+    "no frequency, no PTT — transmit on VOX":
+        "没有频率，没有 PTT — 用 VOX 发射",
+    "— no transmit —":
+        "— 不发射 —",
+    "Listen":
+        "收听",
+    "Cannot open the sound card":
+        "打不开声卡",
+    "Listening to %1":
+        "正在收听 %1",
+    "Listening to %1 — receive only":
+        "正在收听 %1 — 只接收",
     "shared with %1":
         "与 %1 共用",
     "Sharing %1 with %2":

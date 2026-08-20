@@ -249,6 +249,22 @@ Check the radio is on the same subnet, or enter its address below.</source>
 Verifică dacă stația e în aceeași subrețea sau scrie mai jos adresa ei.</translation>
     </message>
     <message>
+        <source>FROM A SOUND CARD</source>
+        <translation>DE LA O PLACĂ DE SUNET</translation>
+    </message>
+    <message>
+        <source>no frequency, no PTT — transmit on VOX</source>
+        <translation>fără frecvență, fără PTT — se emite pe VOX</translation>
+    </message>
+    <message>
+        <source>— no transmit —</source>
+        <translation>— fără emisie —</translation>
+    </message>
+    <message>
+        <source>Listen</source>
+        <translation>Ascultă</translation>
+    </message>
+    <message>
         <source>Connect</source>
         <translation>Conectează</translation>
     </message>
@@ -861,6 +877,25 @@ porțiune de bandă mai lungă.</translation>
     <message>
         <source>Transmit is unavailable on this connection</source>
         <translation>Pe această conexiune nu se poate emite</translation>
+    </message>
+</context>
+<context>
+    <name>decortty::link::SoundCardLink</name>
+    <message>
+        <source>Cannot open the sound card</source>
+        <translation>Nu pot deschide placa de sunet</translation>
+    </message>
+    <message>
+        <source>Listening to %1</source>
+        <translation>Ascult %1</translation>
+    </message>
+    <message>
+        <source>Listening to %1 — receive only</source>
+        <translation>Ascult %1 — doar recepție</translation>
+    </message>
+    <message>
+        <source>Disconnected</source>
+        <translation>Deconectat</translation>
     </message>
 </context>
 </TS>

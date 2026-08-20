@@ -8,6 +8,20 @@ az állomáson senki sem használ.
 """
 
 TRANSLATIONS = {
+    "FROM A SOUND CARD":
+        "HANGKÁRTYÁRÓL",
+    "no frequency, no PTT — transmit on VOX":
+        "nincs frekvencia, nincs PTT — VOX-szal adunk",
+    "— no transmit —":
+        "— nincs adás —",
+    "Listen":
+        "Hallgatás",
+    "Cannot open the sound card":
+        "Nem tudom megnyitni a hangkártyát",
+    "Listening to %1":
+        "Hallgatom: %1",
+    "Listening to %1 — receive only":
+        "Hallgatom: %1 — csak vétel",
     "shared with %1":
         "megosztva vele: %1",
     "Sharing %1 with %2":

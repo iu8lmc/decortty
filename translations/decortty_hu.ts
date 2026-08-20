@@ -249,6 +249,22 @@ Check the radio is on the same subnet, or enter its address below.</source>
 Ellenőrizd, hogy a rádió ugyanazon az alhálózaton van-e, vagy írd be alább a címét.</translation>
     </message>
     <message>
+        <source>FROM A SOUND CARD</source>
+        <translation>HANGKÁRTYÁRÓL</translation>
+    </message>
+    <message>
+        <source>no frequency, no PTT — transmit on VOX</source>
+        <translation>nincs frekvencia, nincs PTT — VOX-szal adunk</translation>
+    </message>
+    <message>
+        <source>— no transmit —</source>
+        <translation>— nincs adás —</translation>
+    </message>
+    <message>
+        <source>Listen</source>
+        <translation>Hallgatás</translation>
+    </message>
+    <message>
         <source>Connect</source>
         <translation>Kapcsolódás</translation>
     </message>
@@ -861,6 +877,25 @@ sávszakasz marad szem előtt.</translation>
     <message>
         <source>Transmit is unavailable on this connection</source>
         <translation>Ezen a kapcsolaton nem lehet adni</translation>
+    </message>
+</context>
+<context>
+    <name>decortty::link::SoundCardLink</name>
+    <message>
+        <source>Cannot open the sound card</source>
+        <translation>Nem tudom megnyitni a hangkártyát</translation>
+    </message>
+    <message>
+        <source>Listening to %1</source>
+        <translation>Hallgatom: %1</translation>
+    </message>
+    <message>
+        <source>Listening to %1 — receive only</source>
+        <translation>Hallgatom: %1 — csak vétel</translation>
+    </message>
+    <message>
+        <source>Disconnected</source>
+        <translation>Szétkapcsolva</translation>
     </message>
 </context>
 </TS>

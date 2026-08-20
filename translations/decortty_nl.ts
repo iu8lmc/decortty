@@ -249,6 +249,22 @@ Check the radio is on the same subnet, or enter its address below.</source>
 Controleer of de set in hetzelfde subnet zit, of vul hieronder zijn adres in.</translation>
     </message>
     <message>
+        <source>FROM A SOUND CARD</source>
+        <translation>VAN EEN GELUIDSKAART</translation>
+    </message>
+    <message>
+        <source>no frequency, no PTT — transmit on VOX</source>
+        <translation>geen frequentie, geen PTT — zenden op VOX</translation>
+    </message>
+    <message>
+        <source>— no transmit —</source>
+        <translation>— niet zenden —</translation>
+    </message>
+    <message>
+        <source>Listen</source>
+        <translation>Luisteren</translation>
+    </message>
+    <message>
         <source>Connect</source>
         <translation>Verbinden</translation>
     </message>
@@ -861,6 +877,25 @@ stuk band in beeld.</translation>
     <message>
         <source>Transmit is unavailable on this connection</source>
         <translation>Over deze verbinding kan niet gezonden worden</translation>
+    </message>
+</context>
+<context>
+    <name>decortty::link::SoundCardLink</name>
+    <message>
+        <source>Cannot open the sound card</source>
+        <translation>Kan de geluidskaart niet openen</translation>
+    </message>
+    <message>
+        <source>Listening to %1</source>
+        <translation>Luistert naar %1</translation>
+    </message>
+    <message>
+        <source>Listening to %1 — receive only</source>
+        <translation>Luistert naar %1 — alleen ontvangst</translation>
+    </message>
+    <message>
+        <source>Disconnected</source>
+        <translation>Verbinding verbroken</translation>
     </message>
 </context>
 </TS>

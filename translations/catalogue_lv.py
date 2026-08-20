@@ -8,6 +8,20 @@ nelieto.
 """
 
 TRANSLATIONS = {
+    "FROM A SOUND CARD":
+        "NO SKAŅAS KARTES",
+    "no frequency, no PTT — transmit on VOX":
+        "nav frekvences, nav PTT — raida ar VOX",
+    "— no transmit —":
+        "— bez raidīšanas —",
+    "Listen":
+        "Klausīties",
+    "Cannot open the sound card":
+        "Nevaru atvērt skaņas karti",
+    "Listening to %1":
+        "Klausos %1",
+    "Listening to %1 — receive only":
+        "Klausos %1 — tikai uztveršana",
     "shared with %1":
         "koplietots ar %1",
     "Sharing %1 with %2":

@@ -8,6 +8,20 @@ servir a l'estació.
 """
 
 TRANSLATIONS = {
+    "FROM A SOUND CARD":
+        "D'UNA TARGETA DE SO",
+    "no frequency, no PTT — transmit on VOX":
+        "sense freqüència, sense PTT — es transmet en VOX",
+    "— no transmit —":
+        "— sense transmissió —",
+    "Listen":
+        "Escolta",
+    "Cannot open the sound card":
+        "No puc obrir la targeta de so",
+    "Listening to %1":
+        "Escoltant %1",
+    "Listening to %1 — receive only":
+        "Escoltant %1 — només recepció",
     "shared with %1":
         "compartit amb %1",
     "Sharing %1 with %2":

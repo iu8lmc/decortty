@@ -8,6 +8,20 @@ la estación.
 """
 
 TRANSLATIONS = {
+    "FROM A SOUND CARD":
+        "DESDE UNA TARJETA DE SONIDO",
+    "no frequency, no PTT — transmit on VOX":
+        "sin frecuencia, sin PTT — se transmite en VOX",
+    "— no transmit —":
+        "— sin transmisión —",
+    "Listen":
+        "Escuchar",
+    "Cannot open the sound card":
+        "No puedo abrir la tarjeta de sonido",
+    "Listening to %1":
+        "Escuchando %1",
+    "Listening to %1 — receive only":
+        "Escuchando %1 — solo recepción",
     "shared with %1":
         "compartido con %1",
     "Sharing %1 with %2":

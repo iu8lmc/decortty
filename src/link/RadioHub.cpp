@@ -84,6 +84,7 @@ void RadioHub::releaseLink()
 
 void RadioHub::adopt(RadioLink* link, bool gateway)
 {
+    m_viaSoundCard = false;
     releaseLink();
     m_link = link;
     m_viaGateway = gateway;
@@ -140,6 +141,35 @@ void RadioHub::connectToAddress(const QString& address, bool gateway)
         adopt(link, false);
         link->connectToAddress(host);
     }
+}
+
+void RadioHub::connectToSoundCard(const QString& captureHint,
+                                  const QString& playbackHint)
+{
+    auto* link = new SoundCardLink(this);
+    adopt(link, /*gateway=*/false);
+    m_viaSoundCard = true;
+    m_captureHint  = captureHint;
+    m_playbackHint = playbackHint;
+    if (!link->open(captureHint, playbackHint)) {
+        m_captureHint.clear();
+        m_playbackHint.clear();
+        // Il messaggio l'ha gia' dato il collegamento; qui si evita solo di
+        // restare con un link aperto a meta'.
+        releaseLink();
+        m_viaSoundCard = false;
+    }
+    emit connectionChanged();
+}
+
+QStringList RadioHub::captureDevices() const
+{
+    return gateway::CodecAudio::captureDevices();
+}
+
+QStringList RadioHub::playbackDevices() const
+{
+    return gateway::CodecAudio::playbackDevices();
 }
 
 void RadioHub::disconnectRadio()

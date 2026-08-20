@@ -8,6 +8,20 @@ gebräuchliche deutsche Entsprechung im Funkbetrieb.
 """
 
 TRANSLATIONS = {
+    "FROM A SOUND CARD":
+        "VON EINER SOUNDKARTE",
+    "no frequency, no PTT — transmit on VOX":
+        "keine Frequenz, kein PTT — Senden per VOX",
+    "— no transmit —":
+        "— kein Senden —",
+    "Listen":
+        "Zuhören",
+    "Cannot open the sound card":
+        "Kann die Soundkarte nicht öffnen",
+    "Listening to %1":
+        "Höre auf %1",
+    "Listening to %1 — receive only":
+        "Höre auf %1 — nur Empfang",
     "shared with %1":
         "geteilt mit %1",
     "Sharing %1 with %2":

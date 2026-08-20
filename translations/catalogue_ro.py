@@ -8,6 +8,20 @@ folosește în stație.
 """
 
 TRANSLATIONS = {
+    "FROM A SOUND CARD":
+        "DE LA O PLACĂ DE SUNET",
+    "no frequency, no PTT — transmit on VOX":
+        "fără frecvență, fără PTT — se emite pe VOX",
+    "— no transmit —":
+        "— fără emisie —",
+    "Listen":
+        "Ascultă",
+    "Cannot open the sound card":
+        "Nu pot deschide placa de sunet",
+    "Listening to %1":
+        "Ascult %1",
+    "Listening to %1 — receive only":
+        "Ascult %1 — doar recepție",
     "shared with %1":
         "partajat cu %1",
     "Sharing %1 with %2":

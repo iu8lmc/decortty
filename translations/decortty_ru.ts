@@ -249,6 +249,22 @@ Check the radio is on the same subnet, or enter its address below.</source>
 Проверьте, что радио в той же подсети, или впишите его адрес ниже.</translation>
     </message>
     <message>
+        <source>FROM A SOUND CARD</source>
+        <translation>СО ЗВУКОВОЙ КАРТЫ</translation>
+    </message>
+    <message>
+        <source>no frequency, no PTT — transmit on VOX</source>
+        <translation>нет частоты, нет PTT — передача по VOX</translation>
+    </message>
+    <message>
+        <source>— no transmit —</source>
+        <translation>— без передачи —</translation>
+    </message>
+    <message>
+        <source>Listen</source>
+        <translation>Слушать</translation>
+    </message>
+    <message>
         <source>Connect</source>
         <translation>Подключить</translation>
     </message>
@@ -861,6 +877,25 @@ stretch of band in view.</source>
     <message>
         <source>Transmit is unavailable on this connection</source>
         <translation>По этому соединению передача невозможна</translation>
+    </message>
+</context>
+<context>
+    <name>decortty::link::SoundCardLink</name>
+    <message>
+        <source>Cannot open the sound card</source>
+        <translation>Не могу открыть звуковую карту</translation>
+    </message>
+    <message>
+        <source>Listening to %1</source>
+        <translation>Слушаю %1</translation>
+    </message>
+    <message>
+        <source>Listening to %1 — receive only</source>
+        <translation>Слушаю %1 — только приём</translation>
+    </message>
+    <message>
+        <source>Disconnected</source>
+        <translation>Отключено</translation>
     </message>
 </context>
 </TS>

@@ -7,6 +7,20 @@
 """
 
 TRANSLATIONS = {
+    "FROM A SOUND CARD":
+        "サウンドカードから",
+    "no frequency, no PTT — transmit on VOX":
+        "周波数も PTT もなし — 送信は VOX で",
+    "— no transmit —":
+        "— 送信しない —",
+    "Listen":
+        "聞く",
+    "Cannot open the sound card":
+        "サウンドカードを開けません",
+    "Listening to %1":
+        "%1 を聞いています",
+    "Listening to %1 — receive only":
+        "%1 を聞いています — 受信のみ",
     "shared with %1":
         "%1 と共用",
     "Sharing %1 with %2":

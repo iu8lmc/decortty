@@ -9,6 +9,7 @@
 #include "flex/FlexDiscovery.h"
 #include "flex/FlexRadioLink.h"
 #include "link/GatewayLink.h"
+#include "link/SoundCardLink.h"
 
 #include <QObject>
 #include <QVariantList>
@@ -34,6 +35,10 @@ class RadioHub : public QObject {
     // interface uses it to label the connection honestly rather than implying
     // everything is a network SDR.
     Q_PROPERTY(bool viaGateway READ viaGateway NOTIFY connectionChanged)
+    // Vero quando l'audio arriva da una scheda del PC: niente frequenza letta,
+    // niente PTT, e l'interfaccia deve dirlo invece di mostrare comandi che non
+    // fanno nulla.
+    Q_PROPERTY(bool viaSoundCard READ viaSoundCard NOTIFY connectionChanged)
     // La stazione con cui si condivide il FlexRadio, vuoto se si lavora da soli.
     Q_PROPERTY(QString sharedWith READ sharedWith NOTIFY connectionChanged)
 
@@ -52,6 +57,10 @@ public:
     bool    canTransmit() const;
     int     signalStrengthDbm() const;
     bool    viaGateway() const { return m_viaGateway; }
+    bool    viaSoundCard() const { return m_viaSoundCard; }
+    // I dispositivi in uso, per poterli riproporre al prossimo avvio.
+    QString captureInUse() const  { return m_captureHint; }
+    QString playbackInUse() const { return m_playbackHint; }
     QString sharedWith() const;
 
     Q_INVOKABLE void startDiscovery();
@@ -60,6 +69,15 @@ public:
     // Manual connect. A gateway and a FlexRadio cannot be told apart from an
     // address alone, so the caller says which it is.
     Q_INVOKABLE void connectToAddress(const QString& address, bool gateway = false);
+    // Collegamento a una scheda audio invece che a una radio in rete: si ascolta
+    // quello che un altro programma — SmartSDR via DAX, un cavo virtuale — mette
+    // su un dispositivo. Il dispositivo di uscita puo' restare vuoto: si riceve
+    // e basta.
+    Q_INVOKABLE void connectToSoundCard(const QString& captureHint,
+                                        const QString& playbackHint);
+    // I dispositivi disponibili, per i menu delle impostazioni.
+    Q_INVOKABLE QStringList captureDevices() const;
+    Q_INVOKABLE QStringList playbackDevices() const;
     Q_INVOKABLE void disconnectRadio();
 
     Q_INVOKABLE void setFrequencyMhz(double mhz);
@@ -89,6 +107,9 @@ private:
     flex::FlexDiscovery m_discovery;
     RadioLink*          m_link{nullptr};   // owned; one at a time
     bool                m_viaGateway{false};
+    bool                m_viaSoundCard{false};
+    QString             m_captureHint;
+    QString             m_playbackHint;
     QString             m_idleStatus;
 };
 

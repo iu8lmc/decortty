@@ -249,6 +249,22 @@ Check the radio is on the same subnet, or enter its address below.</source>
 Comprova que l'equip sigui a la mateixa subxarxa, o escriu a sota la seva adreça.</translation>
     </message>
     <message>
+        <source>FROM A SOUND CARD</source>
+        <translation>D'UNA TARGETA DE SO</translation>
+    </message>
+    <message>
+        <source>no frequency, no PTT — transmit on VOX</source>
+        <translation>sense freqüència, sense PTT — es transmet en VOX</translation>
+    </message>
+    <message>
+        <source>— no transmit —</source>
+        <translation>— sense transmissió —</translation>
+    </message>
+    <message>
+        <source>Listen</source>
+        <translation>Escolta</translation>
+    </message>
+    <message>
         <source>Connect</source>
         <translation>Connecta</translation>
     </message>
@@ -861,6 +877,25 @@ vista un tram de banda més llarg.</translation>
     <message>
         <source>Transmit is unavailable on this connection</source>
         <translation>En aquesta connexió no es pot transmetre</translation>
+    </message>
+</context>
+<context>
+    <name>decortty::link::SoundCardLink</name>
+    <message>
+        <source>Cannot open the sound card</source>
+        <translation>No puc obrir la targeta de so</translation>
+    </message>
+    <message>
+        <source>Listening to %1</source>
+        <translation>Escoltant %1</translation>
+    </message>
+    <message>
+        <source>Listening to %1 — receive only</source>
+        <translation>Escoltant %1 — només recepció</translation>
+    </message>
+    <message>
+        <source>Disconnected</source>
+        <translation>Desconnectat</translation>
     </message>
 </context>
 </TS>

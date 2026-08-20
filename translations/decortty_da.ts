@@ -248,6 +248,22 @@ Check the radio is on the same subnet, or enter its address below.</source>
 Tjek at radioen er på samme undernet, eller skriv dens adresse nedenfor.</translation>
     </message>
     <message>
+        <source>FROM A SOUND CARD</source>
+        <translation>FRA ET LYDKORT</translation>
+    </message>
+    <message>
+        <source>no frequency, no PTT — transmit on VOX</source>
+        <translation>ingen frekvens, ingen PTT — der sendes på VOX</translation>
+    </message>
+    <message>
+        <source>— no transmit —</source>
+        <translation>— ingen sending —</translation>
+    </message>
+    <message>
+        <source>Listen</source>
+        <translation>Lyt</translation>
+    </message>
+    <message>
         <source>Connect</source>
         <translation>Forbind</translation>
     </message>
@@ -859,6 +875,25 @@ længere stykke bånd i syne.</translation>
     <message>
         <source>Transmit is unavailable on this connection</source>
         <translation>Der kan ikke sendes over denne forbindelse</translation>
+    </message>
+</context>
+<context>
+    <name>decortty::link::SoundCardLink</name>
+    <message>
+        <source>Cannot open the sound card</source>
+        <translation>Kan ikke åbne lydkortet</translation>
+    </message>
+    <message>
+        <source>Listening to %1</source>
+        <translation>Lytter til %1</translation>
+    </message>
+    <message>
+        <source>Listening to %1 — receive only</source>
+        <translation>Lytter til %1 — kun modtagelse</translation>
+    </message>
+    <message>
+        <source>Disconnected</source>
+        <translation>Afbrudt</translation>
     </message>
 </context>
 </TS>

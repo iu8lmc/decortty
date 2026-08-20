@@ -243,6 +243,22 @@ Check the radio is on the same subnet, or enter its address below.</source>
 請確設電臺在同一子網内，或在下面填寫它的地址。</translation>
     </message>
     <message>
+        <source>FROM A SOUND CARD</source>
+        <translation>來自音效卡</translation>
+    </message>
+    <message>
+        <source>no frequency, no PTT — transmit on VOX</source>
+        <translation>沒有頻率，沒有 PTT — 用 VOX 發射</translation>
+    </message>
+    <message>
+        <source>— no transmit —</source>
+        <translation>— 不發射 —</translation>
+    </message>
+    <message>
+        <source>Listen</source>
+        <translation>收聽</translation>
+    </message>
+    <message>
         <source>Connect</source>
         <translation>連線</translation>
     </message>
@@ -851,6 +867,25 @@ stretch of band in view.</source>
     <message>
         <source>Transmit is unavailable on this connection</source>
         <translation>这條連線上無法發射</translation>
+    </message>
+</context>
+<context>
+    <name>decortty::link::SoundCardLink</name>
+    <message>
+        <source>Cannot open the sound card</source>
+        <translation>打不開音效卡</translation>
+    </message>
+    <message>
+        <source>Listening to %1</source>
+        <translation>正在收聽 %1</translation>
+    </message>
+    <message>
+        <source>Listening to %1 — receive only</source>
+        <translation>正在收聽 %1 — 只接收</translation>
+    </message>
+    <message>
+        <source>Disconnected</source>
+        <translation>已斷開</translation>
     </message>
 </context>
 </TS>

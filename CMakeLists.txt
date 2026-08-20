@@ -73,8 +73,10 @@ add_library(decortty_flex STATIC
     src/link/GatewayLink.h
     src/link/RadioHub.cpp
     src/link/RadioHub.h
+    src/link/SoundCardLink.cpp
+    src/link/SoundCardLink.h
 )
-target_link_libraries(decortty_flex PUBLIC Qt6::Core Qt6::Network decortty_dsp)
+target_link_libraries(decortty_flex PUBLIC Qt6::Core Qt6::Network decortty_dsp decortty_audio)
 
 # Opus is how the radio wants client transmit audio; without it DecoRTTY can
 # still receive, so the dependency is optional and reported at configure time.
@@ -102,17 +104,26 @@ endif()
 # ── FT-991A gateway ─────────────────────────────────────────────────────────
 # A separate program on purpose: it runs on whichever PC the radio is plugged
 # into, which need not be the one running DecoRTTY.
+# Il codec audio sta per conto suo: lo usa il gateway per parlare con la scheda
+# dell'FT-991A, e lo usa l'applicazione quando l'audio arriva da una scheda
+# qualunque invece che dalla rete. Sono lo stesso mestiere — aprire un
+# dispositivo e portare i campioni a 24 kHz — e vale la pena farlo scrivere una
+# volta sola.
+add_library(decortty_audio STATIC
+    src/gateway/CodecAudio.cpp
+    src/gateway/CodecAudio.h
+)
+target_link_libraries(decortty_audio PUBLIC Qt6::Core Qt6::Multimedia decortty_dsp)
+
 add_library(decortty_gateway STATIC
     src/gateway/Ft991Cat.cpp
     src/gateway/Ft991Cat.h
-    src/gateway/CodecAudio.cpp
-    src/gateway/CodecAudio.h
     src/gateway/Ft991Gateway.cpp
     src/gateway/Ft991Gateway.h
 )
 target_link_libraries(decortty_gateway PUBLIC
     Qt6::Core Qt6::Network Qt6::Multimedia Qt6::SerialPort
-    decortty_flex)
+    decortty_audio decortty_flex)
 target_compile_definitions(decortty_gateway PUBLIC DECORTTY_VERSION="${PROJECT_VERSION}")
 
 qt_add_executable(decortty-ft991 ${DECORTTY_WIN_RESOURCES} tools/gateway_main.cpp)

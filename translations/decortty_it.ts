@@ -249,6 +249,22 @@ Check the radio is on the same subnet, or enter its address below.</source>
 Controlla che la radio sia nella stessa sottorete, o scrivi qui sotto il suo indirizzo.</translation>
     </message>
     <message>
+        <source>FROM A SOUND CARD</source>
+        <translation>DA UNA SCHEDA AUDIO</translation>
+    </message>
+    <message>
+        <source>no frequency, no PTT — transmit on VOX</source>
+        <translation>niente frequenza, niente PTT — si trasmette in VOX</translation>
+    </message>
+    <message>
+        <source>— no transmit —</source>
+        <translation>— niente trasmissione —</translation>
+    </message>
+    <message>
+        <source>Listen</source>
+        <translation>Ascolta</translation>
+    </message>
+    <message>
         <source>Connect</source>
         <translation>Collega</translation>
     </message>
@@ -861,6 +877,25 @@ un tratto di banda più lungo.</translation>
     <message>
         <source>Transmit is unavailable on this connection</source>
         <translation>La trasmissione non è disponibile su questo collegamento</translation>
+    </message>
+</context>
+<context>
+    <name>decortty::link::SoundCardLink</name>
+    <message>
+        <source>Cannot open the sound card</source>
+        <translation>Non riesco ad aprire la scheda audio</translation>
+    </message>
+    <message>
+        <source>Listening to %1</source>
+        <translation>In ascolto su %1</translation>
+    </message>
+    <message>
+        <source>Listening to %1 — receive only</source>
+        <translation>In ascolto su %1 — solo ricezione</translation>
+    </message>
+    <message>
+        <source>Disconnected</source>
+        <translation>Scollegato</translation>
     </message>
 </context>
 </TS>

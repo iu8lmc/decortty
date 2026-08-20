@@ -248,6 +248,22 @@ Check the radio is on the same subnet, or enter its address below.</source>
 Pārbaudi, vai stacija ir tajā pašā apakštīklā, vai ieraksti zemāk tās adresi.</translation>
     </message>
     <message>
+        <source>FROM A SOUND CARD</source>
+        <translation>NO SKAŅAS KARTES</translation>
+    </message>
+    <message>
+        <source>no frequency, no PTT — transmit on VOX</source>
+        <translation>nav frekvences, nav PTT — raida ar VOX</translation>
+    </message>
+    <message>
+        <source>— no transmit —</source>
+        <translation>— bez raidīšanas —</translation>
+    </message>
+    <message>
+        <source>Listen</source>
+        <translation>Klausīties</translation>
+    </message>
+    <message>
         <source>Connect</source>
         <translation>Pieslēgt</translation>
     </message>
@@ -860,6 +876,25 @@ joslas gabals.</translation>
     <message>
         <source>Transmit is unavailable on this connection</source>
         <translation>Pa šo savienojumu raidīt nav iespējams</translation>
+    </message>
+</context>
+<context>
+    <name>decortty::link::SoundCardLink</name>
+    <message>
+        <source>Cannot open the sound card</source>
+        <translation>Nevaru atvērt skaņas karti</translation>
+    </message>
+    <message>
+        <source>Listening to %1</source>
+        <translation>Klausos %1</translation>
+    </message>
+    <message>
+        <source>Listening to %1 — receive only</source>
+        <translation>Klausos %1 — tikai uztveršana</translation>
+    </message>
+    <message>
+        <source>Disconnected</source>
+        <translation>Atslēgts</translation>
     </message>
 </context>
 </TS>

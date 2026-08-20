@@ -8,6 +8,20 @@ ord, ingen bruger i stationen.
 """
 
 TRANSLATIONS = {
+    "FROM A SOUND CARD":
+        "FRA ET LYDKORT",
+    "no frequency, no PTT — transmit on VOX":
+        "ingen frekvens, ingen PTT — der sendes på VOX",
+    "— no transmit —":
+        "— ingen sending —",
+    "Listen":
+        "Lyt",
+    "Cannot open the sound card":
+        "Kan ikke åbne lydkortet",
+    "Listening to %1":
+        "Lytter til %1",
+    "Listening to %1 — receive only":
+        "Lytter til %1 — kun modtagelse",
     "shared with %1":
         "delt med %1",
     "Sharing %1 with %2":

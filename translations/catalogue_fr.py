@@ -8,6 +8,20 @@ donnerait des mots que personne n'emploie en station.
 """
 
 TRANSLATIONS = {
+    "FROM A SOUND CARD":
+        "DEPUIS UNE CARTE SON",
+    "no frequency, no PTT — transmit on VOX":
+        "pas de fréquence, pas de PTT — émission en VOX",
+    "— no transmit —":
+        "— pas d'émission —",
+    "Listen":
+        "Écouter",
+    "Cannot open the sound card":
+        "Impossible d'ouvrir la carte son",
+    "Listening to %1":
+        "À l'écoute de %1",
+    "Listening to %1 — receive only":
+        "À l'écoute de %1 — réception seule",
     "shared with %1":
         "partagée avec %1",
     "Sharing %1 with %2":

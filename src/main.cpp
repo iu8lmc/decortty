@@ -123,6 +123,11 @@ int main(int argc, char* argv[])
         settings.setValue(QStringLiteral("gateway/udpPort"), gateway.udpPort());
         settings.setValue(QStringLiteral("gateway/autoConnect"), gateway.autoConnect());
         settings.setValue(QStringLiteral("ui/language"), language.current());
+        settings.setValue(QStringLiteral("audio/useSoundCard"), radio.viaSoundCard());
+        if (radio.viaSoundCard()) {
+            settings.setValue(QStringLiteral("audio/capture"), radio.captureInUse());
+            settings.setValue(QStringLiteral("audio/playback"), radio.playbackInUse());
+        }
         qsoLog.exportAdif();
         macros.save(settings);
         // Scrittura immediata. QSettings tiene i valori in memoria e li versa su
@@ -167,6 +172,17 @@ int main(int argc, char* argv[])
     // read the window, the list is already populated.
     radio.startDiscovery();
 
+    // Se l'ultima volta si ascoltava una scheda audio, si riprende da li' senza
+    // chiedere niente: e' la sistemazione di chi lavora dietro SmartSDR, e non
+    // cambia da un giorno all'altro.
+    const QString savedCapture = settings.value(QStringLiteral("audio/capture")).toString();
+    const bool useSoundCard    = settings.value(QStringLiteral("audio/useSoundCard"), false).toBool()
+                                 && !savedCapture.isEmpty();
+    if (useSoundCard) {
+        radio.connectToSoundCard(savedCapture,
+                                 settings.value(QStringLiteral("audio/playback")).toString());
+    }
+
     // Un gateway e' gia' in ascolto? Il suo annuncio arriva entro un secondo, e
     // in quel caso non se ne avvia un secondo sulla stessa radio.
     auto gatewayOnAir = [&radio] {
@@ -181,7 +197,8 @@ int main(int argc, char* argv[])
     };
 
     // Un momento di ascolto prima di decidere.
-    QTimer::singleShot(1500, &app, startGatewayIfNeeded);
+    if (!useSoundCard)
+        QTimer::singleShot(1500, &app, startGatewayIfNeeded);
 
     // E se il gateway sparisce mentre siamo aperti — chiuso a mano, o portato
     // via da un'altra istanza che si e' chiusa — si rimette in piedi. Il
@@ -201,7 +218,7 @@ int main(int argc, char* argv[])
     // va letto una volta, non ripetuto a ogni annuncio.
     auto* attempted = new QSet<QString>;
     QObject::connect(&radio, &link::RadioHub::radioListChanged, &app, [&, attempted] {
-        if (!gateway.autoConnect() || radio.connected())
+        if (useSoundCard || !gateway.autoConnect() || radio.connected())
             return;
         for (const QVariant& entry : radio.radioList()) {
             const QVariantMap map = entry.toMap();

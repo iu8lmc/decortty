@@ -16,7 +16,7 @@ Dialog {
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
     anchors.centerIn: Overlay.overlay
     width: 520
-    height: 470
+    height: 560
     padding: 0
 
     background: GlassPanel {
@@ -220,7 +220,7 @@ Dialog {
             id: listView
             x: 12
             width: parent.width - 24
-            height: root.height - 168 - (root.showGateway ? 122 : 42)
+            height: root.height - 258 - (root.showGateway ? 122 : 42)
             clip: true
             spacing: 5
             model: radio.radioList
@@ -317,6 +317,94 @@ Dialog {
                     font.pixelSize: 10
                     horizontalAlignment: Text.AlignHCenter
                     opacity: 0.75
+                }
+            }
+        }
+
+        // ── scheda audio ────────────────────────────────────────────────
+        //
+        // Quando la radio e' gia' occupata da un altro programma, girare attorno
+        // al problema costa meno che risolverlo: SmartSDR l'audio lo mette su un
+        // canale DAX, e da li' lo prende chiunque. Vale lo stesso per un cavo
+        // virtuale o per una radio qualunque attaccata a un ingresso audio.
+        Rectangle {
+            x: 12
+            width: parent.width - 24
+            height: 74
+            radius: 8
+            color: Theme.glassOverlay
+            border.color: Theme.glassBorder
+
+            Column {
+                anchors.left: parent.left
+                anchors.leftMargin: 10
+                anchors.right: parent.right
+                anchors.rightMargin: 10
+                anchors.verticalCenter: parent.verticalCenter
+                spacing: 6
+
+                Row {
+                    spacing: 8
+
+                    Text {
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: qsTr("FROM A SOUND CARD")
+                        color: Theme.textPrimary
+                        font.pixelSize: 11
+                        font.bold: true
+                        font.letterSpacing: 1
+                    }
+                    Text {
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: qsTr("no frequency, no PTT — transmit on VOX")
+                        color: Theme.textSecondary
+                        font.pixelSize: 10
+                    }
+                }
+
+                Row {
+                    spacing: 6
+
+                    ComboBox {
+                        id: cardIn
+                        width: 210
+                        height: 26
+                        font.pixelSize: 11
+                        model: radio.captureDevices()
+                        Component.onCompleted: {
+                            // Su un impianto con SmartSDR il canale giusto e'
+                            // quasi sempre il primo DAX: si preseleziona, e chi
+                            // ha un'altra sistemazione cambia.
+                            for (let i = 0; i < model.length; ++i) {
+                                if (model[i].toLowerCase().indexOf("dax") >= 0) {
+                                    currentIndex = i
+                                    break
+                                }
+                            }
+                        }
+                    }
+
+                    ComboBox {
+                        id: cardOut
+                        width: 210
+                        height: 26
+                        font.pixelSize: 11
+                        // La prima voce e' il nulla: si puo' solo ricevere.
+                        model: [qsTr("— no transmit —")].concat(radio.playbackDevices())
+                    }
+
+                    GlassButton {
+                        text: qsTr("Listen")
+                        minimumWidth: 74
+                        implicitHeight: 26
+                        font.pixelSize: 11
+                        accentColor: Theme.success
+                        onClicked: {
+                            radio.connectToSoundCard(cardIn.currentText,
+                                                     cardOut.currentIndex === 0 ? "" : cardOut.currentText)
+                            root.close()
+                        }
+                    }
                 }
             }
         }

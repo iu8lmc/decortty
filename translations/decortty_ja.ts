@@ -248,6 +248,22 @@ Check the radio is on the same subnet, or enter its address below.</source>
 無線機が同じサブネットにあるか確かめるか、下にアドレスを入れてください。</translation>
     </message>
     <message>
+        <source>FROM A SOUND CARD</source>
+        <translation>サウンドカードから</translation>
+    </message>
+    <message>
+        <source>no frequency, no PTT — transmit on VOX</source>
+        <translation>周波数も PTT もなし — 送信は VOX で</translation>
+    </message>
+    <message>
+        <source>— no transmit —</source>
+        <translation>— 送信しない —</translation>
+    </message>
+    <message>
+        <source>Listen</source>
+        <translation>聞く</translation>
+    </message>
+    <message>
         <source>Connect</source>
         <translation>接続</translation>
     </message>
@@ -860,6 +876,25 @@ stretch of band in view.</source>
     <message>
         <source>Transmit is unavailable on this connection</source>
         <translation>この接続では送信できません</translation>
+    </message>
+</context>
+<context>
+    <name>decortty::link::SoundCardLink</name>
+    <message>
+        <source>Cannot open the sound card</source>
+        <translation>サウンドカードを開けません</translation>
+    </message>
+    <message>
+        <source>Listening to %1</source>
+        <translation>%1 を聞いています</translation>
+    </message>
+    <message>
+        <source>Listening to %1 — receive only</source>
+        <translation>%1 を聞いています — 受信のみ</translation>
+    </message>
+    <message>
+        <source>Disconnected</source>
+        <translation>切断しました</translation>
     </message>
 </context>
 </TS>

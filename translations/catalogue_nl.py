@@ -8,6 +8,20 @@ op die niemand in de shack gebruikt.
 """
 
 TRANSLATIONS = {
+    "FROM A SOUND CARD":
+        "VAN EEN GELUIDSKAART",
+    "no frequency, no PTT — transmit on VOX":
+        "geen frequentie, geen PTT — zenden op VOX",
+    "— no transmit —":
+        "— niet zenden —",
+    "Listen":
+        "Luisteren",
+    "Cannot open the sound card":
+        "Kan de geluidskaart niet openen",
+    "Listening to %1":
+        "Luistert naar %1",
+    "Listening to %1 — receive only":
+        "Luistert naar %1 — alleen ontvangst",
     "shared with %1":
         "gedeeld met %1",
     "Sharing %1 with %2":

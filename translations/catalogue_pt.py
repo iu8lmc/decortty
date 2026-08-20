@@ -8,6 +8,20 @@ ninguém usa na estação.
 """
 
 TRANSLATIONS = {
+    "FROM A SOUND CARD":
+        "DE UMA PLACA DE SOM",
+    "no frequency, no PTT — transmit on VOX":
+        "sem frequência, sem PTT — transmite-se em VOX",
+    "— no transmit —":
+        "— sem transmissão —",
+    "Listen":
+        "Ouvir",
+    "Cannot open the sound card":
+        "Não consigo abrir a placa de som",
+    "Listening to %1":
+        "À escuta de %1",
+    "Listening to %1 — receive only":
+        "À escuta de %1 — só receção",
     "shared with %1":
         "partilhado com %1",
     "Sharing %1 with %2":
