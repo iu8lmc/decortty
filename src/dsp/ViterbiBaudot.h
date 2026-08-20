@@ -63,6 +63,9 @@ private:
         std::array<char, kStates>    emitted{};   // character produced, 0 = none
         std::array<uint8_t, kStates> code{};      // the 5-bit code chosen
         std::array<float, kStates>   quality{};
+        // Probabilita' che il carattere sia esatto, portata a valle per chi
+        // deve scegliere fra due copie della stessa parola.
+        std::array<float, kStates>   certainty{};
         std::array<uint8_t, kStates> corrected{};
         int64_t                      sampleIndex{0};
     };

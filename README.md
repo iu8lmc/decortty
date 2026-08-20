@@ -292,6 +292,24 @@ prints noise through the fades rather than staying quiet. And a deeper Viterbi
 search buys nothing at all, which says the errors arrive in bursts: a character
 bigram model cannot bridge a ten-character hole, however deep you let it look.
 
+### Where the margin is not
+
+With the channel simulator in place, every parameter of the decoder was swept
+against it. `decortty_selftest hf` runs the channel table alone and prints one
+summed figure, so a change can be judged in ten seconds. The baseline is
+**2.265**.
+
+| parameter | values tried | best | current |
+|---|---|---|---|
+| timing flywheel | 16 / 64 / 200 slots | all identical | 64 |
+| noise-reference time constant | 0.0002 / 0.0008 / 0.003 / 0.010 | 0.0008 | 0.0008 |
+| language model weight | 0.30 / 0.55 / 1.00 / 1.80 | 0.55 | 0.55 |
+| character quality threshold | 0.00 … 0.60 | 0.45 | 0.45 |
+
+Every one of them already sits at its optimum, and the flywheel never comes into
+play at all. **The remaining margin is not in the tuning.** That is worth knowing
+before anyone spends an evening turning knobs.
+
 ### What was tried and did not work
 
 Automatic threshold correction, which every historical RTTY decoder has and this
@@ -304,6 +322,40 @@ threshold — this one has none. It divides by the noise floor, which tracks the
 weaker tone, so when a tone fades the ratio drops on its own and the detector
 becomes uncertain rather than confidently wrong. Uncertainty is the correct
 information to hand the Viterbi search, and ATC was throwing it away.
+
+**Recombining the operator's own repetitions.** Nobody sends `CQ DE IU8LMC K` —
+they send `CQ CQ CQ DE IU8LMC IU8LMC IU8LMC K`. Eighty years of practice have
+built a repetition code into the human protocol, and every decoder treats it as
+plain text: three mangled copies printed side by side, and the eye left to merge
+them. So they were merged instead — aligned, and at each position the copy the
+detector had received with more confidence wins.
+
+It gains nothing: 0.086 against 0.087 on a realistic call, 4 to 6 repairs across
+twelve runs. The reason is physical and should have been obvious first. A fade at
+0.5 Hz Doppler spread stays correlated for a second or two; `CQ CQ CQ` takes less
+than that. **The three copies fall inside the same fade**, so there is no time
+diversity to harvest. Adjacent repetition cannot help; only repetition separated
+by more than the channel's coherence time could, and by then the operator has
+read the line anyway.
+
+The idea is not wrong — it is right for a channel with faster fading, or for
+copies minutes apart. It is wrong here, and the measurement said so before it
+shipped.
+
+**Character confidence as a product rather than a mean.** A character is right
+only if all five bits are, so the confidence should be the product of the bit
+probabilities, not their average. As a *measurement* this is plainly better: it
+separates correct characters from wrong ones by 0.50 where the mean manages 0.14.
+As a *decision* it is worse — the threshold for printing a character is calibrated
+on that scale, and on the product scale no value works: at zero the spurious
+end-of-transmission frames get through, above zero good characters are discarded
+long before bad ones. At 20 dB the mean gives no errors at all; the product gives
+0.011.
+
+So both are kept, for the two different questions. `quality()` decides whether a
+character is printed. `certainty()` decides how confident it should *look*: it is
+what drives the fading of uncertain text in the receive window, where a shade
+that means something beats a shade that means nothing.
 
 ## Self-test
 

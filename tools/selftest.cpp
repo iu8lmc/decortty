@@ -410,6 +410,113 @@ double cerOnHfChannel(const std::string& message, float snrDb,
            / static_cast<double>(expected.size());
 }
 
+// La confidenza dei caratteri dice davvero qualcosa?
+//
+// Tutta la ricomposizione delle ripetizioni si regge su una scommessa: che fra
+// due copie della stessa lettera, quella con confidenza maggiore sia piu' spesso
+// quella giusta. Se le confidenze fossero tutte uguali, o peggio scorrelate
+// dall'esito, scegliere "la piu' sicura" sarebbe tirare a sorte con un passaggio
+// in piu'. Qui si allinea il testo decodificato con quello trasmesso e si
+// confrontano le confidenze dei caratteri azzeccati con quelle dei caratteri
+// sbagliati.
+struct QualitySplit {
+    double meanRight{0.0};
+    double meanWrong{0.0};
+    int    right{0};
+    int    wrong{0};
+};
+
+QualitySplit qualityDiscrimination(const std::string& message, float snrDb,
+                                   const decortty::test::HfChannel& channel,
+                                   uint32_t seed)
+{
+    RttyParams params;
+
+    FskModulator mod(params, kRadioRate);
+    mod.setDiddle(false);
+    mod.setAmplitude(0.5f);
+    for (int i = 0; i < 16; ++i) mod.enqueueCode(kBaudotLtrs);
+    mod.enqueueText(message);
+    for (int i = 0; i < 8; ++i) mod.enqueueCode(kBaudotLtrs);
+
+    std::vector<float> tx;
+    std::vector<float> block(1024);
+    while (!mod.idle()) {
+        mod.generate(block.data(), static_cast<int>(block.size()));
+        tx.insert(tx.end(), block.begin(), block.end());
+    }
+    tx.insert(tx.end(), static_cast<size_t>(kRadioRate) / 2, 0.0f);
+
+    decortty::test::applyHfChannel(tx, channel, kRadioRate, seed);
+
+    const float signalPower = 0.5f * 0.5f * 0.5f;
+    const float noiseBw     = params.shiftHz + 2.0f * params.baud;
+    const float snrLin      = std::pow(10.0f, snrDb / 10.0f);
+    const float noisePsd    = signalPower / (snrLin * noiseBw);
+    const float noiseSigma  = std::sqrt(noisePsd * kRadioRate * 0.5f);
+    std::mt19937 rng(seed ^ 0x5bd1e995u);
+    std::normal_distribution<float> gauss(0.0f, noiseSigma);
+    for (float& v : tx) v += gauss(rng);
+
+    FirDecimator    decim(kRadioRate / kWorkRate, kRadioRate);
+    RttyDemodulator demod(params, kWorkRate);
+    ViterbiBaudot   viterbi;
+
+    std::string decoded;
+    std::vector<float> quals;
+    auto onChar = [&](const DecodedChar& dc) {
+        decoded.push_back(dc.text);
+        quals.push_back(dc.quality);
+    };
+
+    std::vector<float> work(block.size());
+    for (size_t i = 0; i < tx.size(); i += block.size()) {
+        const int n = static_cast<int>(std::min(block.size(), tx.size() - i));
+        const int m = decim.process(tx.data() + i, n, work.data());
+        demod.process(work.data(), m, [&](const SoftFrame& f) { viterbi.push(f, onChar); });
+    }
+    viterbi.flush(onChar);
+
+    // Allineamento fra atteso e ricevuto, per sapere quali caratteri sono
+    // finiti dove.
+    const std::string expected = normalise(message);
+    const std::string got      = decoded;
+    const int n = static_cast<int>(expected.size());
+    const int m = static_cast<int>(got.size());
+    if (n == 0 || m == 0)
+        return {};
+
+    std::vector<std::vector<int>> cost(n + 1, std::vector<int>(m + 1, 0));
+    for (int i = 0; i <= n; ++i) cost[i][0] = i;
+    for (int j = 0; j <= m; ++j) cost[0][j] = j;
+    for (int i = 1; i <= n; ++i)
+        for (int j = 1; j <= m; ++j)
+            cost[i][j] = std::min({cost[i - 1][j - 1] + (expected[i - 1] == got[j - 1] ? 0 : 1),
+                                   cost[i - 1][j] + 1, cost[i][j - 1] + 1});
+
+    QualitySplit split;
+    int i = n, j = m;
+    while (i > 0 && j > 0) {
+        const int sub = cost[i - 1][j - 1] + (expected[i - 1] == got[j - 1] ? 0 : 1);
+        if (cost[i][j] == sub) {
+            const float q = quals[static_cast<size_t>(j - 1)];
+            if (expected[i - 1] == got[j - 1]) { split.meanRight += q; ++split.right; }
+            else                               { split.meanWrong += q; ++split.wrong; }
+            --i; --j;
+        } else if (cost[i][j] == cost[i - 1][j] + 1) {
+            --i;
+        } else {
+            // Inserzione: un carattere stampato che non c'era. Conta come errore.
+            const float q = quals[static_cast<size_t>(j - 1)];
+            split.meanWrong += q; ++split.wrong;
+            --j;
+        }
+    }
+    if (split.right) split.meanRight /= split.right;
+    if (split.wrong) split.meanWrong /= split.wrong;
+    return split;
+}
+
 // Characters printed from noise alone. On the air this is what makes a decoder
 // unpleasant: a receiver left on a quiet frequency should print nothing at all,
 // and the aggregate CER above cannot see this failure because it only ever
@@ -657,6 +764,35 @@ void diagnose(const std::string& message, float snrDb)
 
 int main(int argc, char** argv)
 {
+    // "hf" esegue solo le prove sul canale ionosferico. Servono per tarare, e
+    // rifare ogni volta anche tutto il resto costa un minuto buono.
+    const bool hfOnly = argc > 1 && std::string(argv[1]) == "hf";
+    if (hfOnly) {
+        struct Cond { const char* label; decortty::test::HfChannel channel; };
+        const Cond conditions[] = {
+            {"un solo percorso",  {1.0f, 0.5f, true}},
+            {"CCIR buona",        decortty::test::kCcirGood},
+            {"CCIR media",        decortty::test::kCcirModerate},
+            {"CCIR scarsa",       decortty::test::kCcirPoor},
+        };
+        const std::string text = "CQ CQ DE IU8LMC IU8LMC K UR RST 599 599 QTH ROMA NAME MARIO 73";
+        std::printf("  %-22s %8s %8s %8s\n", "condizione", "18 dB", "12 dB", "6 dB");
+        double grand = 0.0;
+        for (const Cond& cond : conditions) {
+            double cer[3] = {0.0, 0.0, 0.0};
+            const float snrs[3] = {18.0f, 12.0f, 6.0f};
+            for (int k = 0; k < 3; ++k) {
+                for (uint32_t trial = 0; trial < 5; ++trial)
+                    cer[k] += cerOnHfChannel(text, snrs[k], cond.channel, 1000u + trial * 77u);
+                cer[k] /= 5.0;
+                grand += cer[k];
+            }
+            std::printf("  %-22s %8.3f %8.3f %8.3f\n", cond.label, cer[0], cer[1], cer[2]);
+        }
+        std::printf("  %-22s %8.3f   (somma, meno e' meglio)\n", "TOTALE", grand);
+        return 0;
+    }
+
     const std::string message =
         argc > 1 ? argv[1]
                  : "CQ CQ DE IU8LMC IU8LMC K UR RST 599 599 QTH ROMA NAME MARIO 73";
@@ -866,6 +1002,55 @@ int main(int argc, char** argv)
                 cer[s] /= 3.0;
             }
             std::printf("  %-26s %8.3f %8.3f %8.3f\n", cond.label, cer[0], cer[1], cer[2]);
+        }
+
+    }
+
+    std::printf("\n  la confidenza distingue i caratteri giusti dagli sbagliati?\n");
+    {
+        const std::string text = "CQ CQ DE IU8LMC IU8LMC K UR RST 599 599 QTH ROMA NAME MARIO 73";
+        struct Row { const char* label; float snr; decortty::test::HfChannel ch; };
+        const Row rows[] = {
+            {"CCIR media, 18 dB", 18.0f, decortty::test::kCcirModerate},
+            {"CCIR media, 12 dB", 12.0f, decortty::test::kCcirModerate},
+            {"CCIR scarsa, 12 dB", 12.0f, decortty::test::kCcirPoor},
+        };
+        for (const Row& row : rows) {
+            QualitySplit total;
+            for (uint32_t trial = 0; trial < 3; ++trial) {
+                const QualitySplit s = qualityDiscrimination(text, row.snr, row.ch,
+                                                             1000u + trial * 77u);
+                total.meanRight += s.meanRight * s.right;
+                total.meanWrong += s.meanWrong * s.wrong;
+                total.right += s.right;
+                total.wrong += s.wrong;
+            }
+            const double right = total.right ? total.meanRight / total.right : 0.0;
+            const double wrong = total.wrong ? total.meanWrong / total.wrong : 0.0;
+            std::printf("    %-20s giusti %.3f (%d)   sbagliati %.3f (%d)   scarto %+.3f\n",
+                        row.label, right, total.right, wrong, total.wrong, right - wrong);
+        }
+    }
+
+    std::printf("\n  soglia di qualita' per accettare un carattere (CCIR media, 12 dB):\n");
+    {
+        const std::string text = "CQ CQ DE IU8LMC IU8LMC K UR RST 599 599 QTH ROMA NAME MARIO 73";
+        for (const float threshold : {0.0f, 0.10f, 0.20f, 0.30f, 0.45f, 0.60f}) {
+            double sum = 0.0;
+            for (uint32_t trial = 0; trial < 3; ++trial) {
+                HfOptions options;
+                options.minFrameQuality = threshold;
+                sum += cerOnHfChannel(text, 12.0f, decortty::test::kCcirModerate,
+                                      1000u + trial * 77u, options);
+            }
+            // La stessa soglia va guardata anche a segnale forte in rumore
+            // bianco: e' li' che una soglia troppo bassa lascia passare i frame
+            // spuri di inizio e fine trasmissione, e un decodificatore che
+            // sbaglia con venti dB di rapporto non e' presentabile.
+            const double clean20 = runOnce(text, 20.0f, 4, 7u, -1.0f, threshold).cer;
+            const double clean6  = runOnce(text,  6.0f, 4, 7u, -1.0f, threshold).cer;
+            std::printf("    %.2f   fading %.3f   AWGN 20 dB %.3f   AWGN 6 dB %.3f\n",
+                        threshold, sum / 3.0, clean20, clean6);
         }
     }
 

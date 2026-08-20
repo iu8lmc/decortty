@@ -113,8 +113,45 @@ struct SoftFrame {
     // A single 0..1 figure of merit used for display and for the squelch.
     // Framing evidence counts as much as bit confidence: a frame whose stop bit
     // read as space is suspect no matter how clean its five data bits looked.
+    // Quanto e' probabile che questo carattere sia esatto — che e' una domanda
+    // diversa da quella cui risponde quality().
+    //
+    // Il carattere e' giusto solo se lo sono tutti e cinque i bit, quindi qui si
+    // moltiplicano le probabilita' invece di mediarle. Misurato su canale
+    // ionosferico, questa grandezza separa i caratteri azzeccati da quelli
+    // sbagliati con uno scarto di 0.50 contro lo 0.14 della media: e' la misura
+    // giusta per scegliere fra due copie della stessa parola.
+    //
+    // Non sostituisce quality(), che decide se stampare: su quella scala la
+    // soglia e' tarata e funziona, mentre su questa nessun valore va bene. Due
+    // domande, due misure.
+    float certainty() const
+    {
+        float product = 1.0f;
+        for (const float llr : bitLlr) {
+            const float mag = llr < 0.0f ? -llr : llr;
+            product *= 0.5f * (1.0f + std::tanh(0.5f * mag));
+        }
+        const float bits = 2.0f * product - 1.0f;
+        return bits < 0.0f ? 0.0f : (bits > 1.0f ? 1.0f : bits);
+    }
+
     float quality() const
     {
+        // Media delle fiducie dei cinque bit, piu' l'incorniciatura.
+        //
+        // Il prodotto delle probabilita' sarebbe la grandezza giusta — un
+        // carattere e' esatto solo se lo sono tutti e cinque i bit — ed e' stato
+        // provato: come misura e' nettamente migliore, lo scarto fra la fiducia
+        // dei caratteri azzeccati e di quelli sbagliati passa da 0.135 a 0.505.
+        // Ma il risultato peggiora, perche' la soglia sotto cui un carattere non
+        // si stampa lavora su questa scala, e sulla scala del prodotto nessun
+        // valore va bene: a zero passano i frame spuri di fine trasmissione, e
+        // sopra zero si scartano caratteri buoni molto prima dei cattivi. Con la
+        // media, a venti dB il tasso di errore e' zero; con il prodotto, 0.011.
+        //
+        // La misura migliore resta a disposizione se un giorno la decisione di
+        // stampare verra' presa in un altro modo. Per ora vince questa.
         float bitSum = 0.0f;
         for (const float llr : bitLlr) {
             const float mag = llr < 0.0f ? -llr : llr;
@@ -133,6 +170,10 @@ struct DecodedChar {
     char    text{0};
     uint8_t code{0};
     float   quality{0.0f};
+    // Probabilita' che il carattere sia esatto, dal prodotto delle fiducie sui
+    // bit. Serve a chi deve scegliere fra due copie, non a chi decide se
+    // stampare.
+    float   certainty{0.0f};
     bool    corrected{false};   // the Viterbi stage overrode the hard decision
     int64_t sampleIndex{0};
 };

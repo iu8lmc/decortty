@@ -453,8 +453,18 @@ void RttyEngine::processRadioAudio(const std::vector<float>& samples, int frames
 
     m_demod.process(audio, decimated, [this](const dsp::SoftFrame& frame) {
         m_viterbi.push(frame, [this](const dsp::DecodedChar& dc) {
+            // Alla finestra di ricezione si manda la certezza, non la qualita'.
+            //
+            // La qualita' e' la media delle fiducie sui cinque bit e serve a
+            // decidere se il carattere si stampa; la certezza e' il loro
+            // prodotto — la probabilita' che il carattere sia davvero quello — e
+            // serve a decidere quanto mostrarlo convinto. Misurate sul canale
+            // ionosferico, la seconda separa i caratteri azzeccati da quelli
+            // sbagliati con uno scarto di 0.50 contro 0.14: sullo schermo e' la
+            // differenza fra una sfumatura che vuol dire qualcosa e una che non
+            // dice niente.
             emit characterDecoded(QString(QChar::fromLatin1(dc.text)),
-                                  static_cast<double>(dc.quality),
+                                  static_cast<double>(dc.certainty),
                                   dc.corrected);
         });
     });

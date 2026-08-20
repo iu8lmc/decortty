@@ -202,12 +202,14 @@ void ViterbiBaudot::push(const SoftFrame& frame,
     step.emitted.fill(0);
     step.code.fill(0);
     step.quality.fill(0.0f);
+    step.certainty.fill(0.0f);
     step.corrected.fill(0);
 
     std::array<float, kStates> next{};
     next.fill(kInf);
 
     const float q = frame.quality();
+    const float c = frame.certainty();
 
     for (int s = 0; s < kStates; ++s) {
         const float base = m_metric[static_cast<size_t>(s)];
@@ -252,6 +254,7 @@ void ViterbiBaudot::push(const SoftFrame& frame,
                 step.emitted[static_cast<size_t>(ns)] = emitted;
                 step.code[static_cast<size_t>(ns)]    = code;
                 step.quality[static_cast<size_t>(ns)] = q;
+                step.certainty[static_cast<size_t>(ns)] = c;
                 step.corrected[static_cast<size_t>(ns)] =
                     static_cast<uint8_t>(code != frame.hardCode ? 1 : 0);
             }
@@ -312,6 +315,7 @@ void ViterbiBaudot::emitOldest(const std::function<void(const DecodedChar&)>& ou
         dc.text        = ch;
         dc.code        = oldest.code[static_cast<size_t>(s)];
         dc.quality     = oldest.quality[static_cast<size_t>(s)];
+        dc.certainty   = oldest.certainty[static_cast<size_t>(s)];
         dc.corrected   = oldest.corrected[static_cast<size_t>(s)] != 0;
         dc.sampleIndex = oldest.sampleIndex;
         out(dc);
