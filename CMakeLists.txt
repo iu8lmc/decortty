@@ -94,7 +94,9 @@ endif()
 # il sistema la trova senza avviare il programma.
 set(DECORTTY_WIN_RESOURCES "")
 if(WIN32)
-    set(DECORTTY_WIN_RESOURCES resources/decortty.rc)
+    configure_file(resources/decortty.rc.in
+                   ${CMAKE_CURRENT_BINARY_DIR}/decortty.rc @ONLY)
+    set(DECORTTY_WIN_RESOURCES ${CMAKE_CURRENT_BINARY_DIR}/decortty.rc)
 endif()
 
 # ── FT-991A gateway ─────────────────────────────────────────────────────────

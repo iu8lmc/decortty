@@ -1,0 +1,47 @@
+// Icona e informazioni di versione dell'eseguibile su Windows.
+//
+// Il primo ICON del file e' quello che Esplora risorse e la barra delle
+// applicazioni mostrano.
+IDI_ICON1 ICON "@CMAKE_CURRENT_SOURCE_DIR@/resources/decortty.ico"
+
+// Il blocco di versione e' quello che compare nelle proprieta' del file e nel
+// pannello di controllo. Senza, il programma installato si presenta senza nome
+// ne' numero, e chi segnala un problema non ha modo di dire quale versione sta
+// usando.
+//
+// Questo file e' un modello: i numeri li scrive CMake al momento di configurare,
+// cosi' non possono divergere da quelli del progetto. L'icona pero' va cercata
+// accanto al sorgente, non accanto al file generato.
+#include <windows.h>
+
+#define DECORTTY_VERSION_RC  @PROJECT_VERSION_MAJOR@,@PROJECT_VERSION_MINOR@,@PROJECT_VERSION_PATCH@,0
+#define DECORTTY_VERSION_STR "@PROJECT_VERSION@"
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION    DECORTTY_VERSION_RC
+PRODUCTVERSION DECORTTY_VERSION_RC
+FILEFLAGSMASK  VS_FFI_FILEFLAGSMASK
+FILEFLAGS      0
+FILEOS         VOS_NT_WINDOWS32
+FILETYPE       VFT_APP
+FILESUBTYPE    VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"   // inglese (Stati Uniti), Unicode
+        BEGIN
+            VALUE "CompanyName",      "IU8LMC - Martino Merola"
+            VALUE "FileDescription",  "DecoRTTY - RTTY over VITA-49"
+            VALUE "FileVersion",      DECORTTY_VERSION_STR
+            VALUE "InternalName",     "decortty"
+            VALUE "LegalCopyright",   "IU8LMC"
+            VALUE "OriginalFilename", "decortty.exe"
+            VALUE "ProductName",      "DecoRTTY"
+            VALUE "ProductVersion",   DECORTTY_VERSION_STR
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
