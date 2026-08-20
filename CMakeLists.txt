@@ -198,7 +198,7 @@ set_target_properties(decortty PROPERTIES
 
 # ── Tools ───────────────────────────────────────────────────────────────────
 if(DECORTTY_BUILD_TOOLS)
-    add_executable(decortty_selftest tools/selftest.cpp)
+    add_executable(decortty_selftest tools/selftest.cpp tools/hfchannel.h)
     target_link_libraries(decortty_selftest PRIVATE decortty_dsp)
     set_target_properties(decortty_selftest PROPERTIES AUTOMOC OFF)
 

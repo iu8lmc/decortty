@@ -7,6 +7,8 @@
 
 #include "dsp/FirDecimator.h"
 #include "dsp/FskModulator.h"
+#include "hfchannel.h"
+
 #include "dsp/AutoTuner.h"
 #include "dsp/RttyDemodulator.h"
 #include "dsp/RxFilters.h"
@@ -327,6 +329,85 @@ int autoTuneFalseMoves(float seconds, float carrierHz, float carrierAmp, uint32_
         }
     }
     return moves;
+}
+
+// Il tasso di errore su un canale ionosferico invece che in rumore bianco.
+//
+// E' la misura che conta e che finora non avevamo: in AWGN il decodificatore
+// legge pulito a 3 dB, ma in banda i due toni distano 170 Hz e il cammino
+// multiplo li fa svanire uno alla volta. Un decodificatore puo' essere
+// eccellente nella prima prova e inservibile nella seconda.
+struct HfOptions {
+    bool  squelch{true};
+    float minFrameQuality{-1.0f};
+    int   viterbiDepth{4};
+};
+
+double cerOnHfChannel(const std::string& message, float snrDb,
+                      const decortty::test::HfChannel& channel,
+                      uint32_t seed, HfOptions options = {})
+{
+    RttyParams params;
+    params.squelchEnabled = options.squelch;
+    if (options.minFrameQuality >= 0.0f)
+        params.minFrameQuality = options.minFrameQuality;
+
+    FskModulator mod(params, kRadioRate);
+    mod.setDiddle(false);
+    mod.setAmplitude(0.5f);
+    for (int i = 0; i < 16; ++i)
+        mod.enqueueCode(kBaudotLtrs);
+    mod.enqueueText(message);
+    for (int i = 0; i < 8; ++i)
+        mod.enqueueCode(kBaudotLtrs);
+
+    std::vector<float> tx;
+    std::vector<float> block(1024);
+    while (!mod.idle()) {
+        mod.generate(block.data(), static_cast<int>(block.size()));
+        tx.insert(tx.end(), block.begin(), block.end());
+    }
+    tx.insert(tx.end(), static_cast<size_t>(kRadioRate) / 2, 0.0f);
+
+    // Prima la ionosfera, poi il rumore: il rumore si prende al ricevitore, dopo
+    // che il canale ha gia' fatto quello che doveva fare al segnale.
+    decortty::test::applyHfChannel(tx, channel, kRadioRate, seed);
+
+    const float signalPower = 0.5f * 0.5f * 0.5f;
+    const float noiseBw     = params.shiftHz + 2.0f * params.baud;
+    const float snrLin      = std::pow(10.0f, snrDb / 10.0f);
+    const float noisePsd    = signalPower / (snrLin * noiseBw);
+    const float noiseSigma  = std::sqrt(noisePsd * kRadioRate * 0.5f);
+
+    std::mt19937 rng(seed ^ 0x5bd1e995u);
+    std::normal_distribution<float> gauss(0.0f, noiseSigma);
+    for (float& v : tx)
+        v += gauss(rng);
+
+    FirDecimator    decim(kRadioRate / kWorkRate, kRadioRate);
+    RttyDemodulator demod(params, kWorkRate);
+    ViterbiBaudot::Config vcfg;
+    vcfg.depth = options.viterbiDepth;
+    ViterbiBaudot viterbi;
+    viterbi.setConfig(vcfg);
+
+    std::string decoded;
+    auto onChar = [&](const DecodedChar& dc) { decoded.push_back(dc.text); };
+
+    std::vector<float> work(block.size());
+    for (size_t i = 0; i < tx.size(); i += block.size()) {
+        const int n = static_cast<int>(std::min(block.size(), tx.size() - i));
+        const int m = decim.process(tx.data() + i, n, work.data());
+        demod.process(work.data(), m, [&](const SoftFrame& f) { viterbi.push(f, onChar); });
+    }
+    viterbi.flush(onChar);
+
+    const std::string expected = normalise(message);
+    const std::string got      = normalise(decoded);
+    if (expected.empty())
+        return 0.0;
+    return static_cast<double>(editDistance(expected, got))
+           / static_cast<double>(expected.size());
 }
 
 // Characters printed from noise alone. On the air this is what makes a decoder
@@ -760,6 +841,58 @@ int main(int argc, char** argv)
         std::printf("    portante debole      %d\n", onPair);
         if (onNoise || onCarrier || onPair)
             std::printf("  *** insegue quello che non deve ***\n");
+    }
+
+    std::printf("\ncanale ionosferico — quello che succede davvero in banda\n");
+    std::printf("  (media di tre realizzazioni; CER, meno e' meglio)\n");
+    std::printf("  %-26s %8s %8s %8s\n", "condizione", "18 dB", "12 dB", "6 dB");
+    std::printf("  --------------------------------------------------------\n");
+    {
+        struct Cond { const char* label; decortty::test::HfChannel channel; };
+        const Cond conditions[] = {
+            {"un solo percorso",     {1.0f, 0.5f, true}},
+            {"CCIR buona",           decortty::test::kCcirGood},
+            {"CCIR media",           decortty::test::kCcirModerate},
+            {"CCIR scarsa",          decortty::test::kCcirPoor},
+        };
+        const std::string text = "CQ CQ DE IU8LMC IU8LMC K UR RST 599 599 QTH ROMA NAME MARIO 73";
+
+        for (const Cond& cond : conditions) {
+            double cer[3] = {0.0, 0.0, 0.0};
+            const float snrs[3] = {18.0f, 12.0f, 6.0f};
+            for (int s = 0; s < 3; ++s) {
+                for (uint32_t trial = 0; trial < 3; ++trial)
+                    cer[s] += cerOnHfChannel(text, snrs[s], cond.channel, 1000u + trial * 77u);
+                cer[s] /= 3.0;
+            }
+            std::printf("  %-26s %8.3f %8.3f %8.3f\n", cond.label, cer[0], cer[1], cer[2]);
+        }
+    }
+
+    std::printf("\n  chi mangia i caratteri quando il segnale svanisce (CCIR media, 12 dB):\n");
+    {
+        const std::string text = "CQ CQ DE IU8LMC IU8LMC K UR RST 599 599 QTH ROMA NAME MARIO 73";
+        auto run = [&](HfOptions options) {
+            double sum = 0.0;
+            for (uint32_t trial = 0; trial < 3; ++trial)
+                sum += cerOnHfChannel(text, 12.0f, decortty::test::kCcirModerate,
+                                      1000u + trial * 77u, options);
+            return sum / 3.0;
+        };
+
+        HfOptions asIs;
+        HfOptions noSquelch;      noSquelch.squelch = false;
+        HfOptions noQuality;      noQuality.minFrameQuality = 0.0f;
+        HfOptions neither;        neither.squelch = false; neither.minFrameQuality = 0.0f;
+        HfOptions deep;           deep.viterbiDepth = 10;
+        HfOptions best;           best.squelch = false; best.minFrameQuality = 0.0f; best.viterbiDepth = 10;
+
+        std::printf("    cosi' com'e'                    %.3f\n", run(asIs));
+        std::printf("    senza squelch                   %.3f\n", run(noSquelch));
+        std::printf("    senza soglia di qualita'        %.3f\n", run(noQuality));
+        std::printf("    senza ne' l'uno ne' l'altra     %.3f\n", run(neither));
+        std::printf("    ricerca profonda (10 caratteri) %.3f\n", run(deep));
+        std::printf("    tutto insieme                   %.3f\n", run(best));
     }
 
     std::printf("\nerror taxonomy (hard decision):\n");

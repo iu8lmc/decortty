@@ -198,6 +198,20 @@ void RttyDemodulator::process(const float* samples, int count,
         // the mean of the weaker filter is sigma*sqrt(pi/2), so scaling by
         // 1/1.2533 recovers sigma itself. Clamped because a strong signal would
         // otherwise produce an LLR large enough to swamp every prior.
+        // Sulla correzione automatica della soglia, che ogni decodificatore RTTY
+        // storico ha e questo no.
+        //
+        // L'ATC nasce per i rivelatori che decidono con una soglia rigida: se il
+        // fading selettivo spegne un tono, la soglia va spostata o si legge il
+        // disequilibrio come se fosse segnale. Qui e' stato implementato due
+        // volte e misurato sul canale ionosferico del banco di prova, e tutte e
+        // due le volte ha peggiorato la copia — pareggiare i due toni: 0.145
+        // contro 0.124; sottrarre lo sbilanciamento medio: 0.161. Il motivo e'
+        // che questo rivelatore una soglia rigida non ce l'ha: divide per il
+        // fondo di rumore, che segue il tono piu' debole, cosi' quando uno
+        // svanisce il rapporto cala da se' e il decisore diventa cauto invece di
+        // sbagliare con sicurezza. E' l'informazione giusta da passare alla
+        // ricerca di Viterbi, e l'ATC gliela toglieva.
         const float sigma = m_noiseFloor / 1.2533f + kEps;
         const float llr   = std::clamp((markMag - spaceMag) / sigma * kLlrGain, -18.0f, 18.0f);
 

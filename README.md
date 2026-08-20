@@ -255,6 +255,56 @@ changing that to run a test interferes with everything else the operator is doin
 ./build/decortty_wavtool gen testsignals/offtune.wav 14 "CQ DE DL0TST K" mark=1445
 ```
 
+## Where the decoder actually stands
+
+Everything above is measured in white noise, and white noise is not the band.
+What kills RTTY on HF is not noise but multipath: two paths arriving a couple of
+milliseconds apart add with different phase at every frequency, and with the
+tones 170 Hz apart it happens constantly that one is in phase and the other in
+opposition. A decoder can be excellent in AWGN and fall apart there.
+
+`tools/hfchannel.h` puts a Watterson channel in the test bench — two independent
+paths with slowly varying complex gain, at the three conditions CCIR report 520
+standardised. The numbers, as character error rate:
+
+| condition | 18 dB | 12 dB | 6 dB |
+|---|---|---|---|
+| one path (flat fading) | 0.038 | 0.091 | 0.392 |
+| CCIR good (0.5 ms, 0.1 Hz) | 0.048 | 0.151 | 0.360 |
+| CCIR moderate (1 ms, 0.5 Hz) | 0.070 | 0.124 | 0.344 |
+| CCIR poor (2 ms, 1 Hz) | 0.167 | 0.231 | 0.398 |
+
+Compare that with the AWGN row: **zero errors at 6 dB**. Flat fading at 18 dB
+already costs 4% of the characters. That gap, not the noise figure, is where the
+remaining work is.
+
+Asking which stage loses them (CCIR moderate, 12 dB):
+
+| | CER |
+|---|---|
+| as it stands | 0.124 |
+| squelch off | 0.210 |
+| quality gate off | 0.134 |
+| deep search, 10 characters | 0.124 |
+
+Two things fall out of that. The squelch **helps** — without it the decoder
+prints noise through the fades rather than staying quiet. And a deeper Viterbi
+search buys nothing at all, which says the errors arrive in bursts: a character
+bigram model cannot bridge a ten-character hole, however deep you let it look.
+
+### What was tried and did not work
+
+Automatic threshold correction, which every historical RTTY decoder has and this
+one does not. Implemented twice and measured on the channel above: levelling the
+two tones to the stronger scored 0.145 against a baseline of 0.124; subtracting
+the long-term imbalance scored 0.161. Both worse.
+
+The reason is worth keeping. ATC exists for detectors that decide against a hard
+threshold — this one has none. It divides by the noise floor, which tracks the
+weaker tone, so when a tone fades the ratio drops on its own and the detector
+becomes uncertain rather than confidently wrong. Uncertainty is the correct
+information to hand the Viterbi search, and ATC was throwing it away.
+
 ## Self-test
 
 The DSP chain can be exercised without a radio. `decortty_selftest` modulates a
