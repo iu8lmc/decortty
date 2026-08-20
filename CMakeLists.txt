@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.21)
 
 project(DecoRTTY
-    VERSION 0.1.0
+    VERSION 0.2.0
     DESCRIPTION "Modern RTTY decoder with native FlexRadio VITA-49 transport"
     LANGUAGES CXX)
 

@@ -8,6 +8,7 @@
 
 #include <QCommandLineParser>
 #include <QSerialPortInfo>
+#include <QStandardPaths>
 #include <QDateTime>
 #include <QDir>
 #include <QFile>
@@ -128,11 +129,20 @@ int main(int argc, char* argv[])
         return 0;
     }
 
-    // Un file di log accanto all'eseguibile. Avviato con un doppio clic il
-    // gateway non ha una console da guardare, e quando qualcosa non trasmette è
-    // esattamente allora che serve sapere cosa è successo.
-    QFile logFile(QCoreApplication::applicationDirPath() + QStringLiteral("/decortty-ft991.log"));
-    logFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text);
+    // Un file di log. Avviato con un doppio clic il gateway non ha una console
+    // da guardare, e quando qualcosa non trasmette e' esattamente allora che
+    // serve sapere cosa e' successo.
+    //
+    // Va nella cartella dati dell'utente e non accanto all'eseguibile: da
+    // installato quest'ultimo sta sotto Programmi, dove nessun programma puo'
+    // scrivere. Il file semplicemente non nascerebbe, e la diagnosi sparirebbe
+    // proprio nell'installazione dove serve di piu' — quella di chi non compila
+    // da se'.
+    const QString logDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+    QDir().mkpath(logDir);
+    QFile logFile(logDir + QStringLiteral("/decortty-ft991.log"));
+    if (!logFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text))
+        out << "Non posso scrivere il log in " << logDir << "\n";
     QTextStream logStream(&logFile);
 
     Ft991Gateway gateway;
