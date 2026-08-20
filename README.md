@@ -170,6 +170,36 @@ cmake --build build
 The first run needs Windows Firewall to allow inbound UDP, or no radio will ever
 appear: discovery works by *listening* to broadcasts on port 4992.
 
+
+## Installing
+
+Download `DecoRTTY-x.y.z-setup.exe` from the
+[releases page](https://github.com/iu8lmc/decortty/releases) and run it. Nothing
+else is needed — no Qt to obtain, no PATH to set up.
+
+It does not ask for administrator rights. By default it installs into the user's
+own folder; anyone who wants it in Program Files for every account can say so on
+the first page. A program that reads a sound card and a serial port has no
+business being handed the keys to the machine.
+
+Uninstalling leaves the **contact log and the settings alone**. An ADIF log is
+years of evenings, and an uninstaller that carries it off because it is "tidying
+up" does damage no convenience repays.
+
+Windows will show a SmartScreen warning: the installer is not signed with a
+commercial certificate. **More info → Run anyway.**
+
+Building the installer, from a checkout with Inno Setup 6 present:
+
+```sh
+bash scripts/deploy.sh
+"C:/Program Files (x86)/Inno Setup 6/ISCC.exe" packaging/decortty.iss
+```
+
+The script builds from `dist/`, so a stale `dist/` ships a stale program without
+saying anything — run the deploy first, every time.
+
+
 ## Deploying
 
 `scripts/deploy.sh` builds a folder that runs anywhere, with no MSYS2 shell and
