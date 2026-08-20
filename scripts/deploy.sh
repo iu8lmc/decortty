@@ -37,6 +37,25 @@ echo "== librerie Qt =="
     --no-translations --no-system-d3d-compiler --no-opengl-sw \
     decortty.exe >/dev/null )
 
+# Via il plugin multimediale, prima che le sue dipendenze vengano risolte.
+#
+# Qt Multimedia porta con se' il back end ffmpeg, e ffmpeg porta i codec video:
+# avcodec, libx265, libaom, libvpx. Centotrentasei megabyte per decodificare
+# filmati, in un programma che tratta soltanto campioni PCM.
+#
+# Non serve. QAudioSource e QAudioSink non passano dal back end: sono scritti
+# sulle API native di Windows, e funzionano anche quando nessun plugin viene
+# trovato — Qt lo dice pure, all'avvio: "No QtMultimedia backends found. Only
+# QMediaDevices, QAudioDevice, QSoundEffect, QAudioSink, and QAudioSource are
+# available". Quelle cinque classi sono esattamente quelle che usiamo.
+#
+# Va tolto qui e non alla fine, perche' il giro delle dipendenze parte da quello
+# che si trova nella cartella: se il plugin non c'e', i codec non entrano.
+if [ -d "$DIST/multimedia" ]; then
+    echo "== via il back end multimediale (non serve all'audio grezzo) =="
+    rm -rf "$DIST/multimedia"
+fi
+
 echo "== moduli QML completi =="
 # 18 MB in tutto: copiarli tutti costa meno che inseguire un sottomodulo alla
 # volta ogni volta che l'interfaccia usa un controllo nuovo.
@@ -90,6 +109,12 @@ while [ "$added" -gt 0 ] && [ "$round" -lt 10 ]; do
         done < <(ldd "$f" 2>/dev/null | grep -oiE "$MINGW/bin/[^ ]+\.dll")
     done < <(find "$DIST" -type f \( -name "*.dll" -o -name "*.exe" \))
 done
+
+# Via quello che non serve piu' a nessuno: lo decide scripts/prune_dlls.py,
+# risalendo il grafo delle dipendenze invece di andare per nomi. Il commento
+# lungo sta li'.
+echo "== pulizia =="
+python scripts/prune_dlls.py "$DIST" || echo "  (saltata: python non disponibile)"
 
 echo "== segnali di prova =="
 mkdir -p "$DIST/testsignals"
