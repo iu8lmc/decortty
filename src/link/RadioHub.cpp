@@ -1,5 +1,7 @@
 #include "link/RadioHub.h"
 
+#include "app/BandPlan.h"
+
 #include <QVariantMap>
 
 namespace decortty::link {
@@ -33,6 +35,28 @@ double  RadioHub::frequencyMhz() const { return m_link ? m_link->frequencyMhz() 
 QString RadioHub::mode() const       { return m_link ? m_link->mode() : QString(); }
 bool    RadioHub::transmitting() const { return m_link && m_link->isTransmitting(); }
 bool    RadioHub::canTransmit() const  { return m_link && m_link->canTransmit(); }
+bool    RadioHub::canControl() const   { return m_link && m_link->canControl(); }
+int     RadioHub::currentBand() const  { return app::bandAt(frequencyMhz()); }
+
+QVariantList RadioHub::bands() const
+{
+    QVariantList list;
+    for (const auto& band : app::bandPlan()) {
+        QVariantMap entry;
+        entry[QStringLiteral("name")] = band.name;
+        entry[QStringLiteral("mhz")]  = band.rttyMhz;
+        list.append(entry);
+    }
+    return list;
+}
+
+QStringList RadioHub::modes() const
+{
+    // DIGU per primo: e' quello giusto per l'AFSK, e chi non sa quale scegliere
+    // sceglie il primo.
+    return { QStringLiteral("DIGU"), QStringLiteral("DIGL"),
+             QStringLiteral("USB"),  QStringLiteral("LSB") };
+}
 int     RadioHub::signalStrengthDbm() const { return m_link ? m_link->signalStrengthDbm() : -140; }
 
 QVariantList RadioHub::radioList() const
@@ -182,6 +206,16 @@ void RadioHub::disconnectRadio()
 }
 
 // ── control, forwarded ──────────────────────────────────────────────────────
+
+void RadioHub::tuneToBand(int index)
+{
+    const auto& plan = app::bandPlan();
+    if (index < 0 || index >= static_cast<int>(plan.size()) || !m_link)
+        return;
+    if (index == currentBand())
+        return;
+    m_link->setFrequencyMhz(plan[index].rttyMhz);
+}
 
 void RadioHub::setFrequencyMhz(double mhz)
 {

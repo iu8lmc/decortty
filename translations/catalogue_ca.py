@@ -253,4 +253,19 @@ TRANSLATIONS = {
         "L'equip ha refusat el registre del client (codi 0x%1)",
     "The radio rejected the UDP port registration":
         "L'equip ha rebutjat el registre del port UDP",
+
+    "No radio connected.":
+        "Cap ràdio connectada.",
+    "The audio comes from a sound card: the radio is not\nunder our control. Change band with the dial.":
+        "L'àudio ve d'una targeta de so: la ràdio no està sota el\nnostre control. Canvia de banda amb el comandament.",
+    "The serial port is held by another program, so the\nradio takes no commands. Close it and reconnect.":
+        "El port sèrie el té un altre programa i la ràdio no accepta\nordres. Tanca'l i torna a connectar.",
+    "%1 — RTTY at %2 MHz":
+        "%1 — RTTY a %2 MHz",
+    "Data on the upper sideband: the mode this\ndecoder is written for.":
+        "Dades a la banda lateral superior: el mode per al qual està\nescrit aquest descodificador.",
+    "Data on the lower sideband. The tones come out\nreversed — REV puts them back.":
+        "Dades a la banda lateral inferior. Els tons surten invertits\n— REV els torna al lloc.",
+    "Voice sideband. RTTY is copied just the same,\nbut the radio's filter is wider than it needs.":
+        "Banda lateral de la fonia. L'RTTY es copia igual, però el\nfiltre de la ràdio és més ample del necessari.",
 }

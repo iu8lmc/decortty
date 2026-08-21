@@ -146,6 +146,8 @@ qt_add_executable(decortty
     src/app/GatewaySupervisor.h
     src/app/Language.cpp
     src/app/Language.h
+    src/app/BandPlan.cpp
+    src/app/BandPlan.h
     src/app/WaterfallItem.cpp
     src/app/WaterfallItem.h
     src/app/Theme.h
@@ -182,6 +184,7 @@ set(DECORTTY_COMPONENT_FILES
     qml/DecoRTTY/components/LabelledSlider.qml
     qml/DecoRTTY/components/HeaderBar.qml
     qml/DecoRTTY/components/WaterfallPanel.qml
+    qml/DecoRTTY/components/BandBar.qml
     qml/DecoRTTY/components/TuningScope.qml
     qml/DecoRTTY/components/ReceivePanel.qml
     qml/DecoRTTY/components/TransmitPanel.qml
@@ -257,10 +260,19 @@ qt_add_translations(decortty
 
 # I .qm accanto all'eseguibile: e' li' che Language li cerca, ed e' anche quello
 # che lo script di distribuzione copia.
-add_custom_command(TARGET decortty POST_BUILD
+#
+# Un bersaglio a se', non un POST_BUILD di decortty. Il POST_BUILD gira solo
+# quando l'eseguibile viene rifatto: chi tocca soltanto una traduzione ricompila,
+# vede passare "Generating decortty_it.qm", avvia il programma — e legge la
+# vecchia frase, perche' il catalogo nuovo e' rimasto nella cartella di
+# compilazione senza mai arrivare a destinazione. Un errore che non da' nessun
+# segno, e che al momento di un rilascio si porta dietro sedici lingue ferme a
+# ieri.
+add_custom_target(decortty_translations ALL
     COMMAND ${CMAKE_COMMAND} -E make_directory $<TARGET_FILE_DIR:decortty>/translations
     COMMAND ${CMAKE_COMMAND} -E copy_if_different ${DECORTTY_QM_FILES}
             $<TARGET_FILE_DIR:decortty>/translations
+    DEPENDS ${DECORTTY_QM_FILES}
     COMMENT "Copio i cataloghi tradotti accanto all'eseguibile"
     VERBATIM
 )

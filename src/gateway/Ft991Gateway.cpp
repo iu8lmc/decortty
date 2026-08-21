@@ -77,6 +77,15 @@ Ft991Gateway::Ft991Gateway(QObject* parent)
     // A context packet a second keeps a late-joining client current without
     // flooding; anything that actually changes is sent immediately anyway.
     m_contextTimer.setInterval(1000);
+
+    // Cinque secondi: abbastanza spesso da accorgersi che la porta si e'
+    // liberata mentre si guarda il waterfall, abbastanza raro da non riempire
+    // il registro di tentativi mentre l'altro programma lavora.
+    m_catRetryTimer.setInterval(5000);
+    connect(&m_catRetryTimer, &QTimer::timeout, this, [this] {
+        if (tryOpenCat())
+            m_catRetryTimer.stop();
+    });
 }
 
 Ft991Gateway::~Ft991Gateway()
@@ -113,13 +122,12 @@ bool Ft991Gateway::start(const Config& config)
         emit log(tr("Audio out: %1").arg(m_audio.playbackDeviceName()));
 
     if (config.catEnabled) {
-        Ft991Cat::Config catConfig;
-        catConfig.portName = config.catPort;
-        catConfig.baudRate = config.catBaud;
-        if (m_cat.open(catConfig))
-            emit log(tr("CAT on %1 at %2 baud").arg(config.catPort).arg(config.catBaud));
-        // A CAT failure is not fatal: receive still works, and the operator can
-        // tune the radio by hand. It is reported, not swallowed.
+        // Un fallimento del CAT non e' fatale: la ricezione funziona lo stesso e
+        // l'operatore puo' girare la manopola. Viene detto, non nascosto — e poi
+        // si riprova, perche' quasi sempre e' un altro programma che tiene la
+        // porta e prima o poi la lascia.
+        if (!tryOpenCat())
+            m_catRetryTimer.start();
     } else {
         emit log(tr("CAT disabled — receive only, no tuning or PTT"));
     }
@@ -131,6 +139,24 @@ bool Ft991Gateway::start(const Config& config)
 
     emit log(tr("Gateway listening on UDP %1").arg(config.dataPort));
     emit started();
+    return true;
+}
+
+bool Ft991Gateway::tryOpenCat()
+{
+    if (m_cat.isOpen())
+        return true;
+
+    Ft991Cat::Config catConfig;
+    catConfig.portName = m_config.catPort;
+    catConfig.baudRate = m_config.catBaud;
+    if (!m_cat.open(catConfig))
+        return false;
+
+    emit log(tr("CAT on %1 at %2 baud").arg(m_config.catPort).arg(m_config.catBaud));
+    // Il contesto lo dice subito ai client: chi aspettava di poter cambiare
+    // banda vede i pulsanti accendersi senza dover fare niente.
+    sendContext(true);
     return true;
 }
 
@@ -146,6 +172,7 @@ void Ft991Gateway::stop()
     m_beaconTimer.stop();
     m_sweepTimer.stop();
     m_contextTimer.stop();
+    m_catRetryTimer.stop();
     m_audio.stop();
     m_cat.close();
     m_data.close();

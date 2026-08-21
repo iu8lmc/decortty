@@ -253,4 +253,19 @@ TRANSLATIONS = {
         "Das Gerät hat die Client-Anmeldung abgelehnt (Code 0x%1)",
     "The radio rejected the UDP port registration":
         "Das Gerät hat die Anmeldung des UDP-Ports abgelehnt",
+
+    "No radio connected.":
+        "Kein Funkgerät verbunden.",
+    "The audio comes from a sound card: the radio is not\nunder our control. Change band with the dial.":
+        "Der Ton kommt von einer Soundkarte: das Funkgerät steht\nnicht unter unserer Kontrolle. Band am Knopf wechseln.",
+    "The serial port is held by another program, so the\nradio takes no commands. Close it and reconnect.":
+        "Die serielle Schnittstelle hält ein anderes Programm, das\nFunkgerät nimmt keine Befehle an. Schließen und neu verbinden.",
+    "%1 — RTTY at %2 MHz":
+        "%1 — RTTY auf %2 MHz",
+    "Data on the upper sideband: the mode this\ndecoder is written for.":
+        "Daten im oberen Seitenband: die Betriebsart, für die\ndieser Decoder geschrieben ist.",
+    "Data on the lower sideband. The tones come out\nreversed — REV puts them back.":
+        "Daten im unteren Seitenband. Die Töne kommen vertauscht\nheraus — REV dreht sie zurück.",
+    "Voice sideband. RTTY is copied just the same,\nbut the radio's filter is wider than it needs.":
+        "Sprech-Seitenband. RTTY wird genauso kopiert, aber das\nFilter des Geräts ist breiter als nötig.",
 }

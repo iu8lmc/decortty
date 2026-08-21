@@ -133,6 +133,30 @@ GlassPanel {
             }
         }
 
+        // ── banda e modo ────────────────────────────────────────────────
+        //
+        // Non compare quando l'audio viene da una scheda del PC: la' la radio
+        // non si comanda e non si comandera' mai, e una fila di pulsanti spenti
+        // per sempre e' solo spazio tolto al waterfall. Dietro il gateway invece
+        // resta, anche spenta: dice perche'.
+        BandBar {
+            id: bandBar
+            width: parent.width
+            visible: radio.connected && !radio.viaSoundCard
+            height: visible ? 24 : 0
+            // Cambiata banda, la cascata riparte: la coda di una banda sopra la
+            // testa di un'altra e' una figura che in aria non esiste.
+            onBandChanged: {
+                waterfall.clear()
+                trace.bins = []
+                trace.requestPaint()
+                // E anche la memoria del decodificatore: il fondo di banda e
+                // l'auto-centratura si appoggiano a quello che hanno visto, e
+                // quello che hanno visto era un'altra banda.
+                rtty.forgetBand()
+            }
+        }
+
         // ── controlli della vista, a scomparsa ──────────────────────────
         Row {
             width: parent.width
@@ -287,7 +311,8 @@ GlassPanel {
             id: waterfall
             width: parent.width
             height: Math.max(40, parent.height - trace.height - freqScale.height - 40
-                    - (root.showViewControls ? 30 : 0))
+                    - (root.showViewControls ? 30 : 0)
+                    - (bandBar.visible ? 30 : 0))
 
             startHz: root.viewStartHz
             endHz: root.viewEndHz

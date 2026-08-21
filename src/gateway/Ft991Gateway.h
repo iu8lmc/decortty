@@ -103,9 +103,16 @@ private:
 
     QUdpSocket m_data;
     QUdpSocket m_beaconSocket;
+    // Prova ad aprire la porta seriale. Vero se da ora il CAT c'e'.
+    bool tryOpenCat();
+
     QTimer     m_beaconTimer;
     QTimer     m_sweepTimer;
     QTimer     m_contextTimer;
+    // Ribussa alla porta seriale finche' non si apre. Un altro programma che la
+    // teneva puo' averla lasciata da un pezzo, e senza questo il CAT resterebbe
+    // chiuso fino al prossimo riavvio del gateway — cioe' del programma intero.
+    QTimer     m_catRetryTimer;
 
     QList<Subscriber> m_subscribers;
     Config            m_config;

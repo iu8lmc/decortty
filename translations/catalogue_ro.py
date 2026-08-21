@@ -253,4 +253,19 @@ TRANSLATIONS = {
         "Stația a refuzat înregistrarea clientului (cod 0x%1)",
     "The radio rejected the UDP port registration":
         "Stația a respins înregistrarea portului UDP",
+
+    "No radio connected.":
+        "Nicio stație conectată.",
+    "The audio comes from a sound card: the radio is not\nunder our control. Change band with the dial.":
+        "Sunetul vine de la o placă de sunet: stația nu e sub\ncontrolul nostru. Schimbă banda de la buton.",
+    "The serial port is held by another program, so the\nradio takes no commands. Close it and reconnect.":
+        "Portul serial e ținut de alt program, iar stația nu primește\ncomenzi. Închide-l și reconectează.",
+    "%1 — RTTY at %2 MHz":
+        "%1 — RTTY la %2 MHz",
+    "Data on the upper sideband: the mode this\ndecoder is written for.":
+        "Date pe banda laterală superioară: modul pentru care e scris\nacest decodor.",
+    "Data on the lower sideband. The tones come out\nreversed — REV puts them back.":
+        "Date pe banda laterală inferioară. Tonurile ies inversate\n— REV le pune la loc.",
+    "Voice sideband. RTTY is copied just the same,\nbut the radio's filter is wider than it needs.":
+        "Banda laterală a fonicului. RTTY se copiază la fel, dar\nfiltrul stației e mai larg decât trebuie.",
 }

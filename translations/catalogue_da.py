@@ -253,4 +253,19 @@ TRANSLATIONS = {
         "Radioen afviste klientregistreringen (kode 0x%1)",
     "The radio rejected the UDP port registration":
         "Radioen afviste registreringen af UDP-porten",
+
+    "No radio connected.":
+        "Ingen radio tilsluttet.",
+    "The audio comes from a sound card: the radio is not\nunder our control. Change band with the dial.":
+        "Lyden kommer fra et lydkort: radioen er ikke under vores\nkontrol. Skift bånd med knappen.",
+    "The serial port is held by another program, so the\nradio takes no commands. Close it and reconnect.":
+        "Den serielle port holdes af et andet program, og radioen\ntager ikke imod kommandoer. Luk det og tilslut igen.",
+    "%1 — RTTY at %2 MHz":
+        "%1 — RTTY på %2 MHz",
+    "Data on the upper sideband: the mode this\ndecoder is written for.":
+        "Data på det øvre sidebånd: den modus denne dekoder er\nskrevet til.",
+    "Data on the lower sideband. The tones come out\nreversed — REV puts them back.":
+        "Data på det nedre sidebånd. Tonerne kommer omvendt ud\n— REV vender dem tilbage.",
+    "Voice sideband. RTTY is copied just the same,\nbut the radio's filter is wider than it needs.":
+        "Talens sidebånd. RTTY kopieres lige så godt, men radioens\nfilter er bredere end nødvendigt.",
 }

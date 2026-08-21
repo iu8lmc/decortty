@@ -253,4 +253,19 @@ TRANSLATIONS = {
         "Радио отказало в регистрации клиента (код 0x%1)",
     "The radio rejected the UDP port registration":
         "Радио отклонило регистрацию порта UDP",
+
+    "No radio connected.":
+        "Радиостанция не подключена.",
+    "The audio comes from a sound card: the radio is not\nunder our control. Change band with the dial.":
+        "Звук идёт со звуковой карты: станция нам не подчиняется.\nДиапазон меняйте ручкой настройки.",
+    "The serial port is held by another program, so the\nradio takes no commands. Close it and reconnect.":
+        "Последовательный порт занят другой программой, станция\nне принимает команд. Закройте её и подключитесь снова.",
+    "%1 — RTTY at %2 MHz":
+        "%1 — RTTY на %2 МГц",
+    "Data on the upper sideband: the mode this\ndecoder is written for.":
+        "Данные в верхней боковой полосе: режим, для которого\nнаписан этот декодер.",
+    "Data on the lower sideband. The tones come out\nreversed — REV puts them back.":
+        "Данные в нижней боковой полосе. Тоны выходят перевёрнутыми\n— REV возвращает их на место.",
+    "Voice sideband. RTTY is copied just the same,\nbut the radio's filter is wider than it needs.":
+        "Речевая боковая полоса. RTTY принимается так же, но фильтр\nстанции шире, чем нужно.",
 }

@@ -253,4 +253,19 @@ TRANSLATIONS = {
         "Stacija atteica klienta reģistrāciju (kods 0x%1)",
     "The radio rejected the UDP port registration":
         "Stacija noraidīja UDP porta reģistrāciju",
+
+    "No radio connected.":
+        "Nav pievienota neviena radiostacija.",
+    "The audio comes from a sound card: the radio is not\nunder our control. Change band with the dial.":
+        "Skaņa nāk no skaņas kartes: radiostacija nav mūsu vadībā.\nJoslu maini ar rokturi.",
+    "The serial port is held by another program, so the\nradio takes no commands. Close it and reconnect.":
+        "Seriālo portu tur cita programma, un radiostacija komandas\nnepieņem. Aizver to un pievienojies no jauna.",
+    "%1 — RTTY at %2 MHz":
+        "%1 — RTTY uz %2 MHz",
+    "Data on the upper sideband: the mode this\ndecoder is written for.":
+        "Dati augšējā sānjoslā: režīms, kuram šis dekodētājs ir\nrakstīts.",
+    "Data on the lower sideband. The tones come out\nreversed — REV puts them back.":
+        "Dati apakšējā sānjoslā. Toņi iznāk apgriezti — REV tos\nsaliek atpakaļ.",
+    "Voice sideband. RTTY is copied just the same,\nbut the radio's filter is wider than it needs.":
+        "Balss sānjosla. RTTY nolasās tikpat labi, bet radiostacijas\nfiltrs ir platāks nekā vajag.",
 }

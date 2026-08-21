@@ -253,4 +253,19 @@ TRANSLATIONS = {
         "A rádió elutasította a kliens bejelentkezését (kód: 0x%1)",
     "The radio rejected the UDP port registration":
         "A rádió elutasította az UDP port bejelentését",
+
+    "No radio connected.":
+        "Nincs csatlakoztatott rádió.",
+    "The audio comes from a sound card: the radio is not\nunder our control. Change band with the dial.":
+        "A hang egy hangkártyáról jön: a rádió nincs a kezünkben.\nA sávot a gombbal kell váltani.",
+    "The serial port is held by another program, so the\nradio takes no commands. Close it and reconnect.":
+        "A soros portot egy másik program tartja, a rádió nem fogad\nparancsot. Zárd be, és csatlakozz újra.",
+    "%1 — RTTY at %2 MHz":
+        "%1 — RTTY %2 MHz-en",
+    "Data on the upper sideband: the mode this\ndecoder is written for.":
+        "Adat a felső oldalsávon: ez az az üzemmód, amire ez a\ndekóder készült.",
+    "Data on the lower sideband. The tones come out\nreversed — REV puts them back.":
+        "Adat az alsó oldalsávon. A hangok fordítva jönnek ki\n— a REV visszafordítja őket.",
+    "Voice sideband. RTTY is copied just the same,\nbut the radio's filter is wider than it needs.":
+        "A fónia oldalsávja. Az RTTY ugyanúgy másolható, de a rádió\nszűrője szélesebb a kelleténél.",
 }

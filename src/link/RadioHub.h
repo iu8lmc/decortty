@@ -41,6 +41,18 @@ class RadioHub : public QObject {
     Q_PROPERTY(bool viaSoundCard READ viaSoundCard NOTIFY connectionChanged)
     // La stazione con cui si condivide il FlexRadio, vuoto se si lavora da soli.
     Q_PROPERTY(QString sharedWith READ sharedWith NOTIFY connectionChanged)
+    // Vero quando banda e modo si possono davvero cambiare. Dietro il gateway
+    // vuol dire che la porta seriale e' nostra: se un altro programma la tiene,
+    // i comandi non partono e l'interfaccia deve dirlo invece di fingere.
+    Q_PROPERTY(bool canControl READ canControl NOTIFY connectionChanged)
+    // Il piano di banda, per la barra sopra il waterfall.
+    Q_PROPERTY(QVariantList bands READ bands CONSTANT)
+    // In quale banda siamo, -1 se fuori da tutte. Segue la radio anche quando a
+    // spostarla e' la manopola o un altro programma.
+    Q_PROPERTY(int currentBand READ currentBand NOTIFY sliceChanged)
+    // I modi che hanno senso per un decodificatore AFSK. RTTY-U e RTTY-L non ci
+    // sono apposta: la' l'apparato aspetta il tasto FSK e l'audio non uscirebbe.
+    Q_PROPERTY(QStringList modes READ modes CONSTANT)
 
 public:
     explicit RadioHub(QObject* parent = nullptr);
@@ -62,6 +74,10 @@ public:
     QString captureInUse() const  { return m_captureHint; }
     QString playbackInUse() const { return m_playbackHint; }
     QString sharedWith() const;
+    bool    canControl() const;
+    QVariantList bands() const;
+    int     currentBand() const;
+    QStringList  modes() const;
 
     Q_INVOKABLE void startDiscovery();
     Q_INVOKABLE void stopDiscovery();
@@ -79,6 +95,12 @@ public:
     Q_INVOKABLE QStringList captureDevices() const;
     Q_INVOKABLE QStringList playbackDevices() const;
     Q_INVOKABLE void disconnectRadio();
+
+    // Porta la radio sul segmento RTTY della banda scelta. Un secondo tocco
+    // sulla banda in cui siamo gia' non fa niente: chi lo preme si aspetta di
+    // essere gia' arrivato, non di essere riportato indietro dalla frequenza
+    // che si e' cercato.
+    Q_INVOKABLE void tuneToBand(int index);
 
     Q_INVOKABLE void setFrequencyMhz(double mhz);
     Q_INVOKABLE void setMode(const QString& mode);

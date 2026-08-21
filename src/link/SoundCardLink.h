@@ -45,6 +45,9 @@ public:
     QString mode() const override         { return QStringLiteral("SOUND"); }
     bool    isTransmitting() const override { return m_transmitting; }
     bool    canTransmit() const override;
+    // Da una scheda audio non si comanda l'apparato: la frequenza la scrive
+    // l'operatore, e la banda si cambia con la manopola.
+    bool    canControl() const override { return false; }
     int     signalStrengthDbm() const override { return -200; }
 
     void disconnectRadio() override;

@@ -40,6 +40,7 @@ public:
     // available — subject to the gateway having its CAT port open, which it
     // reports through the context state bits.
     bool    canTransmit() const override { return m_connected && m_catOnline; }
+    bool    canControl() const override  { return m_connected && m_catOnline; }
     int     signalStrengthDbm() const override { return m_signalDbm; }
 
     void disconnectRadio() override;

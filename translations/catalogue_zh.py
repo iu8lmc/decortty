@@ -252,4 +252,19 @@ TRANSLATIONS = {
         "电台拒绝了客户端注册（代码 0x%1）",
     "The radio rejected the UDP port registration":
         "电台拒绝了 UDP 端口的注册",
+
+    "No radio connected.":
+        "未连接电台。",
+    "The audio comes from a sound card: the radio is not\nunder our control. Change band with the dial.":
+        "音频来自声卡：电台不受本程序控制。\n请用旋钮更换波段。",
+    "The serial port is held by another program, so the\nradio takes no commands. Close it and reconnect.":
+        "串口被另一个程序占用，电台不接受指令。\n关闭它再重新连接。",
+    "%1 — RTTY at %2 MHz":
+        "%1 — RTTY 在 %2 MHz",
+    "Data on the upper sideband: the mode this\ndecoder is written for.":
+        "上边带数据：本解码器就是为这个模式写的。",
+    "Data on the lower sideband. The tones come out\nreversed — REV puts them back.":
+        "下边带数据。音调会反过来——用 REV 转回去。",
+    "Voice sideband. RTTY is copied just the same,\nbut the radio's filter is wider than it needs.":
+        "话音边带。RTTY 一样能抄收，只是电台的\n滤波器比需要的宽。",
 }

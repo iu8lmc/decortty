@@ -388,6 +388,12 @@ void RttyEngine::stopAutoCq()
     emit transmitStateChanged();
 }
 
+void RttyEngine::forgetBand()
+{
+    m_demod.reset();
+    m_demod.clearSpectrum();
+}
+
 void RttyEngine::clearReceiveText()
 {
     m_viterbi.reset();

@@ -33,6 +33,12 @@ public:
     virtual QString mode() const = 0;
     virtual bool    isTransmitting() const = 0;
     virtual bool    canTransmit() const = 0;
+    // Vero quando i comandi di sintonia arrivano davvero all'apparato. Non e' la
+    // stessa cosa di canTransmit(): dietro il gateway servono entrambi la porta
+    // seriale, ma su un FlexRadio si puo' comandare la slice di una stazione con
+    // cui si condivide l'apparato senza avere il diritto di trasmettere. E da una
+    // scheda audio non si comanda niente: si ascolta e basta.
+    virtual bool    canControl() const { return isConnected(); }
     virtual int     signalStrengthDbm() const = 0;
 
     virtual void disconnectRadio() = 0;

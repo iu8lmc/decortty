@@ -164,6 +164,11 @@ public:
     Q_INVOKABLE bool centreOnSignal();
 
     Q_INVOKABLE void clearReceiveText();
+    // Dimentica la banda vista finora. Serve al cambio banda: la memoria
+    // spettrale su cui si appoggiano fondo e auto-centratura descrive un pezzo
+    // di spettro che non esiste piu', e portarsela dietro vuol dire cercare un
+    // segnale dove non c'e' mai stato.
+    Q_INVOKABLE void forgetBand();
     // Queue text for transmission. Starts the transmitter if it is not already up.
     Q_INVOKABLE void transmitText(const QString& text);
     Q_INVOKABLE void startTransmit();

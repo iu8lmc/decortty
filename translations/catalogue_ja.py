@@ -252,4 +252,19 @@ TRANSLATIONS = {
         "無線機がクライアント登録を拒みました（コード 0x%1）",
     "The radio rejected the UDP port registration":
         "無線機が UDP ポートの登録を拒みました",
+
+    "No radio connected.":
+        "無線機が接続されていません。",
+    "The audio comes from a sound card: the radio is not\nunder our control. Change band with the dial.":
+        "音声はサウンドカードから来ています。無線機はこちらの制御下に\nありません。バンドはダイヤルで変えてください。",
+    "The serial port is held by another program, so the\nradio takes no commands. Close it and reconnect.":
+        "シリアルポートを別のプログラムが握っているため、無線機は命令を\n受け付けません。そちらを閉じてから接続し直してください。",
+    "%1 — RTTY at %2 MHz":
+        "%1 — RTTY は %2 MHz",
+    "Data on the upper sideband: the mode this\ndecoder is written for.":
+        "上側波帯のデータ。このデコーダーが想定しているモードです。",
+    "Data on the lower sideband. The tones come out\nreversed — REV puts them back.":
+        "下側波帯のデータ。トーンが反転して出るので、REV で戻します。",
+    "Voice sideband. RTTY is copied just the same,\nbut the radio's filter is wider than it needs.":
+        "音声用の側波帯。RTTY はそのまま復号できますが、無線機の\nフィルターは必要より広くなります。",
 }
