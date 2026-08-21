@@ -49,6 +49,16 @@ filtro de la radio es más ancho de lo necesario.</translation>
     </message>
 </context>
 <context>
+    <name>BandScale</name>
+    <message>
+        <location filename="../qml/DecoRTTY/components/BandScale.qml" line="230" />
+        <source>Drag to move the radio; the wheel tunes by 1 kHz —
+100 Hz with Shift, 10 kHz with Ctrl.</source>
+        <translation>Arrastra para mover la radio; la rueda sintoniza de 1 kHz en 1 kHz —
+100 Hz con Mayús, 10 kHz con Ctrl.</translation>
+    </message>
+</context>
+<context>
     <name>DecoderPanel</name>
     <message>
         <location filename="../qml/DecoRTTY/components/DecoderPanel.qml" line="116" />
@@ -568,56 +578,56 @@ within a few tens of hertz.</source>
 dentro de unas decenas de hercios.</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="168" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="181" />
         <source>band</source>
         <translation>banda</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="177" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="190" />
         <source>How much band to show. Narrow around the tones
 shows the individual bits; wide shows who is calling.</source>
         <translation>Cuánta banda mostrar. Estrecho sobre los tonos se
 ven los bits; ancho se ve quién llama.</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="181" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="194" />
         <source>DECO</source>
         <translation>DECO</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="181" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="194" />
         <source>GREY</source>
         <translation>GRISES</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="181" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="194" />
         <source>FIRE</source>
         <translation>FUEGO</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="190" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="203" />
         <source>speed %1x</source>
         <translation>vel. %1x</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="197" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="210" />
         <source>How fast it scrolls. Slower keeps a longer
 stretch of band in view.</source>
         <translation>Con qué rapidez corre. Más lento mantiene a la
 vista un tramo de banda más largo.</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="202" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="215" />
         <source>light</source>
         <translation>luz</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="217" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="230" />
         <source>contrast</source>
         <translation>contraste</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="232" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="245" />
         <source>floor %1 dB</source>
         <translation>fondo %1 dB</translation>
     </message>
@@ -1098,28 +1108,28 @@ vista un tramo de banda más largo.</translation>
     <name>decortty::link::RadioHub</name>
     <message>
         <location filename="../src/link/RadioHub.cpp" line="11" />
-        <location filename="../src/link/RadioHub.cpp" line="202" />
+        <location filename="../src/link/RadioHub.cpp" line="205" />
         <source>Disconnected</source>
         <translation>Desconectado</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="85" />
-        <location filename="../src/link/RadioHub.cpp" line="202" />
+        <location filename="../src/link/RadioHub.cpp" line="88" />
+        <location filename="../src/link/RadioHub.cpp" line="205" />
         <source>Looking for radios…</source>
         <translation>Buscando equipos…</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="148" />
+        <location filename="../src/link/RadioHub.cpp" line="151" />
         <source>Radio %1 is no longer on the network</source>
         <translation>El equipo %1 ya no está en la red</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="155" />
+        <location filename="../src/link/RadioHub.cpp" line="158" />
         <source>'%1' is not a valid address</source>
         <translation>'%1' no es una dirección válida</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="245" />
+        <location filename="../src/link/RadioHub.cpp" line="248" />
         <source>Transmit is unavailable on this connection</source>
         <translation>En esta conexión no se puede transmitir</translation>
     </message>

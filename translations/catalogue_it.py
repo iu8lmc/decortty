@@ -281,4 +281,7 @@ TRANSLATIONS = {
         "Dati sulla banda laterale inferiore. I toni escono\nrovesciati — REV li rimette a posto.",
     "Voice sideband. RTTY is copied just the same,\nbut the radio's filter is wider than it needs.":
         "Banda laterale della fonia. Il RTTY si copia lo stesso,\nma il filtro della radio è più largo del necessario.",
+
+    "Drag to move the radio; the wheel tunes by 1 kHz —\n100 Hz with Shift, 10 kHz with Ctrl.":
+        "Trascina per spostare la radio; la rotella sintonizza di 1 kHz —\n100 Hz con Shift, 10 kHz con Ctrl.",
 }

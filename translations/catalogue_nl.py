@@ -268,4 +268,7 @@ TRANSLATIONS = {
         "Data op de onderste zijband. De tonen komen omgekeerd\nnaar buiten — REV zet ze terug.",
     "Voice sideband. RTTY is copied just the same,\nbut the radio's filter is wider than it needs.":
         "Spraakzijband. RTTY wordt net zo goed gekopieerd, maar het\nfilter van de radio is breder dan nodig.",
+
+    "Drag to move the radio; the wheel tunes by 1 kHz —\n100 Hz with Shift, 10 kHz with Ctrl.":
+        "Sleep om de radio te verplaatsen; het wiel stemt af per 1 kHz —\n100 Hz met Shift, 10 kHz met Ctrl.",
 }

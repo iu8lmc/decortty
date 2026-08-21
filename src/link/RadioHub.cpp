@@ -45,6 +45,9 @@ QVariantList RadioHub::bands() const
         QVariantMap entry;
         entry[QStringLiteral("name")] = band.name;
         entry[QStringLiteral("mhz")]  = band.rttyMhz;
+        // Gli estremi servono al righello, che deve sapere dove colorare.
+        entry[QStringLiteral("low")]  = band.lowMhz;
+        entry[QStringLiteral("high")] = band.highMhz;
         list.append(entry);
     }
     return list;

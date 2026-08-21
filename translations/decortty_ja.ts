@@ -47,6 +47,16 @@ but the radio's filter is wider than it needs.</source>
     </message>
 </context>
 <context>
+    <name>BandScale</name>
+    <message>
+        <location filename="../qml/DecoRTTY/components/BandScale.qml" line="230" />
+        <source>Drag to move the radio; the wheel tunes by 1 kHz —
+100 Hz with Shift, 10 kHz with Ctrl.</source>
+        <translation>ドラッグで無線機を動かします。ホイールは 1 kHz 刻み —
+Shift で 100 Hz、Ctrl で 10 kHz。</translation>
+    </message>
+</context>
+<context>
     <name>DecoderPanel</name>
     <message>
         <location filename="../qml/DecoRTTY/components/DecoderPanel.qml" line="116" />
@@ -564,12 +574,12 @@ within a few tens of hertz.</source>
 追いかけます。</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="168" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="181" />
         <source>band</source>
         <translation>バンド</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="177" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="190" />
         <source>How much band to show. Narrow around the tones
 shows the individual bits; wide shows who is calling.</source>
         <translation>どれだけの帯域を映すか。トーンのまわりを狭くすると
@@ -577,44 +587,44 @@ shows the individual bits; wide shows who is calling.</source>
 が見えます。</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="181" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="194" />
         <source>DECO</source>
         <translation>DECO</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="181" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="194" />
         <source>GREY</source>
         <translation>グレー</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="181" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="194" />
         <source>FIRE</source>
         <translation>ファイア</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="190" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="203" />
         <source>speed %1x</source>
         <translation>速度 %1x</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="197" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="210" />
         <source>How fast it scrolls. Slower keeps a longer
 stretch of band in view.</source>
         <translation>どれだけ速く流れるか。遅くすると、より長い
 帯域の一続きが画面に残ります。</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="202" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="215" />
         <source>light</source>
         <translation>明るさ</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="217" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="230" />
         <source>contrast</source>
         <translation>コントラスト</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="232" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="245" />
         <source>floor %1 dB</source>
         <translation>ノイズ %1 dB</translation>
     </message>
@@ -1095,28 +1105,28 @@ stretch of band in view.</source>
     <name>decortty::link::RadioHub</name>
     <message>
         <location filename="../src/link/RadioHub.cpp" line="11" />
-        <location filename="../src/link/RadioHub.cpp" line="202" />
+        <location filename="../src/link/RadioHub.cpp" line="205" />
         <source>Disconnected</source>
         <translation>切断しました</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="85" />
-        <location filename="../src/link/RadioHub.cpp" line="202" />
+        <location filename="../src/link/RadioHub.cpp" line="88" />
+        <location filename="../src/link/RadioHub.cpp" line="205" />
         <source>Looking for radios…</source>
         <translation>無線機を探しています…</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="148" />
+        <location filename="../src/link/RadioHub.cpp" line="151" />
         <source>Radio %1 is no longer on the network</source>
         <translation>無線機 %1 はもうネットワークにいません</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="155" />
+        <location filename="../src/link/RadioHub.cpp" line="158" />
         <source>'%1' is not a valid address</source>
         <translation>'%1' は正しいアドレスではありません</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="245" />
+        <location filename="../src/link/RadioHub.cpp" line="248" />
         <source>Transmit is unavailable on this connection</source>
         <translation>この接続では送信できません</translation>
     </message>

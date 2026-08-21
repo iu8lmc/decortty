@@ -49,6 +49,16 @@ but the radio's filter is wider than it needs.</source>
     </message>
 </context>
 <context>
+    <name>BandScale</name>
+    <message>
+        <location filename="../qml/DecoRTTY/components/BandScale.qml" line="230" />
+        <source>Drag to move the radio; the wheel tunes by 1 kHz —
+100 Hz with Shift, 10 kHz with Ctrl.</source>
+        <translation>Перетаскивайте, чтобы двигать станцию; колесо настраивает по 1 кГц —
+100 Гц с Shift, 10 кГц с Ctrl.</translation>
+    </message>
+</context>
+<context>
     <name>DecoderPanel</name>
     <message>
         <location filename="../qml/DecoRTTY/components/DecoderPanel.qml" line="116" />
@@ -568,56 +578,56 @@ within a few tens of hertz.</source>
 пределах нескольких десятков герц.</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="168" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="181" />
         <source>band</source>
         <translation>диапазон</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="177" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="190" />
         <source>How much band to show. Narrow around the tones
 shows the individual bits; wide shows who is calling.</source>
         <translation>Сколько диапазона показывать. Узко вокруг тонов
 видны отдельные биты; широко видно, кто зовёт.</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="181" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="194" />
         <source>DECO</source>
         <translation>DECO</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="181" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="194" />
         <source>GREY</source>
         <translation>СЕРЫЙ</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="181" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="194" />
         <source>FIRE</source>
         <translation>ОГОНЬ</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="190" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="203" />
         <source>speed %1x</source>
         <translation>скор. %1x</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="197" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="210" />
         <source>How fast it scrolls. Slower keeps a longer
 stretch of band in view.</source>
         <translation>Как быстро он бежит. Медленнее — на экране
 остаётся более длинный кусок диапазона.</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="202" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="215" />
         <source>light</source>
         <translation>яркость</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="217" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="230" />
         <source>contrast</source>
         <translation>контраст</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="232" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="245" />
         <source>floor %1 dB</source>
         <translation>шумы %1 дБ</translation>
     </message>
@@ -1098,28 +1108,28 @@ stretch of band in view.</source>
     <name>decortty::link::RadioHub</name>
     <message>
         <location filename="../src/link/RadioHub.cpp" line="11" />
-        <location filename="../src/link/RadioHub.cpp" line="202" />
+        <location filename="../src/link/RadioHub.cpp" line="205" />
         <source>Disconnected</source>
         <translation>Отключено</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="85" />
-        <location filename="../src/link/RadioHub.cpp" line="202" />
+        <location filename="../src/link/RadioHub.cpp" line="88" />
+        <location filename="../src/link/RadioHub.cpp" line="205" />
         <source>Looking for radios…</source>
         <translation>Ищу станции…</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="148" />
+        <location filename="../src/link/RadioHub.cpp" line="151" />
         <source>Radio %1 is no longer on the network</source>
         <translation>Станции %1 больше нет в сети</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="155" />
+        <location filename="../src/link/RadioHub.cpp" line="158" />
         <source>'%1' is not a valid address</source>
         <translation>'%1' — недопустимый адрес</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="245" />
+        <location filename="../src/link/RadioHub.cpp" line="248" />
         <source>Transmit is unavailable on this connection</source>
         <translation>По этому соединению передача невозможна</translation>
     </message>

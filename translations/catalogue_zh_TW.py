@@ -269,4 +269,7 @@ TRANSLATIONS = {
         "下旁波帶資料。音調會反過來——用 REV 轉回去。",
     "Voice sideband. RTTY is copied just the same,\nbut the radio's filter is wider than it needs.":
         "話音旁波帶。RTTY 一樣能抄收，只是電台的\n濾波器比需要的寬。",
+
+    "Drag to move the radio; the wheel tunes by 1 kHz —\n100 Hz with Shift, 10 kHz with Ctrl.":
+        "拖曳可移動電台；滾輪以 1 kHz 步進調諧 —\n按 Shift 為 100 Hz，按 Ctrl 為 10 kHz。",
 }

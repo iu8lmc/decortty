@@ -49,6 +49,16 @@ filtrul stației e mai larg decât trebuie.</translation>
     </message>
 </context>
 <context>
+    <name>BandScale</name>
+    <message>
+        <location filename="../qml/DecoRTTY/components/BandScale.qml" line="230" />
+        <source>Drag to move the radio; the wheel tunes by 1 kHz —
+100 Hz with Shift, 10 kHz with Ctrl.</source>
+        <translation>Trage pentru a muta stația; rotița acordează din 1 kHz —
+100 Hz cu Shift, 10 kHz cu Ctrl.</translation>
+    </message>
+</context>
+<context>
     <name>DecoderPanel</name>
     <message>
         <location filename="../qml/DecoRTTY/components/DecoderPanel.qml" line="116" />
@@ -568,56 +578,56 @@ within a few tens of hertz.</source>
 limita câtorva zeci de hertzi.</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="168" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="181" />
         <source>band</source>
         <translation>bandă</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="177" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="190" />
         <source>How much band to show. Narrow around the tones
 shows the individual bits; wide shows who is calling.</source>
         <translation>Câtă bandă se arată. Îngust în jurul tonurilor se
 văd biții; larg se vede cine cheamă.</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="181" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="194" />
         <source>DECO</source>
         <translation>DECO</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="181" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="194" />
         <source>GREY</source>
         <translation>GRI</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="181" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="194" />
         <source>FIRE</source>
         <translation>FOC</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="190" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="203" />
         <source>speed %1x</source>
         <translation>viteză %1x</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="197" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="210" />
         <source>How fast it scrolls. Slower keeps a longer
 stretch of band in view.</source>
         <translation>Cât de repede curge. Mai lent ține la vedere o
 porțiune de bandă mai lungă.</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="202" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="215" />
         <source>light</source>
         <translation>lumină</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="217" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="230" />
         <source>contrast</source>
         <translation>contrast</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="232" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="245" />
         <source>floor %1 dB</source>
         <translation>prag %1 dB</translation>
     </message>
@@ -1098,28 +1108,28 @@ porțiune de bandă mai lungă.</translation>
     <name>decortty::link::RadioHub</name>
     <message>
         <location filename="../src/link/RadioHub.cpp" line="11" />
-        <location filename="../src/link/RadioHub.cpp" line="202" />
+        <location filename="../src/link/RadioHub.cpp" line="205" />
         <source>Disconnected</source>
         <translation>Deconectat</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="85" />
-        <location filename="../src/link/RadioHub.cpp" line="202" />
+        <location filename="../src/link/RadioHub.cpp" line="88" />
+        <location filename="../src/link/RadioHub.cpp" line="205" />
         <source>Looking for radios…</source>
         <translation>Caut stații…</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="148" />
+        <location filename="../src/link/RadioHub.cpp" line="151" />
         <source>Radio %1 is no longer on the network</source>
         <translation>Stația %1 nu mai e în rețea</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="155" />
+        <location filename="../src/link/RadioHub.cpp" line="158" />
         <source>'%1' is not a valid address</source>
         <translation>'%1' nu e o adresă validă</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="245" />
+        <location filename="../src/link/RadioHub.cpp" line="248" />
         <source>Transmit is unavailable on this connection</source>
         <translation>Pe această conexiune nu se poate emite</translation>
     </message>

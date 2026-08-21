@@ -268,4 +268,7 @@ TRANSLATIONS = {
         "Date pe banda laterală inferioară. Tonurile ies inversate\n— REV le pune la loc.",
     "Voice sideband. RTTY is copied just the same,\nbut the radio's filter is wider than it needs.":
         "Banda laterală a fonicului. RTTY se copiază la fel, dar\nfiltrul stației e mai larg decât trebuie.",
+
+    "Drag to move the radio; the wheel tunes by 1 kHz —\n100 Hz with Shift, 10 kHz with Ctrl.":
+        "Trage pentru a muta stația; rotița acordează din 1 kHz —\n100 Hz cu Shift, 10 kHz cu Ctrl.",
 }

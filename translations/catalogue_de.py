@@ -268,4 +268,7 @@ TRANSLATIONS = {
         "Daten im unteren Seitenband. Die Töne kommen vertauscht\nheraus — REV dreht sie zurück.",
     "Voice sideband. RTTY is copied just the same,\nbut the radio's filter is wider than it needs.":
         "Sprech-Seitenband. RTTY wird genauso kopiert, aber das\nFilter des Geräts ist breiter als nötig.",
+
+    "Drag to move the radio; the wheel tunes by 1 kHz —\n100 Hz with Shift, 10 kHz with Ctrl.":
+        "Ziehen bewegt das Funkgerät; das Rad stimmt in 1-kHz-Schritten ab —\n100 Hz mit Umschalt, 10 kHz mit Strg.",
 }

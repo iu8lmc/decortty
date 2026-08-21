@@ -49,6 +49,16 @@ filtrs ir platāks nekā vajag.</translation>
     </message>
 </context>
 <context>
+    <name>BandScale</name>
+    <message>
+        <location filename="../qml/DecoRTTY/components/BandScale.qml" line="230" />
+        <source>Drag to move the radio; the wheel tunes by 1 kHz —
+100 Hz with Shift, 10 kHz with Ctrl.</source>
+        <translation>Velc, lai pārvietotu radiostaciju; ritenītis noskaņo pa 1 kHz —
+100 Hz ar Shift, 10 kHz ar Ctrl.</translation>
+    </message>
+</context>
+<context>
     <name>DecoderPanel</name>
     <message>
         <location filename="../qml/DecoRTTY/components/DecoderPanel.qml" line="116" />
@@ -567,56 +577,56 @@ within a few tens of hertz.</source>
 hercu robežās.</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="168" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="181" />
         <source>band</source>
         <translation>josla</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="177" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="190" />
         <source>How much band to show. Narrow around the tones
 shows the individual bits; wide shows who is calling.</source>
         <translation>Cik daudz joslas rādīt. Šauri ap toņiem redzami
 atsevišķi biti; plati redzams, kas sauc.</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="181" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="194" />
         <source>DECO</source>
         <translation>DECO</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="181" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="194" />
         <source>GREY</source>
         <translation>PELĒKS</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="181" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="194" />
         <source>FIRE</source>
         <translation>UGUNS</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="190" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="203" />
         <source>speed %1x</source>
         <translation>ātrums %1x</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="197" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="210" />
         <source>How fast it scrolls. Slower keeps a longer
 stretch of band in view.</source>
         <translation>Cik ātri tas ritinās. Lēnāk redzams garāks
 joslas gabals.</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="202" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="215" />
         <source>light</source>
         <translation>gaišums</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="217" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="230" />
         <source>contrast</source>
         <translation>kontrasts</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="232" />
+        <location filename="../qml/DecoRTTY/components/WaterfallPanel.qml" line="245" />
         <source>floor %1 dB</source>
         <translation>trokšņu līmenis %1 dB</translation>
     </message>
@@ -1097,28 +1107,28 @@ joslas gabals.</translation>
     <name>decortty::link::RadioHub</name>
     <message>
         <location filename="../src/link/RadioHub.cpp" line="11" />
-        <location filename="../src/link/RadioHub.cpp" line="202" />
+        <location filename="../src/link/RadioHub.cpp" line="205" />
         <source>Disconnected</source>
         <translation>Atslēgts</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="85" />
-        <location filename="../src/link/RadioHub.cpp" line="202" />
+        <location filename="../src/link/RadioHub.cpp" line="88" />
+        <location filename="../src/link/RadioHub.cpp" line="205" />
         <source>Looking for radios…</source>
         <translation>Meklēju stacijas…</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="148" />
+        <location filename="../src/link/RadioHub.cpp" line="151" />
         <source>Radio %1 is no longer on the network</source>
         <translation>Stacijas %1 tīklā vairs nav</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="155" />
+        <location filename="../src/link/RadioHub.cpp" line="158" />
         <source>'%1' is not a valid address</source>
         <translation>'%1' nav derīga adrese</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="245" />
+        <location filename="../src/link/RadioHub.cpp" line="248" />
         <source>Transmit is unavailable on this connection</source>
         <translation>Pa šo savienojumu raidīt nav iespējams</translation>
     </message>

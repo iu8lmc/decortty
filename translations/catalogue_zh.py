@@ -267,4 +267,7 @@ TRANSLATIONS = {
         "下边带数据。音调会反过来——用 REV 转回去。",
     "Voice sideband. RTTY is copied just the same,\nbut the radio's filter is wider than it needs.":
         "话音边带。RTTY 一样能抄收，只是电台的\n滤波器比需要的宽。",
+
+    "Drag to move the radio; the wheel tunes by 1 kHz —\n100 Hz with Shift, 10 kHz with Ctrl.":
+        "拖动可移动电台；滚轮以 1 kHz 步进调谐 —\n按 Shift 为 100 Hz，按 Ctrl 为 10 kHz。",
 }

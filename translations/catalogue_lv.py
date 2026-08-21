@@ -268,4 +268,7 @@ TRANSLATIONS = {
         "Dati apakšējā sānjoslā. Toņi iznāk apgriezti — REV tos\nsaliek atpakaļ.",
     "Voice sideband. RTTY is copied just the same,\nbut the radio's filter is wider than it needs.":
         "Balss sānjosla. RTTY nolasās tikpat labi, bet radiostacijas\nfiltrs ir platāks nekā vajag.",
+
+    "Drag to move the radio; the wheel tunes by 1 kHz —\n100 Hz with Shift, 10 kHz with Ctrl.":
+        "Velc, lai pārvietotu radiostaciju; ritenītis noskaņo pa 1 kHz —\n100 Hz ar Shift, 10 kHz ar Ctrl.",
 }

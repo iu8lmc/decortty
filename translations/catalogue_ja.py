@@ -267,4 +267,7 @@ TRANSLATIONS = {
         "下側波帯のデータ。トーンが反転して出るので、REV で戻します。",
     "Voice sideband. RTTY is copied just the same,\nbut the radio's filter is wider than it needs.":
         "音声用の側波帯。RTTY はそのまま復号できますが、無線機の\nフィルターは必要より広くなります。",
+
+    "Drag to move the radio; the wheel tunes by 1 kHz —\n100 Hz with Shift, 10 kHz with Ctrl.":
+        "ドラッグで無線機を動かします。ホイールは 1 kHz 刻み —\nShift で 100 Hz、Ctrl で 10 kHz。",
 }

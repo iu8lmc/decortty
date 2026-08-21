@@ -185,6 +185,7 @@ set(DECORTTY_COMPONENT_FILES
     qml/DecoRTTY/components/HeaderBar.qml
     qml/DecoRTTY/components/WaterfallPanel.qml
     qml/DecoRTTY/components/BandBar.qml
+    qml/DecoRTTY/components/BandScale.qml
     qml/DecoRTTY/components/TuningScope.qml
     qml/DecoRTTY/components/ReceivePanel.qml
     qml/DecoRTTY/components/TransmitPanel.qml

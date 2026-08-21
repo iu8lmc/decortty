@@ -268,4 +268,7 @@ TRANSLATIONS = {
         "Adat az alsó oldalsávon. A hangok fordítva jönnek ki\n— a REV visszafordítja őket.",
     "Voice sideband. RTTY is copied just the same,\nbut the radio's filter is wider than it needs.":
         "A fónia oldalsávja. Az RTTY ugyanúgy másolható, de a rádió\nszűrője szélesebb a kelleténél.",
+
+    "Drag to move the radio; the wheel tunes by 1 kHz —\n100 Hz with Shift, 10 kHz with Ctrl.":
+        "Húzással mozgatod a rádiót; a görgő 1 kHz-enként hangol —\n100 Hz Shifttel, 10 kHz Ctrllel.",
 }

@@ -157,6 +157,19 @@ GlassPanel {
             }
         }
 
+        // ── il righello, da zero a cinquanta megahertz ──────────────────
+        //
+        // Sotto i pulsanti di banda e non al posto loro: il pulsante e' il salto
+        // preciso al segmento dove si fa RTTY, il righello e' l'andare a mano
+        // dove non ci sono pulsanti — un'emittente, una utility, il pezzo di
+        // banda dove qualcuno ha detto di trovarsi.
+        BandScale {
+            id: bandScale
+            width: parent.width
+            visible: radio.connected && !radio.viaSoundCard
+            height: visible ? 34 : 0
+        }
+
         // ── controlli della vista, a scomparsa ──────────────────────────
         Row {
             width: parent.width
@@ -312,7 +325,8 @@ GlassPanel {
             width: parent.width
             height: Math.max(40, parent.height - trace.height - freqScale.height - 40
                     - (root.showViewControls ? 30 : 0)
-                    - (bandBar.visible ? 30 : 0))
+                    - (bandBar.visible ? 30 : 0)
+                    - (bandScale.visible ? 40 : 0))
 
             startHz: root.viewStartHz
             endHz: root.viewEndHz

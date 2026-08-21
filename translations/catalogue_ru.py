@@ -268,4 +268,7 @@ TRANSLATIONS = {
         "Данные в нижней боковой полосе. Тоны выходят перевёрнутыми\n— REV возвращает их на место.",
     "Voice sideband. RTTY is copied just the same,\nbut the radio's filter is wider than it needs.":
         "Речевая боковая полоса. RTTY принимается так же, но фильтр\nстанции шире, чем нужно.",
+
+    "Drag to move the radio; the wheel tunes by 1 kHz —\n100 Hz with Shift, 10 kHz with Ctrl.":
+        "Перетаскивайте, чтобы двигать станцию; колесо настраивает по 1 кГц —\n100 Гц с Shift, 10 кГц с Ctrl.",
 }
