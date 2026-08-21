@@ -21,7 +21,7 @@
 ; porta via perche' "pulisce" fa un danno che nessuna comodita' ripaga.
 
 #define AppName        "DecoRTTY"
-#define AppVersion     "0.4.0"
+#define AppVersion     "0.5.0"
 #define AppPublisher   "IU8LMC — Martino Merola"
 #define AppURL         "https://github.com/iu8lmc/decortty"
 #define AppExe         "decortty.exe"
