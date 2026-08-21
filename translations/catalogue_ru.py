@@ -271,4 +271,23 @@ TRANSLATIONS = {
 
     "Drag to move the radio; the wheel tunes by 1 kHz —\n100 Hz with Shift, 10 kHz with Ctrl.":
         "Перетаскивайте, чтобы двигать станцию; колесо настраивает по 1 кГц —\n100 Гц с Shift, 10 кГц с Ctrl.",
+
+    "FLEXRADIO":
+        "FLEXRADIO",
+    "BY ITSELF":
+        "САМ",
+    "Binds to the station already on the radio when there\nis one, and takes the GUI role when the radio is free.":
+        "Привязывается к уже подключённой станции, если она есть,\nи берёт роль GUI, когда станция свободна.",
+    "GUI STATION":
+        "СТАНЦИЯ GUI",
+    "Owns its own slices, so frequency and tuning always\nwork — at the cost of one of the two MultiFlex seats.":
+        "Владеет собственными slice, поэтому частота и настройка\nработают всегда — ценой одного места MultiFlex.",
+    "SECOND CLIENT":
+        "ВТОРОЙ КЛИЕНТ",
+    "Reads the slices of the station that already has the\nradio, without taking a seat. If the radio shows none,\nDecoRTTY goes back to being a GUI station by itself.":
+        "Читает slice станции, у которой аппарат уже занят, не\nзанимая места. Если станция не показывает ни одного,\nDecoRTTY сам возвращается к роли станции GUI.",
+    "Takes effect at the next connection.":
+        "Вступает в силу при следующем подключении.",
+    "Bound to %1 but the radio shows no slice — reconnecting as a GUI station":
+        "Привязан к %1, но станция не показывает ни одного slice — переподключаюсь как станция GUI",
 }

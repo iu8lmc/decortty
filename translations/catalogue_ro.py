@@ -271,4 +271,23 @@ TRANSLATIONS = {
 
     "Drag to move the radio; the wheel tunes by 1 kHz —\n100 Hz with Shift, 10 kHz with Ctrl.":
         "Trage pentru a muta stația; rotița acordează din 1 kHz —\n100 Hz cu Shift, 10 kHz cu Ctrl.",
+
+    "FLEXRADIO":
+        "FLEXRADIO",
+    "BY ITSELF":
+        "SINGUR",
+    "Binds to the station already on the radio when there\nis one, and takes the GUI role when the radio is free.":
+        "Se leagă de stația deja conectată dacă există, și ia rolul\nGUI când stația e liberă.",
+    "GUI STATION":
+        "STAȚIE GUI",
+    "Owns its own slices, so frequency and tuning always\nwork — at the cost of one of the two MultiFlex seats.":
+        "Are propriile slice-uri, deci frecvența și acordul merg\nmereu — cu prețul unuia dintre cele două locuri MultiFlex.",
+    "SECOND CLIENT":
+        "CLIENT SECUNDAR",
+    "Reads the slices of the station that already has the\nradio, without taking a seat. If the radio shows none,\nDecoRTTY goes back to being a GUI station by itself.":
+        "Citește slice-urile stației care are deja stația, fără să\nocupe un loc. Dacă stația nu arată niciunul, DecoRTTY revine\nsingur la rolul de stație GUI.",
+    "Takes effect at the next connection.":
+        "Are efect la următoarea conectare.",
+    "Bound to %1 but the radio shows no slice — reconnecting as a GUI station":
+        "Legat de %1 dar stația nu arată niciun slice — mă reconectez ca stație GUI",
 }

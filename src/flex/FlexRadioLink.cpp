@@ -86,6 +86,7 @@ void FlexRadioLink::onApiConnected()
 {
     setStatusText(tr("Connected to %1").arg(m_radio.displayName()));
     bringUpStreams();
+    armSliceWatch();
     emit connectionChanged();
 }
 
@@ -94,6 +95,7 @@ void FlexRadioLink::onApiDisconnected()
     m_rxStreamId = 0;
     m_txStreamId = 0;
     m_slice      = SliceState{};
+    m_sliceWatch.stop();
     m_vita.stop();
 
     if (m_relinkAsGui) {
@@ -109,6 +111,31 @@ void FlexRadioLink::onApiDisconnected()
     setStatusText(tr("Disconnected"));
     emit connectionChanged();
     emit sliceChanged();
+}
+
+void FlexRadioLink::armSliceWatch()
+{
+    // Solo da client secondario: da stazione GUI le slice sono nostre e se non
+    // ce ne sono e' perche' non ne abbiamo ancora create.
+    if (m_api.boundTo().isEmpty())
+        return;
+
+    m_sliceWatch.setSingleShot(true);
+    // Quattro secondi. La radio manda gli stati subito dopo l'abbonamento; se
+    // dopo tutto questo tempo non e' arrivata nemmeno una slice, non arrivera'.
+    m_sliceWatch.setInterval(4000);
+    disconnect(&m_sliceWatch, nullptr, this, nullptr);
+    connect(&m_sliceWatch, &QTimer::timeout, this, [this] {
+        if (m_slice.index >= 0 || m_api.boundTo().isEmpty())
+            return;
+        emit errorOccurred(tr("Bound to %1 but the radio shows no slice — "
+                              "reconnecting as a GUI station")
+                               .arg(m_api.boundTo()));
+        m_api.setRole(flex::FlexApiClient::Role::Gui);
+        m_relinkAsGui = true;
+        m_api.disconnectFromRadio();
+    });
+    m_sliceWatch.start();
 }
 
 void FlexRadioLink::bringUpStreams()
@@ -223,8 +250,10 @@ void FlexRadioLink::applySliceStatus(int index, const QMap<QString, QString>& kv
 {
     // Adopt the first slice that is in use, and stay with it afterwards.
     const bool inUse = kvs.value(QStringLiteral("in_use"), QStringLiteral("1")) == QLatin1String("1");
-    if (m_slice.index < 0 && inUse)
+    if (m_slice.index < 0 && inUse) {
         m_slice.index = index;
+        m_sliceWatch.stop();   // il legame ha portato quello che doveva
+    }
     if (index != m_slice.index)
         return;
 

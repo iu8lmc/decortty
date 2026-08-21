@@ -17,6 +17,7 @@
 #include "link/RadioLink.h"
 
 #include <QObject>
+#include <QTimer>
 
 #include <vector>
 
@@ -75,7 +76,17 @@ private slots:
 
 private:
     void setStatusText(const QString& text);
+    // Il ruolo con cui presentarsi alla radio. Di norma lo decide da se'
+    // guardando chi c'e' gia' collegato; si puo' imporre perche' l'automatismo
+    // vede solo quello che la radio racconta, e se racconta male non c'e' altra
+    // via d'uscita che dirglielo.
+public:
+    void setRole(FlexApiClient::Role role) { m_api.setRole(role); }
+
+private:
     void bringUpStreams();
+    // Arma il controllo che verifica se dal legame arrivano davvero le slice.
+    void armSliceWatch();
     void tearDownStreams();
     void applySliceStatus(int index, const QMap<QString, QString>& kvs);
 
@@ -90,6 +101,11 @@ private:
     // Vero mentre si sta rifacendo il collegamento perche' il ruolo secondario
     // non ha ottenuto l'audio.
     bool    m_relinkAsGui{false};
+    // Legarsi a una stazione GUI ha senso solo se da quel legame arrivano le
+    // sue slice: e' l'unica cosa che ci interessa vedere. Se non arrivano,
+    // restiamo collegati e ciechi — nessuna frequenza, nessuna sintonia — ed e'
+    // molto peggio che occupare un posto MultiFlex.
+    QTimer  m_sliceWatch;
     // La stazione GUI con cui si condivide la radio, vuoto se si lavora da soli.
     QString m_boundStation;
 public:

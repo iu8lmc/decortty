@@ -271,4 +271,23 @@ TRANSLATIONS = {
 
     "Drag to move the radio; the wheel tunes by 1 kHz —\n100 Hz with Shift, 10 kHz with Ctrl.":
         "Velc, lai pārvietotu radiostaciju; ritenītis noskaņo pa 1 kHz —\n100 Hz ar Shift, 10 kHz ar Ctrl.",
+
+    "FLEXRADIO":
+        "FLEXRADIO",
+    "BY ITSELF":
+        "PATS",
+    "Binds to the station already on the radio when there\nis one, and takes the GUI role when the radio is free.":
+        "Piesaistās stacijai, kas jau ir pieslēgta, un pārņem GUI\nlomu, kad radiostacija ir brīva.",
+    "GUI STATION":
+        "GUI STACIJA",
+    "Owns its own slices, so frequency and tuning always\nwork — at the cost of one of the two MultiFlex seats.":
+        "Tam ir savas slice, tāpēc frekvence un noskaņošana vienmēr\nstrādā — par vienu no divām MultiFlex vietām.",
+    "SECOND CLIENT":
+        "OTRAIS KLIENTS",
+    "Reads the slices of the station that already has the\nradio, without taking a seat. If the radio shows none,\nDecoRTTY goes back to being a GUI station by itself.":
+        "Nolasa tās stacijas slice, kurai radiostacija jau pieder,\nneaizņemot vietu. Ja radiostacija nevienu nerāda, DecoRTTY\npats atgriežas pie GUI stacijas lomas.",
+    "Takes effect at the next connection.":
+        "Stājas spēkā nākamajā savienojumā.",
+    "Bound to %1 but the radio shows no slice — reconnecting as a GUI station":
+        "Piesaistīts %1, bet radiostacija nerāda nevienu slice — pieslēdzos no jauna kā GUI stacija",
 }

@@ -272,4 +272,23 @@ TRANSLATIONS = {
 
     "Drag to move the radio; the wheel tunes by 1 kHz —\n100 Hz with Shift, 10 kHz with Ctrl.":
         "拖曳可移動電台；滾輪以 1 kHz 步進調諧 —\n按 Shift 為 100 Hz，按 Ctrl 為 10 kHz。",
+
+    "FLEXRADIO":
+        "FLEXRADIO",
+    "BY ITSELF":
+        "自動決定",
+    "Binds to the station already on the radio when there\nis one, and takes the GUI role when the radio is free.":
+        "若已有台站連線就綁定它；電台閒置時則自己擔任 GUI。",
+    "GUI STATION":
+        "GUI 台站",
+    "Owns its own slices, so frequency and tuning always\nwork — at the cost of one of the two MultiFlex seats.":
+        "擁有自己的 slice，頻率和調諧始終可用 —\n代價是佔用兩個 MultiFlex 席位之一。",
+    "SECOND CLIENT":
+        "次要用戶端",
+    "Reads the slices of the station that already has the\nradio, without taking a seat. If the radio shows none,\nDecoRTTY goes back to being a GUI station by itself.":
+        "讀取已佔用電台的台站的 slice，不佔席位。\n若電台不顯示任何 slice，DecoRTTY 會自行\n變回 GUI 台站。",
+    "Takes effect at the next connection.":
+        "下次連線時生效。",
+    "Bound to %1 but the radio shows no slice — reconnecting as a GUI station":
+        "已綁定 %1，但電台不顯示任何 slice — 正以 GUI 台站身分重新連線",
 }

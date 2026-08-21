@@ -106,6 +106,79 @@ Dialog {
             color: Theme.glassBorder
         }
 
+        // ── come presentarsi a un FlexRadio ─────────────────────────────
+        //
+        // Di norma lo decide da se': guarda chi e' gia' collegato e, se c'e'
+        // una stazione GUI, si lega a quella senza occupare un posto MultiFlex.
+        // Ma l'automatismo vede solo quello che la radio racconta, e se il
+        // legame riesce senza portare nessuna slice si resta collegati e
+        // ciechi. Da qui lo si obbliga.
+        PanelHeading {
+            x: 16
+            text: qsTr("FLEXRADIO")
+        }
+
+        Row {
+            x: 16
+            spacing: 6
+
+            GlassButton {
+                text: qsTr("BY ITSELF")
+                armed: radio.flexRole === 0
+                minimumWidth: 110
+                implicitHeight: 26
+                font.pixelSize: 11
+                onClicked: radio.flexRole = 0
+                ToolTip.visible: hovered
+                ToolTip.delay: 700
+                ToolTip.text: qsTr("Binds to the station already on the radio when there
+is one, and takes the GUI role when the radio is free.")
+            }
+            GlassButton {
+                text: qsTr("GUI STATION")
+                armed: radio.flexRole === 1
+                accentColor: Theme.primary
+                minimumWidth: 130
+                implicitHeight: 26
+                font.pixelSize: 11
+                onClicked: radio.flexRole = 1
+                ToolTip.visible: hovered
+                ToolTip.delay: 700
+                ToolTip.text: qsTr("Owns its own slices, so frequency and tuning always
+work — at the cost of one of the two MultiFlex seats.")
+            }
+            GlassButton {
+                text: qsTr("SECOND CLIENT")
+                armed: radio.flexRole === 2
+                accentColor: Theme.secondary
+                minimumWidth: 140
+                implicitHeight: 26
+                font.pixelSize: 11
+                onClicked: radio.flexRole = 2
+                ToolTip.visible: hovered
+                ToolTip.delay: 700
+                ToolTip.text: qsTr("Reads the slices of the station that already has the
+radio, without taking a seat. If the radio shows none,
+DecoRTTY goes back to being a GUI station by itself.")
+            }
+        }
+
+        Text {
+            x: 16
+            width: parent.width - 32
+            wrapMode: Text.WordWrap
+            text: qsTr("Takes effect at the next connection.")
+            color: Theme.textSecondary
+            font.pixelSize: 10
+        }
+
+        Rectangle {
+            x: 16
+            width: parent.width - 32
+            height: 1
+            color: Theme.glassBorder
+        }
+
         Row {
             x: 16
             width: parent.width - 32

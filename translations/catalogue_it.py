@@ -284,4 +284,23 @@ TRANSLATIONS = {
 
     "Drag to move the radio; the wheel tunes by 1 kHz —\n100 Hz with Shift, 10 kHz with Ctrl.":
         "Trascina per spostare la radio; la rotella sintonizza di 1 kHz —\n100 Hz con Shift, 10 kHz con Ctrl.",
+
+    "FLEXRADIO":
+        "FLEXRADIO",
+    "BY ITSELF":
+        "DA SÉ",
+    "Binds to the station already on the radio when there\nis one, and takes the GUI role when the radio is free.":
+        "Si lega alla stazione già collegata quando ce n'è una,\ne prende il ruolo GUI quando la radio è libera.",
+    "GUI STATION":
+        "STAZIONE GUI",
+    "Owns its own slices, so frequency and tuning always\nwork — at the cost of one of the two MultiFlex seats.":
+        "Possiede le proprie slice, così frequenza e sintonia\nfunzionano sempre — al prezzo di un posto MultiFlex.",
+    "SECOND CLIENT":
+        "CLIENT SECONDARIO",
+    "Reads the slices of the station that already has the\nradio, without taking a seat. If the radio shows none,\nDecoRTTY goes back to being a GUI station by itself.":
+        "Legge le slice della stazione che ha già la radio, senza\noccupare un posto. Se la radio non ne mostra nessuna,\nDecoRTTY torna da sé a essere stazione GUI.",
+    "Takes effect at the next connection.":
+        "Ha effetto al prossimo collegamento.",
+    "Bound to %1 but the radio shows no slice — reconnecting as a GUI station":
+        "Legato a %1 ma la radio non mostra nessuna slice — mi ricollego come stazione GUI",
 }

@@ -461,17 +461,65 @@ pui în câmpul HIS CALL.</translation>
         <translation>QTH</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="115" />
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="118" />
+        <source>FLEXRADIO</source>
+        <translation>FLEXRADIO</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="126" />
+        <source>BY ITSELF</source>
+        <translation>SINGUR</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="134" />
+        <source>Binds to the station already on the radio when there
+is one, and takes the GUI role when the radio is free.</source>
+        <translation>Se leagă de stația deja conectată dacă există, și ia rolul
+GUI când stația e liberă.</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="138" />
+        <source>GUI STATION</source>
+        <translation>STAȚIE GUI</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="147" />
+        <source>Owns its own slices, so frequency and tuning always
+work — at the cost of one of the two MultiFlex seats.</source>
+        <translation>Are propriile slice-uri, deci frecvența și acordul merg
+mereu — cu prețul unuia dintre cele două locuri MultiFlex.</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="151" />
+        <source>SECOND CLIENT</source>
+        <translation>CLIENT SECUNDAR</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="160" />
+        <source>Reads the slices of the station that already has the
+radio, without taking a seat. If the radio shows none,
+DecoRTTY goes back to being a GUI station by itself.</source>
+        <translation>Citește slice-urile stației care are deja stația, fără să
+ocupe un loc. Dacă stația nu arată niciunul, DecoRTTY revine
+singur la rolul de stație GUI.</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="170" />
+        <source>Takes effect at the next connection.</source>
+        <translation>Are efect la următoarea conectare.</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="188" />
         <source>MACROS</source>
         <translation>MACROURI</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="196" />
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="269" />
         <source>Restore defaults</source>
         <translation>Restaurează</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="202" />
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="275" />
         <source>Close</source>
         <translation>Închide</translation>
     </message>
@@ -781,17 +829,17 @@ porțiune de bandă mai lungă.</translation>
         <translation>Semnal pe %1 Hz: mă mut acolo</translation>
     </message>
     <message>
-        <location filename="../src/app/RttyEngine.cpp" line="230" />
+        <location filename="../src/app/RttyEngine.cpp" line="241" />
         <source>No recognisable RTTY signal in the band</source>
         <translation>Niciun semnal RTTY recognoscibil în bandă</translation>
     </message>
     <message>
-        <location filename="../src/app/RttyEngine.cpp" line="236" />
+        <location filename="../src/app/RttyEngine.cpp" line="247" />
         <source>Centred on %1 Hz (%2 dB above the floor)</source>
         <translation>Centrat pe %1 Hz (%2 dB peste prag)</translation>
     </message>
     <message>
-        <location filename="../src/app/RttyEngine.cpp" line="592" />
+        <location filename="../src/app/RttyEngine.cpp" line="605" />
         <source>The radio is in %1: on voice modes the USB audio does not modulate. Press 'Set radio' in the DECODER panel.</source>
         <translation>Stația e pe %1: în modurile fonie audio-ul de pe USB nu modulează. Apasă „Setează stația” în panoul DECODOR.</translation>
     </message>
@@ -826,7 +874,7 @@ porțiune de bandă mai lungă.</translation>
     </message>
     <message>
         <location filename="../src/flex/FlexRadioLink.cpp" line="36" />
-        <location filename="../src/flex/FlexRadioLink.cpp" line="109" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="111" />
         <source>Disconnected</source>
         <translation>Deconectat</translation>
     </message>
@@ -842,42 +890,47 @@ porțiune de bandă mai lungă.</translation>
         <translation>Conectat la %1</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="103" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="105" />
         <source>Reconnecting to %1…</source>
         <translation>Mă reconectez la %1…</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="117" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="131" />
+        <source>Bound to %1 but the radio shows no slice — reconnecting as a GUI station</source>
+        <translation>Legat de %1 dar stația nu arată niciun slice — mă reconectez ca stație GUI</translation>
+    </message>
+    <message>
+        <location filename="../src/flex/FlexRadioLink.cpp" line="144" />
         <source>Could not open the audio transport</source>
         <translation>Nu am putut deschide transportul audio</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="127" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="154" />
         <source>The radio rejected the UDP port registration</source>
         <translation>Stația a respins înregistrarea portului UDP</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="146" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="173" />
         <source>The radio will not give audio to a bound client — reconnecting as a GUI station</source>
         <translation>Stația nu dă audio unui client legat — mă reconectez ca stație GUI</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="153" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="180" />
         <source>Could not create the receive audio stream</source>
         <translation>Nu am putut crea fluxul audio de recepție</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="158" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="185" />
         <source>Receiving from %1</source>
         <translation>Primesc de la %1</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="166" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="193" />
         <source>Could not create the transmit audio stream</source>
         <translation>Nu am putut crea fluxul audio de emisie</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="343" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="372" />
         <source>Transmit is unavailable: no Opus transmit stream</source>
         <translation>Nu se poate emite: lipsește fluxul Opus de emisie</translation>
     </message>
@@ -1107,29 +1160,29 @@ porțiune de bandă mai lungă.</translation>
 <context>
     <name>decortty::link::RadioHub</name>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="11" />
-        <location filename="../src/link/RadioHub.cpp" line="205" />
+        <location filename="../src/link/RadioHub.cpp" line="27" />
+        <location filename="../src/link/RadioHub.cpp" line="223" />
         <source>Disconnected</source>
         <translation>Deconectat</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="88" />
-        <location filename="../src/link/RadioHub.cpp" line="205" />
+        <location filename="../src/link/RadioHub.cpp" line="104" />
+        <location filename="../src/link/RadioHub.cpp" line="223" />
         <source>Looking for radios…</source>
         <translation>Caut stații…</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="151" />
+        <location filename="../src/link/RadioHub.cpp" line="168" />
         <source>Radio %1 is no longer on the network</source>
         <translation>Stația %1 nu mai e în rețea</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="158" />
+        <location filename="../src/link/RadioHub.cpp" line="175" />
         <source>'%1' is not a valid address</source>
         <translation>'%1' nu e o adresă validă</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="248" />
+        <location filename="../src/link/RadioHub.cpp" line="275" />
         <source>Transmit is unavailable on this connection</source>
         <translation>Pe această conexiune nu se poate emite</translation>
     </message>

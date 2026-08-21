@@ -123,6 +123,7 @@ int main(int argc, char* argv[])
         settings.setValue(QStringLiteral("gateway/udpPort"), gateway.udpPort());
         settings.setValue(QStringLiteral("gateway/autoConnect"), gateway.autoConnect());
         settings.setValue(QStringLiteral("ui/language"), language.current());
+        settings.setValue(QStringLiteral("flex/role"), radio.flexRole());
         settings.setValue(QStringLiteral("audio/useSoundCard"), radio.viaSoundCard());
         if (radio.viaSoundCard()) {
             settings.setValue(QStringLiteral("audio/capture"), radio.captureInUse());
@@ -171,6 +172,8 @@ int main(int argc, char* argv[])
     // Start looking for radios straight away: by the time the operator has
     // read the window, the list is already populated.
     radio.startDiscovery();
+
+    radio.setFlexRole(settings.value(QStringLiteral("flex/role"), 0).toInt());
 
     // Se l'ultima volta si ascoltava una scheda audio, si riprende da li' senza
     // chiedere niente: e' la sistemazione di chi lavora dietro SmartSDR, e non

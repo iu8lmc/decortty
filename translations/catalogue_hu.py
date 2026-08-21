@@ -271,4 +271,23 @@ TRANSLATIONS = {
 
     "Drag to move the radio; the wheel tunes by 1 kHz —\n100 Hz with Shift, 10 kHz with Ctrl.":
         "Húzással mozgatod a rádiót; a görgő 1 kHz-enként hangol —\n100 Hz Shifttel, 10 kHz Ctrllel.",
+
+    "FLEXRADIO":
+        "FLEXRADIO",
+    "BY ITSELF":
+        "MAGÁTÓL",
+    "Binds to the station already on the radio when there\nis one, and takes the GUI role when the radio is free.":
+        "A már csatlakozott állomáshoz köti magát, ha van ilyen,\nés GUI szerepet vesz fel, ha a rádió szabad.",
+    "GUI STATION":
+        "GUI ÁLLOMÁS",
+    "Owns its own slices, so frequency and tuning always\nwork — at the cost of one of the two MultiFlex seats.":
+        "Saját slice-okkal dolgozik, így a frekvencia és a hangolás\nmindig működik — egy MultiFlex hely árán.",
+    "SECOND CLIENT":
+        "MÁSODIK KLIENS",
+    "Reads the slices of the station that already has the\nradio, without taking a seat. If the radio shows none,\nDecoRTTY goes back to being a GUI station by itself.":
+        "Annak az állomásnak a slice-ait olvassa, amelyik már a\nrádiót birtokolja, hely foglalása nélkül. Ha a rádió egyet\nsem mutat, a DecoRTTY magától újra GUI állomás lesz.",
+    "Takes effect at the next connection.":
+        "A következő csatlakozáskor lép életbe.",
+    "Bound to %1 but the radio shows no slice — reconnecting as a GUI station":
+        "%1 állomáshoz kötve, de a rádió egy slice-ot sem mutat — újracsatlakozás GUI állomásként",
 }

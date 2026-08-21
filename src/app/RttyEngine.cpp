@@ -166,6 +166,8 @@ void RttyEngine::applyParams()
 
 void RttyEngine::setMarkHz(double hz)
 {
+    if (!std::isfinite(hz))
+        return;
     if (qFuzzyCompare(m_params.markHz, static_cast<float>(hz)))
         return;
     m_params.markHz = static_cast<float>(std::clamp(hz, 300.0, 3500.0));
@@ -177,6 +179,13 @@ void RttyEngine::setMarkHz(double hz)
 
 void RttyEngine::setShiftHz(double hz)
 {
+    // Un valore non finito non entra nel decodificatore. Ci arrivava da un
+    // cursore dell'interfaccia — quello e' sistemato — ma la difesa resta: da
+    // qui un NaN si propagherebbe ai filtri, poi alle impostazioni salvate, e
+    // al riavvio successivo tornerebbe da solo senza che nessuno l'abbia
+    // toccato.
+    if (!std::isfinite(hz))
+        return;
     if (qFuzzyCompare(m_params.shiftHz, static_cast<float>(hz)))
         return;
     m_params.shiftHz = static_cast<float>(std::clamp(hz, 20.0, 1000.0));
@@ -185,6 +194,8 @@ void RttyEngine::setShiftHz(double hz)
 
 void RttyEngine::setBaud(double baud)
 {
+    if (!std::isfinite(baud))
+        return;
     if (qFuzzyCompare(m_params.baud, static_cast<float>(baud)))
         return;
     m_params.baud = static_cast<float>(std::clamp(baud, 10.0, 300.0));
@@ -249,6 +260,8 @@ void RttyEngine::setAfcEnabled(bool on)
 
 void RttyEngine::setSquelchDb(double db)
 {
+    if (!std::isfinite(db))
+        return;
     const float value = static_cast<float>(std::clamp(db, 0.0, 30.0));
     if (qFuzzyCompare(m_params.squelchDb, value))
         return;

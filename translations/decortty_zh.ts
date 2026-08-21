@@ -452,17 +452,64 @@ in the HIS CALL field.</source>
         <translation>QTH</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="115" />
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="118" />
+        <source>FLEXRADIO</source>
+        <translation>FLEXRADIO</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="126" />
+        <source>BY ITSELF</source>
+        <translation>自动决定</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="134" />
+        <source>Binds to the station already on the radio when there
+is one, and takes the GUI role when the radio is free.</source>
+        <translation>若已有台站连接就绑定它；电台空闲时则自己担任 GUI。</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="138" />
+        <source>GUI STATION</source>
+        <translation>GUI 台站</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="147" />
+        <source>Owns its own slices, so frequency and tuning always
+work — at the cost of one of the two MultiFlex seats.</source>
+        <translation>拥有自己的 slice，频率和调谐始终可用 —
+代价是占用两个 MultiFlex 席位之一。</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="151" />
+        <source>SECOND CLIENT</source>
+        <translation>次要客户端</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="160" />
+        <source>Reads the slices of the station that already has the
+radio, without taking a seat. If the radio shows none,
+DecoRTTY goes back to being a GUI station by itself.</source>
+        <translation>读取已占用电台的台站的 slice，不占席位。
+若电台不显示任何 slice，DecoRTTY 会自行
+变回 GUI 台站。</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="170" />
+        <source>Takes effect at the next connection.</source>
+        <translation>下次连接时生效。</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="188" />
         <source>MACROS</source>
         <translation>宏</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="196" />
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="269" />
         <source>Restore defaults</source>
         <translation>恢复默认</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="202" />
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="275" />
         <source>Close</source>
         <translation>关闭</translation>
     </message>
@@ -769,17 +816,17 @@ stretch of band in view.</source>
         <translation>信号在 %1 Hz：移过去</translation>
     </message>
     <message>
-        <location filename="../src/app/RttyEngine.cpp" line="230" />
+        <location filename="../src/app/RttyEngine.cpp" line="241" />
         <source>No recognisable RTTY signal in the band</source>
         <translation>频带内没有可辨认的 RTTY 信号</translation>
     </message>
     <message>
-        <location filename="../src/app/RttyEngine.cpp" line="236" />
+        <location filename="../src/app/RttyEngine.cpp" line="247" />
         <source>Centred on %1 Hz (%2 dB above the floor)</source>
         <translation>已对准 %1 Hz（高出本底 %2 dB）</translation>
     </message>
     <message>
-        <location filename="../src/app/RttyEngine.cpp" line="592" />
+        <location filename="../src/app/RttyEngine.cpp" line="605" />
         <source>The radio is in %1: on voice modes the USB audio does not modulate. Press 'Set radio' in the DECODER panel.</source>
         <translation>电台处于 %1：在话音模式下 USB 音频不会调制。请在解码器面板上按“设置电台”。</translation>
     </message>
@@ -814,7 +861,7 @@ stretch of band in view.</source>
     </message>
     <message>
         <location filename="../src/flex/FlexRadioLink.cpp" line="36" />
-        <location filename="../src/flex/FlexRadioLink.cpp" line="109" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="111" />
         <source>Disconnected</source>
         <translation>已断开</translation>
     </message>
@@ -830,42 +877,47 @@ stretch of band in view.</source>
         <translation>已连接到 %1</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="103" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="105" />
         <source>Reconnecting to %1…</source>
         <translation>正在重新连接 %1…</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="117" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="131" />
+        <source>Bound to %1 but the radio shows no slice — reconnecting as a GUI station</source>
+        <translation>已绑定 %1，但电台不显示任何 slice — 正以 GUI 台站身份重新连接</translation>
+    </message>
+    <message>
+        <location filename="../src/flex/FlexRadioLink.cpp" line="144" />
         <source>Could not open the audio transport</source>
         <translation>打不开音频通道</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="127" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="154" />
         <source>The radio rejected the UDP port registration</source>
         <translation>电台拒绝了 UDP 端口的注册</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="146" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="173" />
         <source>The radio will not give audio to a bound client — reconnecting as a GUI station</source>
         <translation>电台不给绑定的客户端音频 —— 改为以 GUI 身份重新连接</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="153" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="180" />
         <source>Could not create the receive audio stream</source>
         <translation>无法建立接收音频流</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="158" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="185" />
         <source>Receiving from %1</source>
         <translation>正在接收 %1</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="166" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="193" />
         <source>Could not create the transmit audio stream</source>
         <translation>无法建立发射音频流</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="343" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="372" />
         <source>Transmit is unavailable: no Opus transmit stream</source>
         <translation>无法发射：没有 Opus 发射流</translation>
     </message>
@@ -1095,29 +1147,29 @@ stretch of band in view.</source>
 <context>
     <name>decortty::link::RadioHub</name>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="11" />
-        <location filename="../src/link/RadioHub.cpp" line="205" />
+        <location filename="../src/link/RadioHub.cpp" line="27" />
+        <location filename="../src/link/RadioHub.cpp" line="223" />
         <source>Disconnected</source>
         <translation>已断开</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="88" />
-        <location filename="../src/link/RadioHub.cpp" line="205" />
+        <location filename="../src/link/RadioHub.cpp" line="104" />
+        <location filename="../src/link/RadioHub.cpp" line="223" />
         <source>Looking for radios…</source>
         <translation>正在寻找电台…</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="151" />
+        <location filename="../src/link/RadioHub.cpp" line="168" />
         <source>Radio %1 is no longer on the network</source>
         <translation>电台 %1 已不在网络上</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="158" />
+        <location filename="../src/link/RadioHub.cpp" line="175" />
         <source>'%1' is not a valid address</source>
         <translation>'%1' 不是有效的地址</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="248" />
+        <location filename="../src/link/RadioHub.cpp" line="275" />
         <source>Transmit is unavailable on this connection</source>
         <translation>这条连接上无法发射</translation>
     </message>

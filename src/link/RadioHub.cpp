@@ -4,7 +4,23 @@
 
 #include <QVariantMap>
 
+#include <algorithm>
+
 namespace decortty::link {
+
+namespace {
+
+// La scelta dell'operatore tradotta nel ruolo del protocollo.
+flex::FlexApiClient::Role roleFromSetting(int value)
+{
+    switch (value) {
+    case 1:  return flex::FlexApiClient::Role::Gui;
+    case 2:  return flex::FlexApiClient::Role::Bound;
+    default: return flex::FlexApiClient::Role::Auto;
+    }
+}
+
+} // namespace
 
 RadioHub::RadioHub(QObject* parent)
     : QObject(parent)
@@ -143,6 +159,7 @@ void RadioHub::connectToRadio(const QString& serial)
             link->connectToGateway(radio);
         } else {
             auto* link = new flex::FlexRadioLink(this);
+            link->setRole(roleFromSetting(m_flexRole));
             adopt(link, false);
             link->connectToRadio(radio);
         }
@@ -165,6 +182,7 @@ void RadioHub::connectToAddress(const QString& address, bool gateway)
         link->connectToAddress(host, 4993);
     } else {
         auto* link = new flex::FlexRadioLink(this);
+        link->setRole(roleFromSetting(m_flexRole));
         adopt(link, false);
         link->connectToAddress(host);
     }
@@ -209,6 +227,15 @@ void RadioHub::disconnectRadio()
 }
 
 // ── control, forwarded ──────────────────────────────────────────────────────
+
+void RadioHub::setFlexRole(int role)
+{
+    role = std::clamp(role, 0, 2);
+    if (role == m_flexRole)
+        return;
+    m_flexRole = role;
+    emit flexRoleChanged();
+}
 
 void RadioHub::tuneToBand(int index)
 {

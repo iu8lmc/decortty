@@ -460,17 +460,65 @@ lai ieliktu to laukā HIS CALL.</translation>
         <translation>QTH</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="115" />
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="118" />
+        <source>FLEXRADIO</source>
+        <translation>FLEXRADIO</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="126" />
+        <source>BY ITSELF</source>
+        <translation>PATS</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="134" />
+        <source>Binds to the station already on the radio when there
+is one, and takes the GUI role when the radio is free.</source>
+        <translation>Piesaistās stacijai, kas jau ir pieslēgta, un pārņem GUI
+lomu, kad radiostacija ir brīva.</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="138" />
+        <source>GUI STATION</source>
+        <translation>GUI STACIJA</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="147" />
+        <source>Owns its own slices, so frequency and tuning always
+work — at the cost of one of the two MultiFlex seats.</source>
+        <translation>Tam ir savas slice, tāpēc frekvence un noskaņošana vienmēr
+strādā — par vienu no divām MultiFlex vietām.</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="151" />
+        <source>SECOND CLIENT</source>
+        <translation>OTRAIS KLIENTS</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="160" />
+        <source>Reads the slices of the station that already has the
+radio, without taking a seat. If the radio shows none,
+DecoRTTY goes back to being a GUI station by itself.</source>
+        <translation>Nolasa tās stacijas slice, kurai radiostacija jau pieder,
+neaizņemot vietu. Ja radiostacija nevienu nerāda, DecoRTTY
+pats atgriežas pie GUI stacijas lomas.</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="170" />
+        <source>Takes effect at the next connection.</source>
+        <translation>Stājas spēkā nākamajā savienojumā.</translation>
+    </message>
+    <message>
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="188" />
         <source>MACROS</source>
         <translation>MAKRO</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="196" />
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="269" />
         <source>Restore defaults</source>
         <translation>Atjaunot</translation>
     </message>
     <message>
-        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="202" />
+        <location filename="../qml/DecoRTTY/components/SetupDialog.qml" line="275" />
         <source>Close</source>
         <translation>Aizvērt</translation>
     </message>
@@ -780,17 +828,17 @@ joslas gabals.</translation>
         <translation>Signāls uz %1 Hz: pārvietojos turp</translation>
     </message>
     <message>
-        <location filename="../src/app/RttyEngine.cpp" line="230" />
+        <location filename="../src/app/RttyEngine.cpp" line="241" />
         <source>No recognisable RTTY signal in the band</source>
         <translation>Joslā nav atpazīstama RTTY signāla</translation>
     </message>
     <message>
-        <location filename="../src/app/RttyEngine.cpp" line="236" />
+        <location filename="../src/app/RttyEngine.cpp" line="247" />
         <source>Centred on %1 Hz (%2 dB above the floor)</source>
         <translation>Centrēts uz %1 Hz (%2 dB virs trokšņiem)</translation>
     </message>
     <message>
-        <location filename="../src/app/RttyEngine.cpp" line="592" />
+        <location filename="../src/app/RttyEngine.cpp" line="605" />
         <source>The radio is in %1: on voice modes the USB audio does not modulate. Press 'Set radio' in the DECODER panel.</source>
         <translation>Stacija ir režīmā %1: balss režīmos USB skaņa nemodulē. Nospied «Iestatīt staciju» DEKODERA panelī.</translation>
     </message>
@@ -825,7 +873,7 @@ joslas gabals.</translation>
     </message>
     <message>
         <location filename="../src/flex/FlexRadioLink.cpp" line="36" />
-        <location filename="../src/flex/FlexRadioLink.cpp" line="109" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="111" />
         <source>Disconnected</source>
         <translation>Atslēgts</translation>
     </message>
@@ -841,42 +889,47 @@ joslas gabals.</translation>
         <translation>Pieslēgts pie %1</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="103" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="105" />
         <source>Reconnecting to %1…</source>
         <translation>Pieslēdzos no jauna pie %1…</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="117" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="131" />
+        <source>Bound to %1 but the radio shows no slice — reconnecting as a GUI station</source>
+        <translation>Piesaistīts %1, bet radiostacija nerāda nevienu slice — pieslēdzos no jauna kā GUI stacija</translation>
+    </message>
+    <message>
+        <location filename="../src/flex/FlexRadioLink.cpp" line="144" />
         <source>Could not open the audio transport</source>
         <translation>Neizdevās atvērt skaņas kanālu</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="127" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="154" />
         <source>The radio rejected the UDP port registration</source>
         <translation>Stacija noraidīja UDP porta reģistrāciju</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="146" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="173" />
         <source>The radio will not give audio to a bound client — reconnecting as a GUI station</source>
         <translation>Stacija nedod skaņu piesaistītam klientam — pieslēdzos no jauna kā GUI stacija</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="153" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="180" />
         <source>Could not create the receive audio stream</source>
         <translation>Neizdevās izveidot uztveršanas skaņas plūsmu</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="158" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="185" />
         <source>Receiving from %1</source>
         <translation>Uztveru no %1</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="166" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="193" />
         <source>Could not create the transmit audio stream</source>
         <translation>Neizdevās izveidot raidīšanas skaņas plūsmu</translation>
     </message>
     <message>
-        <location filename="../src/flex/FlexRadioLink.cpp" line="343" />
+        <location filename="../src/flex/FlexRadioLink.cpp" line="372" />
         <source>Transmit is unavailable: no Opus transmit stream</source>
         <translation>Raidīt nav iespējams: trūkst Opus raidīšanas plūsmas</translation>
     </message>
@@ -1106,29 +1159,29 @@ joslas gabals.</translation>
 <context>
     <name>decortty::link::RadioHub</name>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="11" />
-        <location filename="../src/link/RadioHub.cpp" line="205" />
+        <location filename="../src/link/RadioHub.cpp" line="27" />
+        <location filename="../src/link/RadioHub.cpp" line="223" />
         <source>Disconnected</source>
         <translation>Atslēgts</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="88" />
-        <location filename="../src/link/RadioHub.cpp" line="205" />
+        <location filename="../src/link/RadioHub.cpp" line="104" />
+        <location filename="../src/link/RadioHub.cpp" line="223" />
         <source>Looking for radios…</source>
         <translation>Meklēju stacijas…</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="151" />
+        <location filename="../src/link/RadioHub.cpp" line="168" />
         <source>Radio %1 is no longer on the network</source>
         <translation>Stacijas %1 tīklā vairs nav</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="158" />
+        <location filename="../src/link/RadioHub.cpp" line="175" />
         <source>'%1' is not a valid address</source>
         <translation>'%1' nav derīga adrese</translation>
     </message>
     <message>
-        <location filename="../src/link/RadioHub.cpp" line="248" />
+        <location filename="../src/link/RadioHub.cpp" line="275" />
         <source>Transmit is unavailable on this connection</source>
         <translation>Pa šo savienojumu raidīt nav iespējams</translation>
     </message>

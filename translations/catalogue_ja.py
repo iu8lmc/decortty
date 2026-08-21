@@ -270,4 +270,23 @@ TRANSLATIONS = {
 
     "Drag to move the radio; the wheel tunes by 1 kHz —\n100 Hz with Shift, 10 kHz with Ctrl.":
         "ドラッグで無線機を動かします。ホイールは 1 kHz 刻み —\nShift で 100 Hz、Ctrl で 10 kHz。",
+
+    "FLEXRADIO":
+        "FLEXRADIO",
+    "BY ITSELF":
+        "自動",
+    "Binds to the station already on the radio when there\nis one, and takes the GUI role when the radio is free.":
+        "すでに接続している局があればそこに結び付き、無線機が空いて\nいれば GUI の役を取ります。",
+    "GUI STATION":
+        "GUI 局",
+    "Owns its own slices, so frequency and tuning always\nwork — at the cost of one of the two MultiFlex seats.":
+        "自分の slice を持つので周波数も同調も必ず効きます。\nそのかわり MultiFlex の枠をひとつ使います。",
+    "SECOND CLIENT":
+        "二次クライアント",
+    "Reads the slices of the station that already has the\nradio, without taking a seat. If the radio shows none,\nDecoRTTY goes back to being a GUI station by itself.":
+        "すでに無線機を使っている局の slice を読みます。枠は使いま\nせん。無線機が slice を見せない場合、DecoRTTY は自分で\nGUI 局に戻ります。",
+    "Takes effect at the next connection.":
+        "次回の接続から有効になります。",
+    "Bound to %1 but the radio shows no slice — reconnecting as a GUI station":
+        "%1 に結び付きましたが無線機が slice を見せません — GUI 局として接続し直します",
 }

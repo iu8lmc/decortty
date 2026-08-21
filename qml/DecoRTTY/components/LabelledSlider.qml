@@ -14,7 +14,7 @@ Column {
     property real   value: 0
     property int    decimals: 0
 
-    signal moved(real value)
+    signal moved(real newValue)
 
     spacing: 2
 
@@ -27,14 +27,14 @@ Column {
             anchors.verticalCenter: parent.verticalCenter
             // L'etichetta cede il posto al valore, non viceversa: il numero e'
             // quello che si legge mentre si gira la manopola.
-            width: Math.max(0, parent.width - value.width - 8)
+            width: Math.max(0, parent.width - readout.width - 8)
             elide: Text.ElideRight
             text: root.label
             color: Theme.textSecondary
             font.pixelSize: 11
         }
         Text {
-            id: value
+            id: readout
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
             text: root.value.toFixed(root.decimals) + root.suffix
@@ -53,7 +53,15 @@ Column {
         stepSize: root.stepSize
         value: root.value
 
-        onMoved: root.moved(value)
+        onMoved: {
+            root.moved(slider.value)
+            // Il legame si rompe appena il dito muove il cursore: da quel punto
+            // il pallino vive per conto suo e non torna piu' a raccontare quel
+            // che pensa il decodificatore. Se il motore limita il valore — o lo
+            // rifiuta — il numero dice una cosa e il pallino un'altra. Si
+            // riannoda subito.
+            value = Qt.binding(function() { return root.value })
+        }
 
         background: Rectangle {
             x: slider.leftPadding

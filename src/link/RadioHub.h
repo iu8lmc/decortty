@@ -50,6 +50,11 @@ class RadioHub : public QObject {
     // In quale banda siamo, -1 se fuori da tutte. Segue la radio anche quando a
     // spostarla e' la manopola o un altro programma.
     Q_PROPERTY(int currentBand READ currentBand NOTIFY sliceChanged)
+    // Come presentarsi a un FlexRadio: 0 da se', 1 stazione GUI, 2 client
+    // secondario. Da stazione GUI si occupa un posto MultiFlex ma si vedono
+    // sempre le proprie slice; da client secondario si vedono quelle di chi ha
+    // gia' la radio — quando la radio le concede.
+    Q_PROPERTY(int flexRole READ flexRole WRITE setFlexRole NOTIFY flexRoleChanged)
     // I modi che hanno senso per un decodificatore AFSK. RTTY-U e RTTY-L non ci
     // sono apposta: la' l'apparato aspetta il tasto FSK e l'audio non uscirebbe.
     Q_PROPERTY(QStringList modes READ modes CONSTANT)
@@ -75,6 +80,8 @@ public:
     QString playbackInUse() const { return m_playbackHint; }
     QString sharedWith() const;
     bool    canControl() const;
+    int     flexRole() const { return m_flexRole; }
+    void    setFlexRole(int role);
     QVariantList bands() const;
     int     currentBand() const;
     QStringList  modes() const;
@@ -116,6 +123,7 @@ signals:
     void connectionChanged();
     void statusTextChanged();
     void radioListChanged();
+    void flexRoleChanged();
     void sliceChanged();
     void transmittingChanged();
     void metersChanged();
@@ -130,6 +138,7 @@ private:
     RadioLink*          m_link{nullptr};   // owned; one at a time
     bool                m_viaGateway{false};
     bool                m_viaSoundCard{false};
+    int                 m_flexRole{0};
     QString             m_captureHint;
     QString             m_playbackHint;
     QString             m_idleStatus;
